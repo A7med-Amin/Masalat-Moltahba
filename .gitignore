@@ -23,3 +23,9 @@ CMakeSettings.json
 
 # Screenshots
 screenshots/
+
+# build files
+build/
+
+# bin files
+bin/
