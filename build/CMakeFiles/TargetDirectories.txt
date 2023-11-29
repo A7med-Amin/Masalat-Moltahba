@@ -1,0 +1,5 @@
+D:/Ahmed Ameen/Computer Graphics/Project/CMPN205 Project - Student Version/build/CMakeFiles/GAME_APPLICATION.dir
+D:/Ahmed Ameen/Computer Graphics/Project/CMPN205 Project - Student Version/build/CMakeFiles/ALL_BUILD.dir
+D:/Ahmed Ameen/Computer Graphics/Project/CMPN205 Project - Student Version/build/CMakeFiles/ZERO_CHECK.dir
+D:/Ahmed Ameen/Computer Graphics/Project/CMPN205 Project - Student Version/build/vendor/glfw/CMakeFiles/ALL_BUILD.dir
+D:/Ahmed Ameen/Computer Graphics/Project/CMPN205 Project - Student Version/build/vendor/glfw/src/CMakeFiles/glfw.dir
