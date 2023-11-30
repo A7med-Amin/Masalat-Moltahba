@@ -29,3 +29,5 @@ build/
 
 # bin files
 bin/
+
+errors/
