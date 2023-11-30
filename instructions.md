@@ -141,7 +141,7 @@ The *Transform* struct is tested by the *TransformTestState* which is run by the
 
 ---
 
-### Requirement 4: Pipeline State
+### Requirement 4: Pipeline State ✅
 
 OpenGL is a state machine where the options we pick are stored in the OpenGL context and affect the upcoming draw calls. Since each object may require different options while drawing (e.g. transparent objects require blending while Opaque objects don't), we would need to store the options for each object in a data structure and set the OpenGL options to match the given options before drawing.
 
@@ -157,7 +157,7 @@ The *PipelineState* struct is tested by the *PipelineTestState* which is run by 
 
 ---
 
-### Requirement 5: Texture
+### Requirement 5: Texture ✅
 
 A 2D Texture is a sampleable storage containing a 2D array of pixels. By "sampleable", we mean that we can sample a color from it in the shaders.
 
