@@ -25,6 +25,28 @@ bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const 
     // an error in the given shader. You should use it to check if there is a
     // compilation error and print it so that you can know what is wrong with
     // the shader. The returned string will be empty if there is no errors.
+    //-------------------------------------------------------------------------------
+
+    //create shader where type is GL_VERTEX_SHADER or GL_FRAGMENT_SHADER
+    GLuint shader = glCreateShader(type);
+    // 1 : number of source code strings ||| here we have only 1 source code string
+    // sourceCodeCStr: source code as a c_string
+    // nullptr: this parameter is the length of the shader ||| when it is given by null opengl will know the length by itself
+	glShaderSource(shader, 1, &sourceCStr, nullptr);
+    // compile shader and check for the compilation errors
+	glCompileShader(shader);
+    std::string error = checkForShaderCompilationErrors(shader);
+    if(!error.empty()){
+        std::cerr << "ERROR IN " << filename << std::endl;
+        std::cerr << error << std::endl;
+        glDeleteShader(shader);
+        return false;
+    }
+
+    //attach shader
+    glAttachShader(program, shader);
+    //delete shader as no more need for it after attaching it
+    glDeleteShader(shader);
 
     //We return true if the compilation succeeded
     return true;
@@ -38,6 +60,16 @@ bool our::ShaderProgram::link() const {
     // an error in the given program. You should use it to check if there is a
     // linking error and print it so that you can know what is wrong with the
     // program. The returned string will be empty if there is no errors.
+    //-------------------------------------------------------------------------------
+
+    // Link shaders into program and check for linkage errors
+    glLinkProgram(program);
+    std::string error = checkForLinkingErrors(program);
+    if(!error.empty()){
+        std::cerr << error << std::endl;
+        //~ShaderProgram();
+        return false;
+    }
 
     return true;
 }

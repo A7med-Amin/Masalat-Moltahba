@@ -18,9 +18,11 @@ namespace our {
     public:
         ShaderProgram(){
             //TODO: (Req 1) Create A shader program
+            program = glCreateProgram();
         }
         ~ShaderProgram(){
             //TODO: (Req 1) Delete a shader program
+            glDeleteProgram(program);
         }
 
         bool attach(const std::string &filename, GLenum type) const;
