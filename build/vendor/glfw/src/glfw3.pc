@@ -1,7 +1,7 @@
-prefix=C:/Program Files/GFX-LAB
+prefix=C:/Program Files (x86)/GFX-LAB
 exec_prefix=${prefix}
-includedir=C:/Program Files/GFX-LAB/include
-libdir=C:/Program Files/GFX-LAB/lib
+includedir=C:/Program Files (x86)/GFX-LAB/include
+libdir=C:/Program Files (x86)/GFX-LAB/lib
 
 Name: GLFW
 Description: A multi-platform library for OpenGL, window and input

@@ -17,6 +17,9 @@ else()
 
   if("3.3.2" MATCHES "^([0-9]+)\\.")
     set(CVF_VERSION_MAJOR "${CMAKE_MATCH_1}")
+    if(NOT CVF_VERSION_MAJOR VERSION_EQUAL 0)
+      string(REGEX REPLACE "^0+" "" CVF_VERSION_MAJOR "${CVF_VERSION_MAJOR}")
+    endif()
   else()
     set(CVF_VERSION_MAJOR "3.3.2")
   endif()
@@ -48,11 +51,6 @@ else()
   endif()
 endif()
 
-
-# if the installed project requested no architecture check, don't perform the check
-if("FALSE")
-  return()
-endif()
 
 # if the installed or the using project don't have CMAKE_SIZEOF_VOID_P set, ignore it:
 if("${CMAKE_SIZEOF_VOID_P}" STREQUAL "" OR "8" STREQUAL "")
