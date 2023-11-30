@@ -3,7 +3,6 @@
 #include <glad/gl.h>
 
 namespace our {
-
     // This class defined an OpenGL texture which will be used as a GL_TEXTURE_2D
     class Texture2D {
         // The OpenGL object name of this texture 
