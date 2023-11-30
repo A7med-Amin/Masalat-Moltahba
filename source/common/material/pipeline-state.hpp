@@ -69,8 +69,6 @@ namespace our {
             glColorMask(colorMask.r, colorMask.g, colorMask.b, colorMask.a);
 
             glDepthMask(depthMask);
-
-            
         }
 
         // Given a json object, this function deserializes a PipelineState structure
