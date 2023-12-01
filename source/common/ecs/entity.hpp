@@ -79,8 +79,8 @@ namespace our {
                 // std::cout << element << " ";
                 if (testComponent != nullptr)
                 {
-                    int x = 3;
                     components.remove(testComponent);
+                    delete testComponent;
                 }
             }
         }
@@ -106,6 +106,7 @@ namespace our {
                 if (testComponent != nullptr)
                 {
                     components.remove(testComponent);
+                    delete testComponent;
                 }
             }
         }

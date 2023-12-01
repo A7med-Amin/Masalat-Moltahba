@@ -3,7 +3,7 @@
 #include <glad/gl.h>
 #include <json/json.hpp>
 #include <glm/vec4.hpp>
-
+#include <iostream>
 namespace our {
 
     // This class defined an OpenGL sampler
@@ -26,7 +26,7 @@ namespace our {
         // This method binds this sampler to the given texture unit
         void bind(GLuint textureUnit) const {
             //TODO: (Req 6) Complete this function
-            fprintf(stderr, "%s", name);
+            std::cout << name<<std::endl;
             glBindSampler(textureUnit, name);
         }
 
