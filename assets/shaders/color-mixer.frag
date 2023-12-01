@@ -18,8 +18,19 @@ out vec4 frag_color;
 // However, this line is too long to write, so we can simplify it using a dot product
 // (which is defined in the "dot" function).
 
+// Uniforms for channel mixing
+uniform vec4 red;
+uniform vec4 green;
+uniform vec4 blue;
+
 //TODO: (Req 1) Finish this shader and apply the channel mixing using the "dot" function.
 
 void main(){
-    frag_color = fs_in.color;
+    // Apply channel mixing using the dot product
+    frag_color.r = dot(vec3(red), fs_in.color);
+    frag_color.g = dot(vec3(green), fs_in.color);
+    frag_color.b = dot(vec3(blue), fs_in.color);
+
+    // Alpha remains unchanged
+    frag_color.a = 1.0;
 }

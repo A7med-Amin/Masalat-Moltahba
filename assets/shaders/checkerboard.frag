@@ -8,9 +8,23 @@ out vec4 frag_color;
 
 //TODO: (Req 1) Finish this shader.
 
+
 uniform int size = 32;
 uniform vec3 colors[2];
 
 void main(){
-    frag_color = vec4(colors[0], 1.0);
+    // frag_color = vec4(colors[0], 1.0);
+
+    // Calculate the normalized coordinates of the fragment
+    vec2 fragCoordNorm = gl_FragCoord.xy / size;
+
+    // Calculate the checkboard pattern
+    int xCheck = int(mod(fragCoordNorm.x, 2.0));
+    int yCheck = int(mod(fragCoordNorm.y, 2.0));
+
+    // Determine the color based on the checkboard pattern
+    vec3 finalColor = colors[xCheck ^ yCheck];
+
+    // Set the output color
+    frag_color = vec4(finalColor, 1.0);
 }

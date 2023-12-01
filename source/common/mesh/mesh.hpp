@@ -64,7 +64,7 @@ namespace our {
             glEnableVertexAttribArray(ATTRIB_LOC_NORMAL);
             // ------------------------------------------------------------------------------------------------------------
             // Element buffer implementation
-            elementCount = elements.size();
+            elementCount = (GLsizei) elements.size();
             glGenBuffers(1, &EBO);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementCount * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
@@ -90,7 +90,7 @@ namespace our {
             glDeleteVertexArrays(1, &VAO);
             glDeleteBuffers(1, &VBO);
             glDeleteBuffers(1, &EBO);
-            elementCount = 0;
+            // elementCount = (GLsizei) 0;
             // VAO = 0;
             // VBO = 0;
             // EBO = 0;
