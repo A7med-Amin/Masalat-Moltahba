@@ -28,16 +28,16 @@ namespace our {
     void TintedMaterial::setup() const {
         //TODO: (Req 7) Write this function
         Material::setup();
-        GLint tintloc = shader->getUniformLocation("tint");
-        
-        if (tintloc != -1)
-        {
-            glUniform4fv(tintloc, 1, glm::value_ptr(this->tint));
-        }
-        else
-        {
-            fprintf(stderr, "OH MY GOD!");
-        }
+        // GLint tintloc = shader->getUniformLocation("tint");
+        shader->set("tint", tint);
+        // if (tintloc != -1)
+        // {
+        //     glUniform4fv(tintloc, 1, glm::value_ptr(this->tint));
+        // }
+        // else
+        // {
+        //     fprintf(stderr, "OH MY GOD!");
+        // }
     }
 
     // This function read the material data from a json object
@@ -53,21 +53,38 @@ namespace our {
     void TexturedMaterial::setup() const {
         //TODO: (Req 7) Write this function
         TintedMaterial::setup();
-        GLint alphaloc = shader->getUniformLocation("alphaThreshold");
+        // GLint alphaloc = shader->getUniformLocation("alphaThreshold");
 
-        if (alphaloc != -1)
-        {
-            glUniform1f(alphaloc, this->alphaThreshold);
-        }
-        else
-        {
-            fprintf(stderr, "OH MY GOD!");
-        }
-
-        // Setting the sampler
+        shader->set("alphaThreshold", alphaThreshold);
+        // glActiveTexture(GL_TEXTURE0);
         texture->bind();
-        GLuint textID = texture->getOpenGLName();
-        sampler->bind(textID);
+        GLuint textureID = texture->getOpenGLName();
+        sampler->bind(textureID);
+        shader->set("tex", 0);
+
+        // if (alphaloc != -1)
+        // {
+        //     glUniform1f(alphaloc, this->alphaThreshold);
+        // }
+        // else
+        // {
+        //     fprintf(stderr, "OH MY GOD!");
+        // }
+
+        // // Setting the sampler
+        // GLint tex = shader->getUniformLocation("tex");
+        // glActiveTexture(GL_TEXTURE0);
+        // texture->bind();
+        // // GLuint textID = texture->getOpenGLName();
+        // sampler->bind(0);
+        // if (tex != -1)
+        // {
+        //     glUniform1f(tex, 0);
+        // }
+        // else
+        // {
+        //     fprintf(stderr, "OH MY GOD!");
+        // }
     }
 
     // This function read the material data from a json object

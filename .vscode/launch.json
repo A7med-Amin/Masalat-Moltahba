@@ -21,7 +21,7 @@
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "program": "${workspaceFolder}/bin/GAME_APPLICATION.exe",
-            "args": ["-c=${workspaceFolder}/config/material-test/test-0.jsonc"]
+            "args": ["-c=${workspaceFolder}/config/entity-test/test-0.jsonc"]
         }    
     ]
 }
