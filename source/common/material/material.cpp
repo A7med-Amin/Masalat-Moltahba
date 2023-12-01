@@ -53,11 +53,11 @@ namespace our {
     void TexturedMaterial::setup() const {
         //TODO: (Req 7) Write this function
         TintedMaterial::setup();
-        GLint alpha = shader->getUniformLocation("alphaThreshold");
+        GLint alphaloc = shader->getUniformLocation("alphaThreshold");
 
-        if (alpha != -1)
+        if (alphaloc != -1)
         {
-            glUniform1f(alpha, this->alphaThreshold);
+            glUniform1f(alphaloc, this->alphaThreshold);
         }
         else
         {
@@ -65,7 +65,9 @@ namespace our {
         }
 
         // Setting the sampler
-
+        texture->bind();
+        GLuint textID = texture->getOpenGLName();
+        sampler->bind(textID);
     }
 
     // This function read the material data from a json object

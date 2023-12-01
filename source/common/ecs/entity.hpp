@@ -63,6 +63,14 @@ namespace our {
         void deleteComponent(){
             //TODO: (Req 8) Go through the components list and find the first component that can be dynamically cast to "T*".
             // If found, delete the found component and remove it from the components list
+            for (const auto& element : components) {
+                T* testClass = dynamic_cast<T*>(element);
+                std::cout << element << " ";
+                if (testClass != nullptr)
+                {
+                    
+                }
+            }
         }
 
         // This template method searhes for a component of type T and deletes it
