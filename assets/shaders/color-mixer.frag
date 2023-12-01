@@ -19,6 +19,7 @@ out vec4 frag_color;
 // (which is defined in the "dot" function).
 
 // Uniforms for channel mixing
+// Ask why vec4 instead of vec3 as alpha is not used
 uniform vec4 red = vec4(1.0, 0.0, 0.0, 0.0);
 uniform vec4 green = vec4(0.0, 1.0, 0.0, 0.0);
 uniform vec4 blue = vec4(0.0, 0.0, 1.0, 0.0);
@@ -28,6 +29,6 @@ uniform vec4 blue = vec4(0.0, 0.0, 1.0, 0.0);
 void main(){
     // Apply channel mixing using the dot product
     frag_color.r = dot(red, vec4(fs_in.color,1.0));
-    frag_color.g = dot((green), vec4(fs_in.color,1.0));
-    frag_color.b = dot((blue), vec4(fs_in.color,1.0));
+    frag_color.g = dot(green, vec4(fs_in.color,1.0));
+    frag_color.b = dot(blue, vec4(fs_in.color,1.0));
 }

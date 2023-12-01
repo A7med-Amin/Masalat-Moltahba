@@ -11,17 +11,14 @@ namespace our {
     glm::mat4 Transform::toMat4() const {
         //TODO: (Req 3) Write this function
         // Create transformation matrix with the order: Scaling, Rotation, Translation
-        glm::mat4 matrix = glm::mat4(1.0f); // Identity matrix
+        glm::mat4 matrix = glm::mat4(1.0f); // Identity matrix to apply on it transformation matrices scalling and translation
 
         // Apply scaling
-        glm::mat4 scale_matrix = glm::scale(matrix, scale);
-
         // Apply rotation (convert euler angles to rotation matrix)
-        glm::mat4 rotation_matrix = glm::yawPitchRoll(rotation.y, rotation.x, rotation.z);
-
         // Apply translation
-        glm::mat4 translation_matrix = glm::translate(matrix, position);
-        return translation_matrix * rotation_matrix * scale_matrix; 
+        return (glm::mat4)(glm::translate(matrix, position) *
+                glm::yawPitchRoll(rotation.y, rotation.x, rotation.z) * 
+                glm::scale(matrix, scale)); 
     }
 
      // Deserializes the entity data and components from a json object
@@ -30,5 +27,4 @@ namespace our {
         rotation = glm::radians(data.value("rotation", glm::degrees(rotation)));
         scale    = data.value("scale", scale);
     }
-
 }
