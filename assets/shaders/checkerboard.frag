@@ -13,8 +13,6 @@ uniform int size = 32;
 uniform vec3 colors[2];
 
 void main(){
-    // frag_color = vec4(colors[0], 1.0);
-
     // Calculate the normalized coordinates of the fragment
     vec2 fragCoordNorm = gl_FragCoord.xy / size;
 
@@ -23,6 +21,7 @@ void main(){
     int yCheck = int(mod(fragCoordNorm.y, 2.0));
 
     // Determine the color based on the checkboard pattern
+    // they should be (in order): colors[0], colors[1] which means adjacent tiles should be different in colors
     vec3 finalColor = colors[xCheck ^ yCheck];
 
     // Set the output color
