@@ -13,7 +13,7 @@ namespace our {
     glm::mat4 Entity::getLocalToWorldMatrix() const {
         //TODO: (Req 8) Write this function
         Entity* currentParent = parent;
-        glm::mat4 netMatrix = glm::mat4(1.0f) * this->localTransform.toMat4();
+        glm::mat4 netMatrix = this->localTransform.toMat4();
         if (currentParent != nullptr)
         {
             netMatrix = netMatrix * currentParent->getLocalToWorldMatrix();         

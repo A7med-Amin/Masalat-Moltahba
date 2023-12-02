@@ -56,19 +56,19 @@ namespace our {
                 markedForRemoval.erase(element);
                 delete element;
             }
+            markedForRemoval.clear();
         }
 
         //This deletes all entities in the world
         void clear(){
             //TODO: (Req 8) Delete all the entites and make sure that the containers are empty
-            for (const auto& element : markedForRemoval) {
-                markedForRemoval.erase(element);
-                delete element;
-            }
+            
             for (const auto& element : entities) {
                 entities.erase(element);
                 delete element;
             }
+            markedForRemoval.clear();
+            entities.clear();
         }
 
         //Since the world owns all of its entities, they should be deleted alongside it.

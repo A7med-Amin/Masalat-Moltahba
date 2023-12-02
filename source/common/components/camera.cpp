@@ -53,10 +53,10 @@ namespace our {
         // Left and Right are the same but after being multiplied by the aspect ratio
         // For the perspective camera, you can use glm::perspective
         glm::mat4 M;
-        float aspectRatio = viewportSize[0] / viewportSize[1];
+        float aspectRatio = viewportSize.x / viewportSize.y;
         if (cameraType == CameraType::ORTHOGRAPHIC)
         {
-            M = glm::ortho(aspectRatio, aspectRatio, -orthoHeight /2, orthoHeight /2);
+            M = glm::ortho((-orthoHeight /2) * aspectRatio, (orthoHeight /2) *aspectRatio, -orthoHeight /2, orthoHeight /2, near, far);
         }
         else if (cameraType == CameraType::PERSPECTIVE)
         {
