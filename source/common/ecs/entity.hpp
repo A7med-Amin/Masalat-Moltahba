@@ -37,8 +37,8 @@ namespace our {
             // Don't forget to return a pointer to the new component
             T* myComponent = new T();
             myComponent->owner = this;
-            components.push_back(myComponent);
-            return nullptr;
+            this->components.push_back(myComponent);
+            return myComponent;
         }
 
         // This template method searhes for a component of type T and returns a pointer to it

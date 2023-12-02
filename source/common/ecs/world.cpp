@@ -1,4 +1,5 @@
 #include "world.hpp"
+#include <iostream>
 
 namespace our {
 
@@ -9,11 +10,17 @@ namespace our {
         if(!data.is_array()) return;
         for(const auto& entityData : data){
             //TODO: (Req 8) Create an entity, make its parent "parent" and call its deserialize with "entityData".
-            
+            Entity *myEntity = new Entity();
+            if (parent != nullptr)
+                myEntity->parent = parent;
+            myEntity->deserialize(entityData);
+
+            std::cout << "helllllllllllllllllllllllllll"<<std::endl;
+
             if(entityData.contains("children")){
                 //TODO: (Req 8) Recursively call this world's "deserialize" using the children data
                 // and the current entity as the parent
-                
+                World::deserialize(entityData["children"], myEntity);        
             }
         }
     }
