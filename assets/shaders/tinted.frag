@@ -6,7 +6,7 @@ in Varyings {
 
 out vec4 frag_color;
 
-uniform vec4 tint;
+uniform vec4 tint = vec4(0.0, 0.0, 0.0 , 0.0);
 
 void main(){
     //TODO: (Req 7) Modify the following line to compute the fragment color
