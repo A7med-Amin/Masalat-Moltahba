@@ -100,20 +100,31 @@ namespace our {
         void deleteComponent(T const* component){
             //TODO: (Req 8) Go through the components list and find the given component "component".
             // If found, delete the found component and remove it from the components list
-            for (const auto& element : components) {
-                T* testComponent = dynamic_cast<T*>(element);
-                // std::cout << element << " ";
+            for (auto it = components.begin(); it != components.end();) {
+                T* testComponent = dynamic_cast<T*>(*it);
                 if (testComponent != nullptr)
                 {
-                    components.remove(testComponent);
-                    delete testComponent;
+                    auto it2 = it;
+                    it = components.erase(it); // Erase the current element and get the iterator to the next element
+                    delete (*it2);
                 }
             }
+            // for (const auto& element : components) {
+            //     T* testComponent = dynamic_cast<T*>(element);
+            //     if (testComponent != nullptr)
+            //     {
+            //         components.remove(testComponent);
+            //         delete testComponent;
+            //     }
+            // }
         }
 
         // Since the entity owns its components, they should be deleted alongside the entity
         ~Entity(){
             //TODO: (Req 8) Delete all the components in "components".
+            for (auto it = components.begin(); it != components.end();) {
+                it = components.erase(it); // Erase the current element and get the iterator to the next element
+            }
         }
 
         // Entities should not be copyable

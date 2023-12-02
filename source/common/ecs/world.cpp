@@ -11,8 +11,8 @@ namespace our {
         for(const auto& entityData : data){
             //TODO: (Req 8) Create an entity, make its parent "parent" and call its deserialize with "entityData".
             Entity *myEntity = add();
-            if (parent != nullptr)
-                myEntity->parent = parent;
+            // if (parent != nullptr)
+            myEntity->parent = parent;
             myEntity->deserialize(entityData);
 
             // std::cout << "helllllllllllllllllllllllllll"<<std::endl;

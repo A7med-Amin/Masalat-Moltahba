@@ -16,7 +16,7 @@ namespace our {
         glm::mat4 netMatrix = this->localTransform.toMat4();
         if (currentParent != nullptr)
         {
-            netMatrix = netMatrix * currentParent->getLocalToWorldMatrix();         
+            netMatrix =  currentParent->getLocalToWorldMatrix() * netMatrix;         
         }
         return netMatrix;
     }
