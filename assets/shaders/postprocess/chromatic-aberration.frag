@@ -22,7 +22,7 @@ void main(){
     // To get the blue channel, we move by amount STRENGTH to the right then sample another pixel from which we take the blue channel
     vec3 color;
     color.r = texture(tex , vec2(tex_coord.x - STRENGTH , tex_coord.y)).r;
-    color.b = texture(tex , vec2(tex_coord.x - STRENGTH , tex_coord.y)).b;
+    color.b = texture(tex , vec2(tex_coord.x + STRENGTH , tex_coord.y)).b;
     color.g = texture(tex , tex_coord).g;
     frag_color = vec4(color.r , color.g , color.b , 1.0);
 }
