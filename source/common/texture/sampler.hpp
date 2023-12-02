@@ -3,7 +3,6 @@
 #include <glad/gl.h>
 #include <json/json.hpp>
 #include <glm/vec4.hpp>
-
 namespace our {
 
     // This class defined an OpenGL sampler

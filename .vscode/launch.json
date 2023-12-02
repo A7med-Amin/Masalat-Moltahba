@@ -14,7 +14,14 @@
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "externalTerminal"
-        }
-        
+        },
+        {
+            "name": "omarDebugger",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "program": "${workspaceFolder}/bin/GAME_APPLICATION.exe",
+            "args": ["-c=${workspaceFolder}/config/shader-test/test-0.jsonc"]
+        }    
     ]
 }
