@@ -163,7 +163,8 @@ namespace our
         texture->bind();
         // To tell OpenGL which sampler object we will use for this unit,
         // we bind the sampler to unit 0 (which is specified by the 1st parameter of the following function).
-        sampler->bind(0);
+        if(sampler != nullptr)
+            sampler->bind(0);
         // send the unit number to the uniform variable "tex"
         shader->set("tex", 0);
     }
