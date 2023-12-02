@@ -5,7 +5,6 @@
 
 #include <iostream>
 
-
 our::Texture2D *our::texture_utils::empty(GLenum format, glm::ivec2 size)
 {
     our::Texture2D *texture = new our::Texture2D();
@@ -19,6 +18,7 @@ our::Texture2D *our::texture_utils::empty(GLenum format, glm::ivec2 size)
     glTexStorage2D(GL_TEXTURE_2D, 1, format, size.x, size.y);
     // unbind the texture for purpose of security
     texture->unbind();
+    return texture;
 }
 
 our::Texture2D *our::texture_utils::loadImage(const std::string &filename, bool generate_mipmap)
