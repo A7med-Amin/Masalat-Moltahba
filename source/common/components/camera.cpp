@@ -25,9 +25,9 @@ namespace our {
         auto M = owner->getLocalToWorldMatrix();
         glm::mat3 submatrixTopLeft = glm::mat3(M);
         glm::mat4 view;
-        glm::vec3 eye = glm::vec3(0.0f, 0.0f, 0.0f);
-        glm::vec3 center = glm::vec3(0.0f, 0.0f, -1.0f);
-        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+        glm::vec3 eye = M * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        glm::vec3 center = M * glm::vec4(0.0f, 0.0f, -1.0f, 1.0f);
+        glm::vec3 up = M * glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
         //TODO: (Req 8) Complete this function
         //HINT:
         // In the camera space:
@@ -40,7 +40,7 @@ namespace our {
         // - the center position which is the point (0,0,-1) but after being transformed by M
         // - the up direction which is the vector (0,1,0) but after being transformed by M
         // then you can use glm::lookAt
-        view = glm::lookAt(submatrixTopLeft * eye, submatrixTopLeft * center, submatrixTopLeft * up);
+        view = glm::lookAt(eye, center, up);
         return view;
     }
 
