@@ -22,14 +22,15 @@ void main(){
     // Calculate the checkboard pattern
     // This line calculates the checkboard pattern. xCheck and yCheck are integers representing whether the fragment is in an even 
     //or odd position in the x and y directions, respectively.
-    int xCheck = int(round(mod(fragCoordNorm.x, 2.0)));
-    int yCheck = int(round(mod(fragCoordNorm.y, 2.0)));
+    int xCheck = int(mod(fragCoordNorm.x, 2.0));
+    int yCheck = int(mod(fragCoordNorm.y, 2.0));
 
     // Determine the color based on the checkboard pattern
     // they should be (in order): colors[0], colors[1] which means adjacent tiles should be different in colors
     // we use the xCheck and yCheck variables to determine the color by Xoring them together
-    // i.e. if xCheck and yCheck are 1, then the color should be colors[1] (1 ^ 1 = 0)
-    // where top most tile (start tile) is colors[0]
+    // i.e. if xCheck and yCheck are 1, then the color should be colors[0] (1 ^ 1 = 0)
+    // where top most tile (start tile) is colors[0] , so the pattern will be odd tiles 
+    // Even takes colors[0] and Odd takes colors[1]
     vec3 finalColor = colors[xCheck ^ yCheck];
 
     // Set the output color
