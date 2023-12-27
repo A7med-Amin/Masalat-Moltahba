@@ -53,13 +53,17 @@ namespace our {
         void deserialize(const nlohmann::json& data) override;
     };
 
+    // TODO: (Phase 2) Add class for LightingMaterial
+
     // This function returns a new material instance based on the given type
     inline Material* createMaterialFromType(const std::string& type){
         if(type == "tinted"){
             return new TintedMaterial();
         } else if(type == "textured"){
             return new TexturedMaterial();
-        } else {
+        } 
+        // TODO: (Phase 2) Add condition for LightingMaterial
+        else {
             return new Material();
         }
     }

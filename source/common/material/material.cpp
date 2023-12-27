@@ -185,4 +185,8 @@ namespace our
     // corresponding uniform variable e.g"Material.albedo"
     
 
+    // TODO: (Phase 2) add LightingMaterial::setup() 
+    
+    // TODO: (Phase 2) add LightingMaterial::deserialize()
+
 }

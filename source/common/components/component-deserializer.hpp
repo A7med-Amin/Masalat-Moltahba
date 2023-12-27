@@ -25,6 +25,8 @@ namespace our {
         {
             component = entity->addComponent<MeshRendererComponent>();
         }
+
+        // TODO: (Phase 2) Add new components conditions here
         
         if(component) component->deserialize(data);
     }

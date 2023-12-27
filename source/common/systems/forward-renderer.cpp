@@ -165,6 +165,9 @@ namespace our
                     opaqueCommands.push_back(command);
                 }
             }
+
+            // TODO: (Phase 2) add entity light component to the list of lights
+
         }
 
         // If there is no camera, we return (we cannot render without a camera)
@@ -220,9 +223,18 @@ namespace our
         for (auto opaqueCommand : opaqueCommands)
         {
             opaqueCommand.material->setup();
-            glm::mat4 modelMatrix = opaqueCommand.localToWorld;
-            glm::mat4 ModelViewProjection = ViewProjection * modelMatrix;
-            opaqueCommand.material->shader->set("transform" , ModelViewProjection);
+
+            // TODO: (Phase 2) Add lights logic
+            if()
+            {
+
+            }
+
+            else{
+                glm::mat4 modelMatrix = opaqueCommand.localToWorld;
+                glm::mat4 ModelViewProjection = ViewProjection * modelMatrix;
+                opaqueCommand.material->shader->set("transform" , ModelViewProjection);
+            }
             opaqueCommand.mesh->draw();
         }
         // If there is a sky material, draw the sky
@@ -255,10 +267,18 @@ namespace our
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
         for (auto transparentCommand : transparentCommands)
         {
+            // TODO: (Phase 2) Add lights logic
             transparentCommand.material->setup();
-            glm::mat4 ModelMatrix = transparentCommand.localToWorld;
-            glm::mat4 ModelViewProjection = ViewProjection * ModelMatrix;
-            transparentCommand.material->shader->set("transform" , ModelViewProjection);
+
+            if()
+            {
+                    
+            }
+            else{
+                glm::mat4 ModelMatrix = transparentCommand.localToWorld;
+                glm::mat4 ModelViewProjection = ViewProjection * ModelMatrix;
+                transparentCommand.material->shader->set("transform" , ModelViewProjection);
+                }
             transparentCommand.mesh->draw();
         }
 
@@ -272,6 +292,9 @@ namespace our
             postprocessMaterial->setup();
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
+
+        //  TODO: (Phase 2): setup material light
+        
     }
 
 }
