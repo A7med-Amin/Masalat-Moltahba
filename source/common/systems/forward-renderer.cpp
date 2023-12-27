@@ -79,8 +79,8 @@ namespace our
             // colorTarget->getOpenGLName(): takes a name of texture object not a texture itself
             // 0: represents a mipmap level of texture that i attached to framebuffer (highest resolution of texture)
             // GL_COLOR_ATTACHMENT0: first color attachment to the framebuffer
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTarget->getOpenGLName(), 0);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTarget->getOpenGLName(), 0);
+            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTarget->getOpenGLName(), 0);
+            glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthTarget->getOpenGLName(), 0);
             // TODO: (Req 11) Unbind the framebuffer just to be safe
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
             // Create a vertex array to use for drawing the texture
@@ -267,7 +267,7 @@ namespace our
         {
             // TODO: (Req 11) Return to the default framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-            glBindVertexArray(postprocessFrameBuffer);
+            glBindVertexArray(postProcessVertexArray);
             // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
             postprocessMaterial->setup();
             glDrawArrays(GL_TRIANGLES, 0, 3);
