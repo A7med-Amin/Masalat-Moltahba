@@ -184,9 +184,56 @@ namespace our
     // Then it should bind each texture and sampler to a texture unit and send the unit number to 
     // corresponding uniform variable e.g"Material.albedo"
     
+    // TODO: (Phase 2) add LightingMaterial::setup()
+    void LightMaterial::setup() const{
+        // This function will be used for any setup at first
+        TintedMaterial::setup();
+        // Activate Texture unit 0 to be used in next operations
+        glActiveTexture(GL_TEXTURE0);
+        // albedo texture to the currently active texture unit (texture unit 0 in this case). Binding a texture means making it the current texture that will be used in subsequent rendering operations.
+        albedo->bind();
+        // set a shader uniform "material.albedo" to texture unit 0
+        shader->set("material.albedo", 0);
+        // bind the sampler to texture unit 0
+        sampler->bind(0);
 
-    // TODO: (Phase 2) add LightingMaterial::setup() 
-    
-    // TODO: (Phase 2) add LightingMaterial::deserialize()
+        // Repeat previoud lines for the rest of textures
+        glActiveTexture(GL_TEXTURE1);
+        specular->bind();
+        shader->set("material.specular", 1);
+        sampler->bind(1);
 
+        glActiveTexture(GL_TEXTURE2);
+        emissive->bind();
+        shader->set("material.emissive", 2);
+        sampler->bind(2);
+
+        glActiveTexture(GL_TEXTURE3);
+        roughness->bind();
+        shader->set("material.roughness", 3);
+        sampler->bind(3);
+
+        glActiveTexture(GL_TEXTURE4);
+        ambient_occlusion->bind();
+        shader->set("material.ambient_occlusion", 4);
+        sampler->bind(4);
+    }
+    void LightMaterial::deserialize(const nlohmann:: json& data){
+        // Call deserialize function for the base class
+        TintedMaterial::deserialize(data);
+        // Check if the data does not object
+        if(!data.is_object()) return;
+        // load "albedo" value from Json object and assign the value to class member value -> albedo //
+        albedo = AssetLoader<Texture2D>::get(data.value("albedo" , ""));
+        // load "emissive" value from Json object and assign the value to class member value -> emmissive //
+        emissive = AssetLoader<Texture2D>::get(data.value("emissive" , ""));
+        // load "specular" value from Json object and assign the value to class member value -> specular //
+        specular = AssetLoader<Texture2D>::get(data.value("specular" , ""));
+        // load "ambient_occlusion" value from Json object and assign the value to class member value -> ambient_occlusion //
+        ambient_occlusion = AssetLoader<Texture2D>::get(data.value("ambient_occlusion" , ""));
+        // load "roughness" value from Json object and assign the value to class member value -> roughness //
+        roughness = AssetLoader<Texture2D>::get(data.value("roughness" , ""));
+        // load "sampler" value from Json object and assign the value to class member value -> sampler //
+        sampler = AssetLoader<Sampler>::get(data.value("sampler" , ""));
+    }
 }
