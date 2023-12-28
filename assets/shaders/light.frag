@@ -1,4 +1,4 @@
-// TODO: (Phase 2)
+// DONE TODO: (Phase 2)
 
 #define DIRECTIONAL 0
 #define POINT       1
@@ -76,6 +76,7 @@ float lambert(vec3 normal, vec3 world_to_light_direction) {
 }
 
 float phong(vec3 reflected, vec3 view, float shininess) {
+    // reflected = reflect(-world_to_light_dir, normal)
     return pow(max(0.0f, dot(reflected, view)), shininess);
 }
 
@@ -83,7 +84,7 @@ float phong(vec3 reflected, vec3 view, float shininess) {
 void main() {
     vec3 normal = normalize(fsin.normal);
     vec3 view = normalize(fsin.view);
-    
+
     vec3 ambient_light = compute_sky_light(normal);
 
     vec3 diffuse = texture(material.albedo, fsin.tex_coord).rgb;
@@ -127,6 +128,7 @@ void main() {
         color += (computed_diffuse + computed_specular) * attenuation;
     }
 
+    // TODO: (Phase 2) Make sure
     frag_color = fsin.color * vec4(color, 1.0f);
 }
 

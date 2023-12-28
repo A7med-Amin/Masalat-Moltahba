@@ -5,6 +5,7 @@
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
+#include "light.hpp"
 
 namespace our {
 
@@ -27,6 +28,10 @@ namespace our {
         }
 
         // TODO: (Phase 2) Add new components conditions here
+        else if(type == LightComponent::getID()
+        {
+            component = entity->addComponent<LightComponent>();
+        })
         
         if(component) component->deserialize(data);
     }

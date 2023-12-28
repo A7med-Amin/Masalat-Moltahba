@@ -53,7 +53,7 @@ namespace our {
         void deserialize(const nlohmann::json& data) override;
     };
 
-    // TODO: (Phase 2) Add class for LightingMaterial
+    // DONE TODO: (Phase 2) Add class for LightingMaterial 
     // This class used to add materials for lighting
     class LightMaterial : public TintedMaterial {
     public:
