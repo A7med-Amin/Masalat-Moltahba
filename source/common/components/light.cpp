@@ -2,6 +2,8 @@
 #include "../ecs/entity.hpp"
 #include "../deserialize-utils.hpp"
 
+// DONE TODO: (Phase 2) Create the `LightComponent`
+
 namespace our
 {
     void LightComponent::deserialize(const nlohmann::json &data)

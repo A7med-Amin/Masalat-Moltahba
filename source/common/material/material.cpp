@@ -184,7 +184,7 @@ namespace our
     // Then it should bind each texture and sampler to a texture unit and send the unit number to 
     // corresponding uniform variable e.g"Material.albedo"
     
-    // TODO: (Phase 2) add LightingMaterial::setup()
+    // DONE TODO: (Phase 2) add LightingMaterial::setup() 
     void LightMaterial::setup() const{
         // This function will be used for any setup at first
         TintedMaterial::setup();
@@ -218,6 +218,7 @@ namespace our
         shader->set("material.ambient_occlusion", 4);
         sampler->bind(4);
     }
+
     void LightMaterial::deserialize(const nlohmann:: json& data){
         // Call deserialize function for the base class
         TintedMaterial::deserialize(data);

@@ -3,6 +3,8 @@
 #include <glm/gtx/euler_angles.hpp>
 #include <glm/glm.hpp>
 #include <json/json.hpp>
+
+// DONE TODO: (Phase 2) Create the `LightComponent`
 namespace our
 {
     class LightComponent : public Component
