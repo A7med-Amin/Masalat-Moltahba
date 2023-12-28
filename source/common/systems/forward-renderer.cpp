@@ -1,7 +1,10 @@
 #include "forward-renderer.hpp"
 #include "../mesh/mesh-utils.hpp"
 #include "../texture/texture-utils.hpp"
-
+#define DIRECTIONAL 0
+#define POINT 1
+#define SPOT 2
+#define SPOT_NUM 6
 namespace our
 {
 
@@ -165,9 +168,18 @@ namespace our
                     opaqueCommands.push_back(command);
                 }
             }
-
             // TODO: (Phase 2) add entity light component to the list of lights
-
+            if (auto light = entity->getComponent<LightComponent>(); light)
+            {
+                if (light->light_type == SPOT)
+                {
+                    spot_light.push_back(light);
+                }
+                else
+                {
+                    point_directional_lights.push_back(light);
+                }
+            }
         }
 
         // If there is no camera, we return (we cannot render without a camera)
@@ -184,7 +196,6 @@ namespace our
         glm::vec3 positionOfCameraPoints = Matrix * glm::vec4(0, 0, -1, 1);
         glm::vec3 cameraForward = glm::normalize(positionOfCameraPoints - positionOfCamera);
 
-
         std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand &first, const RenderCommand &second)
                   {
             //TODO: (Req 9) Finish this function
@@ -192,7 +203,14 @@ namespace our
             // here i need to check the first will be rendered first before the second so, i will use
             // dot product between the first and forward and second and forward and the first should be greter than first after dot product
             return glm::dot(cameraForward , first.center) > glm::dot(cameraForward , second.center); });
-
+        // This function used to sort spot lights ascendingly according to the distance from the camera
+        // Calculate the world position for two lights (first , second) and then use dot product to sort ascendingly
+        std::sort(spot_light.begin(), spot_light.end(), [cameraForward](const LightComponent* first, const LightComponent* second)
+                  {
+            // get world position of first light
+            auto firstPosition = glm::vec3(first->getOwner()->getLocalToWorldMatrix() * glm::vec4(first->getOwner()->localTransform.position, 1.0));
+            auto secondPosition = glm::vec3(second->getOwner()->getLocalToWorldMatrix() * glm::vec4(second->getOwner()->localTransform.position, 1.0));
+            return firstPosition.x > secondPosition.x; });
         // TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
         //  to get ViewProjection matrix , firstly get Projection matrix and then multiply it with View Matrix
         glm::mat4 ViewProjection = camera->getProjectionMatrix(this->windowSize) * camera->getViewMatrix();
@@ -223,18 +241,80 @@ namespace our
         for (auto opaqueCommand : opaqueCommands)
         {
             opaqueCommand.material->setup();
-
             // TODO: (Phase 2) Add lights logic
-            // if()
-            // {
+            if (dynamic_cast<our::LightMaterial *>(opaqueCommand.material))
+            {
+                int index = 0;
+                for (auto it = point_directional_lights.begin(); it != point_directional_lights.end(); it++, index++)
+                {
+                    opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].type", (*it)->light_type);
+                    if ((*it)->light_type == 0)
+                    {
+                        opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].direction",
+                                                            (*it)->direction);
+                        opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].color",
+                                                            (*it)->color);
+                    }
+                    else
+                    {
+                        glm::mat4 m = point_directional_lights[index]->getOwner()->getLocalToWorldMatrix();
+                        glm::mat4 mVP = ViewProjection * m;
+                        auto lightPosition =
+                            glm::vec3(m *
+                                      glm::vec4((point_directional_lights[index])->getOwner()->localTransform.position, 1.0));
 
-            // }
+                        opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].position",
+                                                            lightPosition);
+                        opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].color",
+                                                            (*it)->color);
+                        opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].attenuation",
+                                                            (*it)->attenuation);
+                    }
+                }
+                int index2 = 0;
+                // Loop through the street_lights to send light data to the shader (limited by SPOT_NUM)
+                for (auto it = spot_light.begin(); index2 < SPOT_NUM; it++, index++, index2++)
+                {
+                    // Set the light type for the current index
+                    opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].type", (*it)->light_type);
 
-            // else{
+                    // spot light
+                    glm::mat4 m = spot_light[index2]->getOwner()->getLocalToWorldMatrix();
+                    glm::mat4 mVP = m;
+                    // for testing
+                    auto lightPosition =
+                        glm::vec3(
+                            glm::vec4((spot_light[index2])->getOwner()->localTransform.position, 1.0));
+                    lightPosition.y += 3.0; // Adjusting the position to simulate the upper part of the street light
+
+                    // Set position, direction, color, attenuation, and cone angles for the spot light
+                    opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].position",
+                                                        lightPosition);
+                    opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].direction",
+                                                        (*it)->direction);
+                    opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].color",
+                                                        (*it)->color);
+                    opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].attenuation",
+                                                        (*it)->attenuation);
+                    opaqueCommand.material->shader->set("lights[" + std::to_string(index) + "].cone_angles",
+                                                        (*it)->cone_angles);
+                }
+                opaqueCommand.material->shader->set("light_count", (int32_t)point_directional_lights.size() + SPOT_NUM);
+                opaqueCommand.material->shader->set("sky.top", glm::vec3(0.1, 0.5, 0.1));
+                opaqueCommand.material->shader->set("sky.bottom", glm::vec3(0.1, 0.5, 0.1));
+                opaqueCommand.material->shader->set("sky.horizon", glm::vec3(0.1, 0.5, 0.1));
+
+                opaqueCommand.material->shader->set("VP", ViewProjection);
+                opaqueCommand.material->shader->set("M", opaqueCommand.localToWorld);
+                opaqueCommand.material->shader->set("M_IT", glm::transpose(glm::inverse(opaqueCommand.localToWorld)));
+                opaqueCommand.material->shader->set("camera_position", positionOfCamera);
+            }
+            else
+            {
                 glm::mat4 modelMatrix = opaqueCommand.localToWorld;
                 glm::mat4 ModelViewProjection = ViewProjection * modelMatrix;
-                opaqueCommand.material->shader->set("transform" , ModelViewProjection);
-            // }
+                opaqueCommand.material->shader->set("transform", ModelViewProjection);
+            }
             opaqueCommand.mesh->draw();
         }
         // If there is a sky material, draw the sky
@@ -269,16 +349,69 @@ namespace our
         {
             // TODO: (Phase 2) Add lights logic
             transparentCommand.material->setup();
+            if (dynamic_cast<our::LightMaterial *>(transparentCommand.material))
+            {
+                int index = 0;
+                for (auto it = point_directional_lights.begin(); it != point_directional_lights.end(); it++, index++)
+                {
+                    transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].type",
+                                                             (*it)->light_type);
+                    if ((*it)->light_type == 0)
+                    {
+                        transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].direction",
+                                                                 (*it)->direction);
+                        transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].color",
+                                                                 (*it)->color);
+                    }
+                    else
+                    {
+                        transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].position",
+                                                                 (*it)->getOwner()->localTransform.position);
+                        transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].color",
+                                                                 (*it)->color);
+                        transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].attenuation",
+                                                                 (*it)->attenuation);
+                    }
+                }
+                int index2 = 0;
+                for (auto it = spot_light.begin(); index2 < SPOT_NUM; it++, index++, index2++)
+                {
+                    transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].type", (*it)->light_type);
+                    glm::mat4 m = spot_light[index2]->getOwner()->getLocalToWorldMatrix();
+                    glm::mat4 mVP = m;
+                    auto lightPosition =
+                        glm::vec3(
+                            glm::vec4((spot_light[index2])->getOwner()->localTransform.position, 1.0));
+                    lightPosition.y += 3.0; // to simulate the upper part of the streat light not the base part
+                    transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].position",
+                                                             lightPosition);
+                    transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].direction",
+                                                             (*it)->direction);
+                    transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].color",
+                                                             (*it)->color);
+                    transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].attenuation",
+                                                             (*it)->attenuation);
+                    transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].cone_angles",
+                                                             (*it)->cone_angles);
+                }
+                // std::cout << "num of lightsis : " << (int32_t)lights_list.size() << std::endl;
+                transparentCommand.material->shader->set("light_count", (int32_t)point_directional_lights.size());
+                transparentCommand.material->shader->set("sky.top", glm::vec3(0.1, 0.5, 0.1));
+                transparentCommand.material->shader->set("sky.bottom", glm::vec3(0.1, 0.5, 0.1));
+                transparentCommand.material->shader->set("sky.horizon", glm::vec3(0.1, 0.5, 0.1));
 
-            // if()
-            // {
-                    
-            // }
-            // else{
+                transparentCommand.material->shader->set("VP", ViewProjection);
+                transparentCommand.material->shader->set("M", transparentCommand.localToWorld);
+                transparentCommand.material->shader->set("M_IT",
+                                                         glm::transpose(glm::inverse(transparentCommand.localToWorld)));
+                transparentCommand.material->shader->set("camera_position", positionOfCamera); // eye * Model of camera
+            }
+            else
+            {
                 glm::mat4 ModelMatrix = transparentCommand.localToWorld;
                 glm::mat4 ModelViewProjection = ViewProjection * ModelMatrix;
-                transparentCommand.material->shader->set("transform" , ModelViewProjection);
-                // }
+                transparentCommand.material->shader->set("transform", ModelViewProjection);
+            }
             transparentCommand.mesh->draw();
         }
 
@@ -292,9 +425,5 @@ namespace our
             postprocessMaterial->setup();
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
-
-        //  TODO: (Phase 2): setup material light
-        
     }
-
 }
