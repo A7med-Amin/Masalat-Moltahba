@@ -293,7 +293,7 @@ namespace our
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
 
-        //  TODO: (Phase 2): setup material light
+        //  TODO: (Phase 2): setup light material
         
     }
 

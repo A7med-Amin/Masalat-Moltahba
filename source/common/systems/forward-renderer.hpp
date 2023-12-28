@@ -41,7 +41,7 @@ namespace our
         Texture2D *colorTarget, *depthTarget;
         TexturedMaterial* postprocessMaterial;
 
-        // TODO: (Phase 2) Add lights lists to the forward renderer
+        // TODO: (Phase 2) Add lights list to the forward renderer
 
     public:
         // Initialize the renderer including the sky and the Postprocessing objects.
