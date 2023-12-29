@@ -225,16 +225,16 @@ namespace our
             opaqueCommand.material->setup();
 
             // TODO: (Phase 2) Add lights logic
-            if()
-            {
+            // if()
+            // {
 
-            }
+            // }
 
-            else{
+            // else{
                 glm::mat4 modelMatrix = opaqueCommand.localToWorld;
                 glm::mat4 ModelViewProjection = ViewProjection * modelMatrix;
                 opaqueCommand.material->shader->set("transform" , ModelViewProjection);
-            }
+            // }
             opaqueCommand.mesh->draw();
         }
         // If there is a sky material, draw the sky
@@ -271,15 +271,15 @@ namespace our
             transparentCommand.material->setup();
 
             // dynamic_cast<LightingMaterial*>()
-            if(this->material == )
-            {
+            // if(this->material == )
+            // {
                     
-            }
-            else{
+            // }
+            // else{
                 glm::mat4 ModelMatrix = transparentCommand.localToWorld;
                 glm::mat4 ModelViewProjection = ViewProjection * ModelMatrix;
                 transparentCommand.material->shader->set("transform" , ModelViewProjection);
-            }
+            // }
             transparentCommand.mesh->draw();
         }
 
