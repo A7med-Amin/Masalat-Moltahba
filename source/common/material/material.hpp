@@ -54,6 +54,13 @@ namespace our {
     };
 
     // TODO: (Phase 2) Add class for LightingMaterial
+    class LightingMaterial : public TintedMaterial {
+    public:
+        // TODO: (Phase 2) ADD Attributes
+
+        void setup() const override;
+        void deserialize(const nlohmann::json& data) override;
+    };
 
     // This function returns a new material instance based on the given type
     inline Material* createMaterialFromType(const std::string& type){

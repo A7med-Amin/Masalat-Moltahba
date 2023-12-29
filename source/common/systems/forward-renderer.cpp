@@ -270,7 +270,8 @@ namespace our
             // TODO: (Phase 2) Add lights logic
             transparentCommand.material->setup();
 
-            if()
+            // dynamic_cast<LightingMaterial*>()
+            if(this->material == )
             {
                     
             }
@@ -278,7 +279,7 @@ namespace our
                 glm::mat4 ModelMatrix = transparentCommand.localToWorld;
                 glm::mat4 ModelViewProjection = ViewProjection * ModelMatrix;
                 transparentCommand.material->shader->set("transform" , ModelViewProjection);
-                }
+            }
             transparentCommand.mesh->draw();
         }
 
