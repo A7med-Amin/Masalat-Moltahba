@@ -15,6 +15,13 @@
 
 namespace our {
 
+    // The motion state of the player
+    enum MotionState
+    {
+        RUNNING,
+        RESTING,
+    };
+    
     // This struct handles window attributes: (title, size, isFullscreen).
     struct WindowConfiguration {
         std::string title;
@@ -71,6 +78,8 @@ namespace our {
         virtual void setupCallbacks();                              // Sets-up the window callback functions from GLFW to our (Mouse/Keyboard) classes.
 
     public:
+
+        int heartCount = 3;
 
         // Create an application with following configuration
         Application(const nlohmann::json& app_config) : app_config(app_config) {}
