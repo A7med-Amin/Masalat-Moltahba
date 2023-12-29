@@ -30,25 +30,13 @@
                 "grass": "assets/textures/grass_ground_d.jpg",
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
-                "monkey": "assets/textures/monkey.png",
-                "masalah": "assets/textures/masalah/FancObel_t.jpeg",
-                "house": "assets/textures/civilBuilding/MergedBake_Bake1_PBR_Normal.png",
-                "house_diffuse": "assets/textures/civilBuilding/MergedBake_Bake1_PBR_Diffuse.png",
-                "house_roughness": "assets/textures/civilBuilding/MergedBake_Bake1_PBR_Roughness.png",
-                "road": "assets/textures/road.jpg",
-                "road_albedo": "assets/textures/road_albedo2.png",
-                "road_specular": "assets/textures/road_specular2.png",
-                "road_roughness": "assets/textures/road_roughness2.png",
-                "road_ambient_occlusion": "assets/textures/road_AO2.png",
-                "road_emissive": "assets/textures/road_emissive2.png"
+                "monkey": "assets/textures/monkey.png"
             },
             "meshes":{
                 "cube": "assets/models/cube.obj",
                 "monkey": "assets/models/monkey.obj",
                 "plane": "assets/models/plane.obj",
-                "sphere": "assets/models/sphere.obj",
-                "masalah": "assets/models/masalah.obj",
-                "house": "assets/models/winterhouse.obj"
+                "sphere": "assets/models/sphere.obj"
             },
             "samplers":{
                 "default":{},
@@ -136,64 +124,6 @@
                     "tint": [1, 1, 1, 1],
                     "texture": "moon",
                     "sampler": "default"
-                },
-                "masalah":{
-                    "type": "textured",
-                    "shader": "textured",
-                    "pipelineState": {
-                        "faceCulling":{
-                            "enabled": false
-                        },
-                        "depthTesting":{
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "texture": "masalah",
-                    "sampler": "default"
-                },
-                "house":{
-                    "type": "textured",
-                    "shader": "textured",
-                    "pipelineState": {
-                        "faceCulling":{
-                            "enabled": false
-                        },
-                        "depthTesting":{
-                            "enabled": true
-                        }
-                    },
-                    "tint": [1, 1, 1, 1],
-                    "texture": "house",
-                    "sampler": "default",
-                    "roughness": "house_roughness",
-                    "albedo": "house_diffuse"
-
-                },
-                "road": {
-                    "type": "lighted",
-                    "shader": "lighted",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [
-                        1,
-                        1,
-                        1,
-                        1
-                    ],
-                    "texture": "road",
-                    "albedo": "road_albedo",
-                    "specular": "road_specular",
-                    "roughness": "road_roughness",
-                    "emissive": "road_emissive",
-                    "ambient_occlusion": "road_ambient_occlusion",
-                    "sampler": "default"
                 }
             }
         },
@@ -224,49 +154,108 @@
                 ]
             },
             {
-                "position": [0, 0, 0],
-                // "rotation": [-45, 0, 0],
+                "rotation": [-45, 0, 0],
                 "components": [
                     {
                         "type": "Mesh Renderer",
-                        "mesh": "masalah",
-                        "material": "masalah"
+                        "mesh": "monkey",
+                        "material": "monkey"
+                    },
+                    {
+                        "type": "Movement",
+                        "linearVelocity": [0, 0.1, 0],
+                        "angularVelocity": [0, 45, 0]
                     }
                 ]
             },
             {
-                "position": [10, 0, 0],
-                // "rotation": [-45, 0, 0],
-                "components": [
-                    {
-                        "type": "Mesh Renderer",
-                        "mesh": "house",
-                        "material": "house"
-                    }
-                ]
-            },
-            {
-                "position": [-100, -1,0],
-                "rotation": [-90,0,0],
-                "scale": [1000,10,1],
+                "position": [0, -1, 0],
+                "rotation": [-90, 0, 0],
+                "scale": [10, 10, 1],
                 "components": [
                     {
                         "type": "Mesh Renderer",
                         "mesh": "plane",
-                        "material": "road"
-                    },
-                    {
-                        "type": "Repeat",
-                        "translation": [
-                            -100,
-                            0,
-                            0
-                        ]
+                        "material": "grass"
                     }
                 ]
             },
-
-
+            {
+                "position": [0, 1, 2],
+                "rotation": [0, 0, 0],
+                "scale": [2, 2, 2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "glass"
+                    }
+                ]
+            },
+            {
+                "position": [0, 1, -2],
+                "rotation": [0, 0, 0],
+                "scale": [2, 2, 2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "glass"
+                    }
+                ]
+            },
+            {
+                "position": [2, 1, 0],
+                "rotation": [0, 90, 0],
+                "scale": [2, 2, 2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "glass"
+                    }
+                ]
+            },
+            {
+                "position": [-2, 1, 0],
+                "rotation": [0, 90, 0],
+                "scale": [2, 2, 2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "glass"
+                    }
+                ]
+            },
+            {
+                "position": [0, 3, 0],
+                "rotation": [90, 0, 0],
+                "scale": [2, 2, 2],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "glass"
+                    }
+                ]
+            },
+            {
+                "position": [0, 10, 0],
+                "rotation": [45, 45, 0],
+                "scale": [5, 5, 5],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "sphere",
+                        "material": "moon"
+                    },
+                    {
+                        "type": "Movement",
+                        "angularVelocity": [0, 90, 0]
+                    }
+                ]
+            }
         ]
     }
 }
