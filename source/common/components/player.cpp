@@ -1,14 +1,11 @@
-//TODO: (Phase 2)
-#include "collision.hpp"
+#include "player.hpp"
 #include "../ecs/entity.hpp"
 #include "../deserialize-utils.hpp"
 
 namespace our {
     // Reads linearVelocity & angularVelocity from the given json object
-    void CollisionComponent::deserialize(const nlohmann::json &data) {
+    void PlayerComponent::deserialize(const nlohmann::json &data) {
         if (!data.is_object()) return;
-        start = data.value("start", start);
-        end = data.value("end", end);
+        this->speed = data.value("speed", this->speed);
     }
 }
-
