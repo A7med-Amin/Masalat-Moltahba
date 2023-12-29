@@ -18,7 +18,7 @@ namespace our
     public:
 
         // This should be called every frame to update all entities containing a MovementComponent. 
-        void update(World* world, float deltaTime, our::MotionState motionState) {
+        void update(World* world, float deltaTime) {
             // TODO: (Phase 2) Add movement logic here
 
             // For each entity in the world
@@ -26,12 +26,14 @@ namespace our
                 // Get the movement component if it exists
                 MovementComponent* movement = entity->getComponent<MovementComponent>();
                 // If the movement component exists
-                if(movement && motionState == our::MotionState::RUNNING){
+                if(movement){
                     // Change the position and rotation based on the linear & angular velocity and delta time.
                     entity->localTransform.position += deltaTime * movement->linearVelocity;
                     entity->localTransform.rotation += deltaTime * movement->angularVelocity;
                 }
             }
         }
+
     };
+
 }
