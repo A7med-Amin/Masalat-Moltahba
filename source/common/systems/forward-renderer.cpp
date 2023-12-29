@@ -381,7 +381,7 @@ namespace our
                     glm::mat4 mVP = m;
                     auto lightPosition =
                         glm::vec3(
-                            glm::vec4((spot_light[index2])->getOwner()->localTransform.position, 1.0));
+                            m * glm::vec4((spot_light[index2])->getOwner()->localTransform.position, 1.0));
                     lightPosition.y += 3.0; // to simulate the upper part of the streat light not the base part
                     transparentCommand.material->shader->set("lights[" + std::to_string(index) + "].position",
                                                              lightPosition);
