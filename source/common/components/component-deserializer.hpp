@@ -6,6 +6,12 @@
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
 #include "light.hpp"
+#include "collision.hpp"
+#include "masala.hpp"
+#include "heart.hpp"
+#include "gem-heart.hpp"
+#include "player.hpp"
+#include "repeat.hpp"
 
 namespace our {
 
@@ -32,8 +38,37 @@ namespace our {
         {
             component = entity->addComponent<LightComponent>();
         }
-        
-        
+
+        else if(type == CollisionComponent::getID())
+        {
+            component = entity->addComponent<CollisionComponent>();
+        }
+
+        else if(type == MasalaComponent::getID())
+        {
+            component = entity->addComponent<MasalaComponent>();
+        }
+
+        else if(type == HeartComponent::getID())
+        {
+            component = entity->addComponent<HeartComponent>();
+        }
+
+        else if(type == GemHeartComponent::getID())
+        {
+            component = entity->addComponent<GemHeartComponent>();
+        }
+
+        else if(type == PlayerComponent::getID())
+        {
+            component = entity->addComponent<PlayerComponent>();
+        }
+
+        else if(type == RepeatComponent::getID())
+        {
+            component = entity->addComponent<RepeatComponent>();
+        }
+
         if(component) component->deserialize(data);
     }
 

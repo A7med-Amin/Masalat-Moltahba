@@ -14,6 +14,8 @@
 namespace our
 {
 
+    //TODO: (Phase 2) free camera controller
+
     // The free camera controller system is responsible for moving every entity which contains a FreeCameraControllerComponent.
     // This system is added as a slightly complex example for how use the ECS framework to implement logic. 
     // For more information, see "common/components/free-camera-controller.hpp"
