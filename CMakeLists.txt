@@ -78,13 +78,30 @@ set(COMMON_SOURCES
         source/common/components/movement.hpp
         source/common/components/movement.cpp
         source/common/components/component-deserializer.hpp
+        source/common/components/collision.hpp
+        source/common/components/collision.cpp
         source/common/components/light.hpp
         source/common/components/light.cpp
+        source/common/components/heart.hpp
+        source/common/components/heart.cpp
+        source/common/components/gem-heart.hpp
+        source/common/components/gem-heart.cpp
+        source/common/components/masala.hpp
+        source/common/components/masala.cpp
+        source/common/components/player.hpp
+        source/common/components/player.cpp
+        source/common/components/repeat.hpp
+        source/common/components/repeat.cpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp
         source/common/systems/free-camera-controller.hpp
         source/common/systems/movement.hpp
+        source/common/systems/collision.hpp
+        source/common/systems/collision.cpp
+        source/common/systems/repeat.hpp
+        source/common/systems/repeat.cpp
+        
 )
 
 # Define the directories in which to search for the included headers
@@ -114,6 +131,9 @@ set(STATES_SOURCES
         source/states/material-test-state.hpp
         source/states/entity-test-state.hpp
         source/states/renderer-test-state.hpp
+        source/states/game-over-state.hpp
+        source/states/winning-state.hpp
+
 )
 
 # For each example, we add an executable target
