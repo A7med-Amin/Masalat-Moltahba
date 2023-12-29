@@ -53,26 +53,36 @@ namespace our {
         void deserialize(const nlohmann::json& data) override;
     };
 
-    // TODO: (Phase 2) Add class for LightingMaterial
-    class LightingMaterial : public TintedMaterial {
+    // DONE TODO: (Phase 2) Add class for LightingMaterial 
+    // This class used to add materials for lighting
+    class LightMaterial : public TintedMaterial {
     public:
-        // TODO: (Phase 2) ADD Attributes
-
+        Sampler* sampler;
+        Texture2D* albedo;
+        Texture2D* emissive;
+        Texture2D* roughness;
+        Texture2D* specular;
+        Texture2D* ambient_occlusion;
         void setup() const override;
-        void deserialize(const nlohmann::json& data) override;
+        void deserialize(const nlohmann::json &data) override;
     };
 
     // This function returns a new material instance based on the given type
     inline Material* createMaterialFromType(const std::string& type){
-        if(type == "tinted"){
+        if(type == "tinted")
+        {
             return new TintedMaterial();
-        } else if(type == "textured"){
+        } 
+        else if(type == "textured")
+        {
             return new TexturedMaterial();
         } 
-        // TODO: (Phase 2) Add condition for LightingMaterial
+        else if(type == "lighted")
+        {
+            return new LightMaterial();
+        }
         else {
             return new Material();
         }
     }
-
 }

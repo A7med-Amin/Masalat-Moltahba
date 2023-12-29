@@ -10,6 +10,8 @@
 #include <functional>
 #include <array>
 
+// TODO: (Phase 2) change a menu state
+
 // This struct is used to store the location and size of a button and the code it should execute when clicked
 struct Button {
     // The position (of the top-left corner) of the button and its size in pixels

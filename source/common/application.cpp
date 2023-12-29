@@ -24,6 +24,9 @@
 
 #include "texture/screenshot.hpp"
 
+#include "stb/stb_image.h"
+
+
 std::string default_screenshot_filepath() {
     std::stringstream stream;
     auto time = std::time(nullptr);

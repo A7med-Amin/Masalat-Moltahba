@@ -129,13 +129,13 @@
         },
         "world":[
             {
-                "position": [0, 0, 10],
+                "position": [0, 2, 10],
                 "components": [
                     {
                         "type": "Camera"
                     },
                     {
-                        "type": "Free Camera Controller"
+                        "type": "Player"
                     }
                 ],
                 "children": [

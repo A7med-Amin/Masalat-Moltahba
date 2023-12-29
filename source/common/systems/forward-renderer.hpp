@@ -4,6 +4,7 @@
 #include "../components/camera.hpp"
 #include "../components/mesh-renderer.hpp"
 #include "../asset-loader.hpp"
+#include "../components/light.hpp"
 
 #include <glad/gl.h>
 #include <vector>
@@ -42,6 +43,8 @@ namespace our
         TexturedMaterial* postprocessMaterial;
 
         // TODO: (Phase 2) Add lights lists to the forward renderer
+        std::vector<LightComponent *> point_directional_lights;
+        std::vector<LightComponent *> spot_light;
 
     public:
         // Initialize the renderer including the sky and the Postprocessing objects.
@@ -51,8 +54,5 @@ namespace our
         void destroy();
         // This function should be called every frame to draw the given world
         void render(World* world);
-
-
     };
-
 }
