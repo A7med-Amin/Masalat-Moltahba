@@ -12,6 +12,7 @@
 #include "gem-heart.hpp"
 #include "player.hpp"
 #include "repeat.hpp"
+#include "final-line.hpp"
 
 namespace our {
 
@@ -67,6 +68,11 @@ namespace our {
         else if(type == RepeatComponent::getID())
         {
             component = entity->addComponent<RepeatComponent>();
+        }
+
+        else if(type == FinalLineComponent::getID())
+        {
+            component = entity->addComponent<FinalLineComponent>();
         }
 
         if(component) component->deserialize(data);
