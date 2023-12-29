@@ -3,7 +3,7 @@
 #include "../deserialize-utils.hpp"
 
 namespace our {
-    // Reads linearVelocity & angularVelocity from the given json object
+    // Moves the player by given speed from json
     void PlayerComponent::deserialize(const nlohmann::json &data) {
         if (!data.is_object()) return;
         this->speed = data.value("speed", this->speed);

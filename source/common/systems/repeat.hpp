@@ -10,7 +10,8 @@
 
 namespace our {
 
-    // The repeat system is responsible for repeating the entities.
+    // The repeat system is responsible for repeating the entities, 
+    // by moving it forward within the screen 
     class RepeatSystem {
     public:
         Application *app; // The application in which the state runs
