@@ -363,7 +363,15 @@
             "type": "Collision",
             "start": [-0.5, -0.5, -0.5],
             "end": [0.5, 0.5, 0.5]
-          }
+          },
+          {
+            "type": "Repeat",
+            "translation": [
+                0,
+                0,
+                -100
+            ]
+        }
           // ,
           // {
           //     "type": "Repeat",
@@ -378,13 +386,21 @@
       {
         "position": [-10, 0, -40],
         "scale": [0.2, 0.2, 0.2],
-        "duplicates": [2, 20, false],
+        "duplicates": [2, 20, true],
         "components": [
           {
             "type": "Mesh Renderer",
             "mesh": "house",
             "material": "house"
-          }
+          },
+          {
+            "type": "Repeat",
+            "translation": [
+                0,
+                0,
+                -100
+            ]
+        }
         ]
       },
 
