@@ -35,7 +35,7 @@ class GameOverstate : public our::State
         MenuMaterial->shader->attach("assets/shaders/textured.vert", GL_VERTEX_SHADER);
         MenuMaterial->shader->attach("assets/shaders/textured.frag", GL_FRAGMENT_SHADER);
         MenuMaterial->shader->link();
-        MenuMaterial->texture = our::texture_utils::loadImage("assets/textures/game-over.jpg");
+        MenuMaterial->texture = our::texture_utils::loadImage("assets/textures/game-over.png");
         MenuMaterial->tint = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 
         HighlightedMaterial = new our::TintedMaterial();
