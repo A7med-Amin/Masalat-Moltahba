@@ -128,7 +128,7 @@ namespace our
                 {
                     if(entity->getComponent<PlayerComponent>())
                     {
-                        std::cout << "Collide with Player"<< std::endl;
+                        // std::cout << "Collide with Player"<< std::endl;
                         continue;
                     }
 
