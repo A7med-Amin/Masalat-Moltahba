@@ -22,6 +22,6 @@
         //     "cwd": "${workspaceFolder}",
         //     "program": "${workspaceFolder}/bin/GAME_APPLICATION.exe",
         //     "args": ["-c=${workspaceFolder}/config/shader-test/test-0.jsonc"]
-        // }    
+        // }
     ]
 }

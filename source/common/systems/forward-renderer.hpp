@@ -9,6 +9,7 @@
 #include <glad/gl.h>
 #include <vector>
 #include <algorithm>
+#include "../application.hpp"
 
 namespace our
 {
@@ -41,6 +42,8 @@ namespace our
         GLuint postprocessFrameBuffer, postProcessVertexArray;
         Texture2D *colorTarget, *depthTarget;
         TexturedMaterial* postprocessMaterial;
+        Application *app; // The application in which the state runs
+        std::string lastPostProcess = "";
 
         // TODO: (Phase 2) Add lights lists to the forward renderer
         // std::vector<LightComponent *> point_directional_lights;
@@ -54,6 +57,12 @@ namespace our
         // Clean up the renderer
         void destroy();
         // This function should be called every frame to draw the given world
-        void render(World* world);
+        void render(World* world, const std::string &postProcessFilter);
+
+        // When a state enters, it should call this function and give it the pointer to the application
+        void enter(Application *app)
+        {
+            this->app = app;
+        }
     };
 }
