@@ -88,7 +88,7 @@ class Playstate: public our::State {
         cameraController.update(&world, (float)deltaTime, didCollide);
         
         repeatSystem.update(&world, (float) deltaTime);
-        finalLineSystem.update(&world, (float) deltaTime);
+        finalLineSystem.update(&world, (float) deltaTime, getApp()->heartCount);
 
         std::string postProcessFrag = "assets/shaders/postprocess/vignette.frag";
         

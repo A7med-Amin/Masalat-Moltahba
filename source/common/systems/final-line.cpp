@@ -6,9 +6,10 @@
 #include "../components/final-line.hpp"
 
 #include <glm/glm.hpp>
+#include <iostream>
 
 namespace our {
-    void FinalLineSystem::update(World *world, float deltaTime) {
+    void FinalLineSystem::update(World *world, float deltaTime, int &heartCount) {
 
         // Find the player
         glm::vec3 playerPosition;
@@ -38,9 +39,11 @@ namespace our {
             glm::vec3 &finalLinePosition = finalLineEntity->localTransform.position;
             // If the player component exists
             if (finalLineComponent) {
-                if (playerPosition[0] <= finalLinePosition[0]) {
+                if (playerPosition[2] <= finalLinePosition[2]) {
+                    heartCount = 3;
                     // Change the state to winning
                     this->app->changeState("winning");
+                    std::cout<<"WIN" << std::endl;
                     break;
                 }
             }
