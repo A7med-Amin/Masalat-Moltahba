@@ -50,8 +50,8 @@ namespace our
             FreeCameraControllerComponent *controller = nullptr;
             int collisionFactor = 1;
 
-            float jumpSpeed = 6;
-            float jumpMaxHeight = 4;
+            float jumpSpeed = 8;
+            float jumpMaxHeight = 5;
             for (auto entity : world->getEntities())
             {
                 camera = entity->getComponent<CameraComponent>();
@@ -116,35 +116,35 @@ namespace our
                 // S & W moves the player back and forth
                 if (app->getKeyboard().isPressed(GLFW_KEY_W))
                 {
-                    // We set the jump state to JUMPING
-                    jumpState = our::JumpState::JUMPING;
-                    // Start the jump
-                    position.z += (deltaTime * jumpSpeed * collisionFactor);
-                    if (position.z >= jumpMaxHeight)
-                    {
-                        jumpState = our::JumpState::FALLING;
-                    }
-                    else if (position.z <= 1)
-                    {
-                        // If the player was falling, we set the jump state to GROUNDED
-                        jumpState = our::JumpState::GROUNDED;
-                    }
+                    // // We set the jump state to JUMPING
+                    // jumpState = our::JumpState::JUMPING;
+                    // // Start the jump
+                    // position.z += (deltaTime * jumpSpeed * collisionFactor);
+                    // if (position.z >= jumpMaxHeight)
+                    // {
+                    //     jumpState = our::JumpState::FALLING;
+                    // }
+                    // else if (position.z <= 1)
+                    // {
+                    //     // If the player was falling, we set the jump state to GROUNDED
+                    //     jumpState = our::JumpState::GROUNDED;
+                    // }
 
-                    // We update the player position based on the jump state
-                    if (jumpState == our::JumpState::JUMPING)
-                    {
-                        position.z -= (deltaTime * jumpSpeed);
-                    }
-                    else if (jumpState == our::JumpState::FALLING)
-                    {
-                        // We update the player position based on the jump state
-                        position.z += (deltaTime * jumpSpeed);
-                    }
-                    else
-                    {
-                        // We make sure the player is grounded
-                        position.z = 1;
-                    }
+                    // // We update the player position based on the jump state
+                    // if (jumpState == our::JumpState::JUMPING)
+                    // {
+                    //     position.z -= (deltaTime * jumpSpeed);
+                    // }
+                    // else if (jumpState == our::JumpState::FALLING)
+                    // {
+                    //     // We update the player position based on the jump state
+                    //     position.z += (deltaTime * jumpSpeed);
+                    // }
+                    // else
+                    // {
+                    //     // We make sure the player is grounded
+                    //     position.z = 1;
+                    // }
                 }
                 // if (app->getKeyboard().isPressed(GLFW_KEY_S))
                 //     position -= front * (deltaTime * current_sensitivity.z * collisionFactor);

@@ -1,418 +1,554 @@
 {
-  "start-scene": "menu",
-  "window": {
-    "title": "Masalat Molthba",
-    "size": {
-      "width": 1280,
-      "height": 720
+    "start-scene": "menu",
+    "window": {
+        "title": "Masalat Molthba",
+        "size": {
+            "width": 1280,
+            "height": 720
+        },
+        "fullscreen": false
     },
-    "fullscreen": false
-  },
-  "scene": {
-    "renderer": {
-      "sky": "assets/textures/sky.jpg",
-      "postprocess": "assets/shaders/postprocess/vignette.frag"
-    },
-    "assets": {
-      "shaders": {
-        "tinted": {
-          "vs": "assets/shaders/tinted.vert",
-          "fs": "assets/shaders/tinted.frag"
+    "scene": {
+        "renderer": {
+            "sky": "assets/textures/sky.jpg",
+            "postprocess": "assets/shaders/postprocess/vignette.frag"
         },
-        "textured": {
-          "vs": "assets/shaders/textured.vert",
-          "fs": "assets/shaders/textured.frag"
-        },
-        "light": {
-          "vs": "assets/shaders/light.vert",
-          "fs": "assets/shaders/light.frag"
-        }
-      },
-      "textures": {
-        "moon": "assets/textures/moon.jpg",
-        "grass": "assets/textures/grass_ground_d.jpg",
-        "wood": "assets/textures/wood.jpg",
-        "glass": "assets/textures/glass-panels.png",
-        "monkey": "assets/textures/monkey.png",
-        "masala": "assets/textures/masala/FancObel_t.jpeg",
-        "house": "assets/textures/house/house.jpg",
-        "house_albedo": "assets/textures/house/house_albedo.jpg",
-        "house_specular": "assets/textures/house/house_specular.jpg",
-        "house_roughness": "assets/textures/house/house_roughness.jpg",
-        "house_ambient_occlusion": "assets/textures/house/house_ambient_occlusion.jpg",
-        "house_emissive": "assets/textures/house/house_emissive.jpg",
-        "road_albedo": "assets/textures/road_albedo2.png",
-        "road_specular": "assets/textures/road_specular2.png",
-        "road_roughness": "assets/textures/road_roughness2.png",
-        "road_ambient_occlusion": "assets/textures/road_AO2.png",
-        "road_emissive": "assets/textures/road_emissive2.png",
-        "road": "assets/textures/road.jpg",
-        "house2_normal": "assets/textures/cottage_normal.png",
-        "house2_diffuse": "assets/textures/cottage_diffuse.png",
-        "road2": "assets/textures/road2.jpg",
-        "man_norm": "assets/textures/rp_dennis_posed_004_norm.jpg",
-        "man_diff": "assets/textures/rp_dennis_posed_004_dif.jpg"
-      },
-      "meshes": {
-        "cube": "assets/models/cube.obj",
-        "monkey": "assets/models/monkey.obj",
-        "plane": "assets/models/plane.obj",
-        "sphere": "assets/models/sphere.obj",
-        "masala": "assets/models/masala.obj",
-        "house": "assets/models/house.obj",
-        "house2": "assets/models/house2.obj",
-        // "guy": "assets/models/guy.obj"
-        "man": "assets/models/man.obj"
-      },
-      "samplers": {
-        "default": {},
-        "pixelated": {
-          "MAG_FILTER": "GL_NEAREST"
-        }
-      },
-      "materials": {
-        "metal": {
-          "type": "tinted",
-          "shader": "tinted",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
+        "assets": {
+            "shaders": {
+                "tinted": {
+                    "vs": "assets/shaders/tinted.vert",
+                    "fs": "assets/shaders/tinted.frag"
+                },
+                "textured": {
+                    "vs": "assets/shaders/textured.vert",
+                    "fs": "assets/shaders/textured.frag"
+                }
             },
-            "depthTesting": {
-              "enabled": true
+            "textures": {
+                "moon": "assets/textures/moon.jpg",
+                "grass": "assets/textures/grass_ground_d.jpg",
+                "wood": "assets/textures/wood.jpg",
+                "glass": "assets/textures/glass-panels.png",
+                "monkey": "assets/textures/monkey.png",
+                "masala": "assets/textures/masala/FancObel_t.jpeg",
+                "house": "assets/textures/house/house.jpg",
+                "house_albedo": "assets/textures/house/house_albedo.jpg",
+                "house_specular": "assets/textures/house/house_specular.jpg",
+                "house_roughness": "assets/textures/house/house_roughness.jpg",
+                "house_ambient_occlusion": "assets/textures/house/house_ambient_occlusion.jpg",
+                "house_emissive": "assets/textures/house/house_emissive.jpg",
+                "road_albedo": "assets/textures/road_albedo2.png",
+                "road_specular": "assets/textures/road_specular2.png",
+                "road_roughness": "assets/textures/road_roughness2.png",
+                "road_ambient_occlusion": "assets/textures/road_AO2.png",
+                "road_emissive": "assets/textures/road_emissive2.png",
+                "road": "assets/textures/road.jpg",
+                "house2_normal": "assets/textures/cottage_normal.png",
+                "house2_diffuse": "assets/textures/cottage_diffuse.png",
+                "road2": "assets/textures/road2.jpg",
+                "man_norm": "assets/textures/rp_dennis_posed_004_norm.jpg",
+                "man_diff": "assets/textures/rp_dennis_posed_004_dif.jpg"
+            },
+            "meshes": {
+                "cube": "assets/models/cube.obj",
+                "monkey": "assets/models/monkey.obj",
+                "plane": "assets/models/plane.obj",
+                "sphere": "assets/models/sphere.obj",
+                "masala": "assets/models/masala.obj",
+                "house": "assets/models/house.obj",
+                "house2": "assets/models/house2.obj",
+                "man": "assets/models/man.obj"
+            },
+            "samplers": {
+                "default": {},
+                "pixelated": {
+                    "MAG_FILTER": "GL_NEAREST"
+                }
+            },
+            "materials": {
+                "metal": {
+                    "type": "tinted",
+                    "shader": "tinted",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        0.45,
+                        0.4,
+                        0.5,
+                        1
+                    ]
+                },
+                "glass": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        },
+                        "blending": {
+                            "enabled": true,
+                            "sourceFactor": "GL_SRC_ALPHA",
+                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                        },
+                        "depthMask": false
+                    },
+                    "transparent": true,
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "glass",
+                    "sampler": "pixelated"
+                },
+                "grass": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "grass",
+                    "sampler": "default"
+                },
+                "monkey": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "monkey",
+                    "sampler": "default"
+                },
+                "moon": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "moon",
+                    "sampler": "default"
+                },
+                "masala": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ], // what are the channels for? (RGBA)
+                    "texture": "masala",
+                    "sampler": "default"
+                },
+                "house": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "house",
+                    "albedo": "house_albedo",
+                    "specular": "house_specular",
+                    "roughness": "house_roughness",
+                    "emissive": "house_emissive",
+                    "ambient_occlusion": "house_ambient_occlusion",
+                    "sampler": "default"
+                },
+                "house2": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "house2_diffuse",
+                    "albedo": "house2_diffuse",
+                    "sampler": "default"
+                },
+                "man": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "man_diff",
+                    "albedo": "man_norm",
+                    "sampler": "default"
+                },
+                "road": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "road",
+                    "albedo": "road_albedo",
+                    "specular": "road_specular",
+                    "roughness": "road_roughness",
+                    "emissive": "road_emissive",
+                    "ambient_occlusion": "road_ambient_occlusion",
+                    "sampler": "default"
+                },
+                "road2": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "road2",
+                    "sampler": "default"
+                }
             }
-          },
-          "tint": [0.45, 0.4, 0.5, 1]
         },
-        "glass": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
+        "world": [
+            {
+                "position": [
+                    0,
+                    50,
+                    5
+                ],
+                "components": [
+                    {
+                        "name": "camera",
+                        "type": "Camera"
+                    },
+                    {
+                        "name": "cameraController",
+                        "type": "Free Camera Controller"
+                    }
+                ],
+                "children": [
+                    {
+                        "position": [
+                            0,
+                            -2,
+                            -3
+                        ],
+                        "rotation": [
+                            0,
+                            180,
+                            0
+                        ],
+                        "scale": [
+                            0.8,
+                            0.8,
+                            0.8
+                        ],
+                        "components": [
+                            {
+                                "type": "Player",
+                                "speed": 4
+                            },
+                            {
+                                "type": "Collision",
+                                "start": [
+                                    -0.3,
+                                    -0.6,
+                                    -0.2
+                                ],
+                                "end": [
+                                    0.3,
+                                    1,
+                                    0.5
+                                ]
+                            },
+                            {
+                                "name": "1",
+                                "type": "Mesh Renderer",
+                                "mesh": "man",
+                                "material": "man"
+                            }
+                        ]
+                    }
+                ]
             },
-            "depthTesting": {
-              "enabled": true
+            {
+                "position": [
+                    0,
+                    -1,
+                    0
+                ],
+                "rotation": [
+                    -90,
+                    90,
+                    0
+                ],
+                "scale": [
+                    1000,
+                    10,
+                    1
+                ],
+                "components": [
+                    {
+                        "name": "road1",
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "road"
+                    }
+                ]
             },
-            "blending": {
-              "enabled": true,
-              "sourceFactor": "GL_SRC_ALPHA",
-              "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+            {
+                "position": [
+                    20,
+                    -1,
+                    0
+                ],
+                "rotation": [
+                    -90,
+                    90,
+                    0
+                ],
+                "scale": [
+                    1000,
+                    10,
+                    1
+                ],
+                "components": [
+                    {
+                        "name": "road2",
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "road2"
+                    }
+                ]
             },
-            "depthMask": false
-          },
-          "transparent": true,
-          "tint": [1, 1, 1, 1],
-          "texture": "glass",
-          "sampler": "pixelated"
-        },
-        "grass": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
+            {
+                "position": [
+                    -20,
+                    -1,
+                    0
+                ],
+                "rotation": [
+                    -90,
+                    90,
+                    0
+                ],
+                "scale": [
+                    1000,
+                    10,
+                    1
+                ],
+                "components": [
+                    {
+                        "name": "road2",
+                        "type": "Mesh Renderer",
+                        "mesh": "plane",
+                        "material": "road2"
+                    }
+                ]
             },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "grass",
-          "sampler": "default"
-        },
-        "monkey": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
+            {
+                "position": [
+                    0,
+                    -7,
+                    -30
+                ],
+                "scale": [
+                    1,
+                    0.9,
+                    1
+                ],
+                // "duplicates": [
+                //     2,
+                //     10,
+                //     false
+                // ],
+                "components": [
+                    {
+                        "name": "2",
+                        "type": "Mesh Renderer",
+                        "mesh": "masala",
+                        "material": "masala"
+                    },
+                    {
+                        "type": "Masala"
+                    },
+                    // {
+                    //     "type": "Movement",
+                    //     "linearVelocity": [0, 0.3, 0]
+                    //     // "angularVelocity": [0, 45, 0]
+                    // }
+                    // , 
+                    {
+                        "type": "Collision",
+                        "start": [
+                            -0.5,
+                            -5,
+                            -0.2
+                        ],
+                        "end": [
+                            0.5,
+                            6,
+                            0.1
+                        ]
+                    }
+                    // ,
+                    // {
+                    //     "type": "Repeat",
+                    //     "translation": [
+                    //         0,
+                    //         0,
+                    //         -5
+                    //     ]
+                    // }
+                ]
             },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "monkey",
-          "sampler": "default"
-        },
-        "moon": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
+            {
+                "position": [
+                    -10,
+                    0,
+                    -40
+                ],
+                "scale": [
+                    0.2,
+                    0.2,
+                    0.2
+                ],
+                "duplicates": [
+                    2,
+                    20,
+                    false
+                ],
+                "components": [
+                    {
+                        "name": "house",
+                        "type": "Mesh Renderer",
+                        "mesh": "house",
+                        "material": "house"
+                    }
+                ]
             },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "moon",
-          "sampler": "default"
-        },
-        "masala": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 0.6, 0.6, 1], // what are the channels for? (RGBA)
-          "texture": "masala",
-          "sampler": "default"
-        },
-        "house": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "house",
-          "albedo": "house_albedo",
-          "specular": "house_specular",
-          "roughness": "house_roughness",
-          "emissive": "house_emissive",
-          "ambient_occlusion": "house_ambient_occlusion",
-          "sampler": "default"
-        },
-        "house2": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "house2_diffuse",
-          "albedo": "house2_diffuse",
-          "sampler": "default"
-        },
-        "man": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "man_diff",
-          "albedo": "man_norm",
-          "sampler": "default"
-        },
-        "road": {
-          "type": "lighted",
-          "shader": "light",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "road",
-          "albedo": "road_albedo",
-          "specular": "road_specular",
-          "roughness": "road_roughness",
-          "emissive": "road_emissive",
-          "ambient_occlusion": "road_ambient_occlusion",
-          "sampler": "default"
-        },
-        "road2": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "road2",
-          "sampler": "default"
-        }
-        // "guy": {
-        //     "type": "textured",
-        //     "shader": "textured",
-        //     "pipelineState": {
-        //         "faceCulling": {
-        //             "enabled": false
-        //         },
-        //         "depthTesting": {
-        //             "enabled": true
-        //         }
-        //     },
-        //     "tint": [
-        //         1,
-        //         1,
-        //         1,
-        //         1
-        //     ],
-        //     "sampler": "default"
-        // }
-      }
-    },
-    "world": [
-      {
-        "position": [0, 0, 5],
-        "components": [
-          {
-            "type": "Camera"
-          },
-          {
-            "type": "Free Camera Controller"
-          }
-        ],
-        "children": [
-          {
-            "position": [0, -2, -6],
-            "rotation": [0, 180, 0],
-            "components": [
-              {
-                "type": "Player",
-                "speed": 4
-              },
-              {
-                "type": "Collision",
-                "start": [-0.5, -0.5, -0.5],
-                "end": [0.5, 0.5, 0.5]
-              },
-              {
-                "name": "1",
-                "type": "Mesh Renderer",
-                "mesh": "man",
-                "material": "man"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "position": [0, -1, 0],
-        "rotation": [-90, 90, 0],
-        "scale": [1000, 10, 1],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "plane",
-            "material": "road"
-          }
-        ]
-      },
-      {
-        "position": [20, -1, 0],
-        "rotation": [-90, 90, 0],
-        "scale": [1000, 10, 1],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "plane",
-            "material": "road2"
-          }
-        ]
-      },
-      {
-        "position": [-20, -1, 0],
-        "rotation": [-90, 90, 0],
-        "scale": [1000, 10, 1],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "plane",
-            "material": "road2"
-          }
-        ]
-      },
-      {
-        "position": [0, -10, -30],
-        "scale": [2, 2, 2],
-        // "duplicates": [
-        //     2,
-        //     10,
-        //     false
-        // ],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "masala",
-            "material": "masala"
-          },
-          {
-            "type": "Collision",
-            "start": [-0.5, -0.5, -0.5],
-            "end": [0.5, 0.5, 0.5]
-          }
-          // ,
-          // {
-          //     "type": "Repeat",
-          //     "translation": [
-          //         0,
-          //         0,
-          //         -5
-          //     ]
-          // }
-        ]
-      },
-      {
-        "position": [-10, 0, -40],
-        "scale": [0.2, 0.2, 0.2],
-        "duplicates": [2, 20, false],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "house",
-            "material": "house"
-          }
-        ]
-      },
 
-      {
-        "position": [-15, 0, -20],
-        "scale": [1, 1, 1],
-        "duplicates": [2, 30, false],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "house2",
-            "material": "house2"
-          }
+            {
+                "position": [
+                    -15,
+                    0,
+                    -20
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    30,
+                    false
+                ],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    }
+                ]
+            }
         ]
-      },
-      {
-        "position": [0, 50, 0],
-        "name": "spot light",
-        "components": [
-          {
-            "type": "Light",
-            "lightType": 1,
-            "color": [1, 1, 0],
-            "attenuation": [1, 1, 0.001],
-            "coneAngles": [70, 80]
-          }
-        ]
-      }
-    ]
-  }
+    }
 }
