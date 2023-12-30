@@ -173,10 +173,18 @@ namespace our
             if (app->getKeyboard().isPressed(GLFW_KEY_E))
                 position -= up * (deltaTime * current_sensitivity.y);
             // A & D moves the player left or right
-            if (app->getKeyboard().isPressed(GLFW_KEY_D))
-                position += right * (deltaTime * current_sensitivity.x * collisionFactor);
+            if (app->getKeyboard().isPressed(GLFW_KEY_D)){
+                // limit the player movement to the left and right
+                if (position.x <= 7)
+                    position += right * (deltaTime * current_sensitivity.x * collisionFactor);
+
+            }
             if (app->getKeyboard().isPressed(GLFW_KEY_A))
-                position -= right * (deltaTime * current_sensitivity.x * collisionFactor);
+            {
+                // limit the player movement to the left and right
+                if (position.x >= -7)
+                    position -= right * (deltaTime * current_sensitivity.x * collisionFactor);
+            }
 
             // Jump logic
             if ((app->getKeyboard().isPressed(GLFW_KEY_SPACE) || app->getKeyboard().isPressed(GLFW_KEY_UP)))
