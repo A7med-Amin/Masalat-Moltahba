@@ -43,11 +43,48 @@ namespace our
                (box1.minZ - 3 < box2.maxZ && box1.maxZ - 3 > box2.minZ);
     }
 
-    // Example usage
+    void CollisionSystem::checkMasalaHeight(World *world, float deltaTime)
+    {
+        // Entity *tempEntity = nullptr;
+        MasalaComponent *masala = nullptr;
+        for (auto entity : world->getEntities())
+        { // search for the player entity
+            // Get the MASALA component if it exists
+            // playerEntity = entity;
+            masala = entity->getComponent<MasalaComponent>();
+            // If the player component exists
+            if (masala)
+            {
+                if (masala->increasingHeight)
+                {
+                    // glm::vec3 masalaCoordinates = glm::vec3(entity->getLocalToWorldMatrix() *
+                    //             glm::vec4(entity->localTransform.position, 1.0)); // get the player's position in the world
+
+                    glm::vec3 &position = entity->localTransform.position;
+                    position.y += 0.2 * deltaTime;
+                    if (position.y > -3)
+                    {
+                        masala->increasingHeight = false;
+                    }
+                }
+                else
+                {
+                    glm::vec3 &position = entity->localTransform.position;
+                    position.y -= 0.2 * deltaTime;
+                    if (position.y < -10)
+                    {
+                        masala->increasingHeight = true;
+                    }
+                }
+            }
+        }
+    }
+
 
     bool CollisionSystem::update(World *world, float deltaTime, int &heartCount,
                                  float &collisionStartTime)
     {
+        checkMasalaHeight(world, 0.05);
         PlayerComponent *player;  // The player component if it exists
         glm::vec3 playerPosition; // The player's position in the world
         Entity *playerEntity;     // The player entity if it exists
@@ -65,6 +102,8 @@ namespace our
                     glm::vec3(playerEntity->getLocalToWorldMatrix() *
                               glm::vec4(playerEntity->localTransform.position, 1.0)); // get the player's position in the world
                 break;
+                glm::vec3 &position = entity->localTransform.position;
+
             }
         }
         if (!player)
@@ -82,11 +121,6 @@ namespace our
         {
             // Get the collision component if it exists
             // std::string type = data.value("type", "");
-            if (entity->name == "moon")
-            {
-                std::cout << "Hello";
-            }
-            // std::cout << entity->name;
             CollisionComponent *collision = entity->getComponent<CollisionComponent>();
             // If the collision component exists
             if (collision)
@@ -96,34 +130,8 @@ namespace our
                 auto objectScale = entity->localTransform.scale;       // get the object's scale
 
                 // Get object collision bounding box
-                glm::vec3 objectStart = (objectPosition); // get the object's start position
-                glm::vec3 objectEnd = (objectPosition);   // get the object's end position
-
-                // loop for each axis (x,y,z)
-                // for (int i = 0; i < 3; ++i) {
-                // std::cout<< objectPosition[0]<< " ++++++++++ " << objectPosition[1]<<std::endl;
-                // std::cout<<"player x1:"<< playerStart[0]<< " ------- " << "player x2:"<<playerEnd[0]<<std::endl;
-                // std::cout<<"object x1:"<< objectStart[0]<< " ------- " << "object x2:"<< objectEnd[0]<<std::endl;
-                // std::cout<<"player y1:"<< playerStart[1]<< " ------- " << "player y2:"<<playerEnd[1]<<std::endl;
-                // std::cout<<"object y1:"<< objectStart[1]<< " ------- " << "object y2:"<< objectEnd[1]<<std::endl;
-                // std::cout<<"player z1:"<< playerStart[2]<< " ------- " << "player z1:"<<playerEnd[2]<<std::endl;
-                // std::cout<<"object z2:"<< objectStart[2]<< " ------- " << "object z2:"<< objectEnd[2]<<std::endl;
-                // std::cout<<"========================================="<<std::endl;
-                // if ((playerStart[0] < objectEnd[0] && playerEnd[0] > objectStart[0])
-                // && (playerStart[1] < objectEnd[1] && playerEnd[1] > objectStart[1])
-                // && (playerStart[2] < objectEnd[2] && playerEnd[2] > objectStart[2])
-                //     ) { // if the player and object don't overlap on this axis
-                //     collided = true; // then they don't collide
-                //     // break;
-                // }
-                // }
-
-
-                // if( absolute(playerPosition.x - objectPosition.x) < 1.0f && absolute(playerPosition.y - objectPosition.y) < 1.0f && absolute(playerPosition.z - objectPosition.z) < 1.0f)
-                // {
-                //     collided = true;
-
-                // }
+                glm::vec3 objectStart = (collision->start + objectPosition); // get the object's start position
+                glm::vec3 objectEnd = (objectPosition + collision->end);     // get the object's end position
 
                 BoundingBox playerBox = {playerStart[0], playerEnd[0], playerStart[1], playerEnd[1], playerStart[2], playerEnd[2]};
                 BoundingBox obstacleBox = {objectStart[0], objectEnd[0], objectStart[1] - 1, objectEnd[1] - 1, objectStart[2], objectEnd[2]};
@@ -131,23 +139,37 @@ namespace our
 
                 if (collided)
                 {
+                    if (entity->getComponent<PlayerComponent>())
+                    {
+                        // std::cout << "Collide with Player"<< std::endl;
+                        continue;
+                    }
+
                     // Player hits an obstacle
                     if (entity->getComponent<MasalaComponent>())
                     { // if the object is an obstacle
+                        std::cout << "collided with obstacle : " << heartCount << std::endl;
+
                         if (collisionStartTime == 0)
                             collisionStartTime = deltaTime; // start counting the time of collision for postprocessing effect
+                        else if (glfwGetTime() - collisionStartTime >= 1)
+                        {
+                            continue;
+                        }
 
                         CollisionSystem::decreaseHearts(world, heartCount);
 
                         if (heartCount < 1)
-                        { // if the player has no more hearts
-
+                        {                                  // if the player has no more hearts
+                            heartCount = 3;                // reset the heart count
                             app->changeState("game-over"); // go to the game over state
                         }
                     }
+
                     // Player takes a heart
                     else if (entity->getComponent<GemHeartComponent>()) // if the object is a gem heart
                     {
+                        std::cout << "collided with heart" << std::endl;
                         if (heartCount < 3) // if the player has less than 3 hearts which is max
                         {
                             heartCount++; // increase the count of hearts
@@ -170,7 +192,6 @@ namespace our
                         }
                     }
 
-
                     RepeatComponent *repeatComponent = entity->getComponent<RepeatComponent>();
                     glm::vec3 &repeatPosition = entity->localTransform.position;
                     if (repeatComponent)
@@ -179,20 +200,14 @@ namespace our
                     }
                     break;
                 }
-                // else{
-                //         std::cout<<"notttttttttttttttt";
-
-                // }
             }
         }
-        // std::cout<< iterator <<std::endl;
         return (collided);
     }
 
     // decrease the hearts
     void CollisionSystem::decreaseHearts(World *world, int &heartCount)
     {
-
         for (auto heartEntity : world->getEntities())
         { // search for the heart entity
             HeartComponent *heart = heartEntity->getComponent<HeartComponent>();

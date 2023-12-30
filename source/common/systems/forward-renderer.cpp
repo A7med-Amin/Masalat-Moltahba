@@ -188,8 +188,8 @@ namespace our
         //  from the local space to the world space
         auto cameraOwner = camera->getOwner();
         auto Matrix = cameraOwner->getLocalToWorldMatrix();
-        glm::vec3 positionOfCamera = Matrix * glm::vec4(0, 0, 0, 1);
-        glm::vec3 positionOfCameraPoints = Matrix * glm::vec4(0, 0, -1, 1);
+        glm::vec3 positionOfCamera = Matrix * glm::vec4(0, 2, 0, 1);
+        glm::vec3 positionOfCameraPoints = Matrix * glm::vec4(0, 0, -2, 1);
         glm::vec3 cameraForward = glm::normalize(positionOfCameraPoints - positionOfCamera);
 
         std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand &first, const RenderCommand &second)
@@ -234,9 +234,9 @@ namespace our
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // TODO: (Req 9) Draw all the opaque commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
-        for (auto opaqueCommand : opaqueCommands)
+        for (auto command : opaqueCommands)
         {
-            opaqueCommand.material->setup();
+            command.material->setup();
             // TODO: (Phase 2) Add lights logic
             // if (dynamic_cast<our::LightMaterial *>(opaqueCommand.material))
             // {
@@ -311,43 +311,42 @@ namespace our
             //     glm::mat4 ModelViewProjection = ViewProjection * modelMatrix;
             //     opaqueCommand.material->shader->set("transform", ModelViewProjection);
             // }
-            glm::mat4 modelMatrix = opaqueCommand.localToWorld;
-            glm::mat4 ModelViewProjection = ViewProjection * modelMatrix;
-            opaqueCommand.material->shader->set("transform", ModelViewProjection);
-            opaqueCommand.material->shader->set("VP", ViewProjection);
-            opaqueCommand.material->shader->set("M", opaqueCommand.localToWorld);
-            opaqueCommand.material->shader->set("M_IT", glm::transpose(glm::inverse(opaqueCommand.localToWorld)));
-            opaqueCommand.material->shader->set("camera_position", positionOfCamera);
-            opaqueCommand.material->shader->set("light_count",(int)lights.size());
-            int index = 0;
-            const int MAX_LIGHT_COUNT = 16;
-            for(const auto& light : lights)
+            command.material->setup();
+            // Transform the model from world space to clip space
+            glm::mat4 MVP = ViewProjection * command.localToWorld;
+            command.material->shader->set("transform", MVP);
+            command.material->shader->set("M", command.localToWorld);
+            command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
+            command.material->shader->set("VP", ViewProjection);
+            command.material->shader->set("camera_position", glm::vec3(camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1)));
+            command.material->shader->set("light_count", (int)lights.size());
+            for (int i = 0; i < lights.size(); i++)
             {
-                std::string prefix = "lights[" + std::to_string(index) + "].";
-                opaqueCommand.material->shader->set(prefix + "type", static_cast<int>(light->light_type));
-                opaqueCommand.material->shader->set(prefix + "color", light->color);
-                switch(light->light_type)
+                command.material->shader->set("lights[" + std::to_string(i) + "].type", (int)lights[i]->LightType);
+                command.material->shader->set("lights[" + std::to_string(i) + "].color", lights[i]->color);
+                if (lights[i]->LightType == LightType::DIRECTIONAL_LIGHT)
                 {
-                    case 0:
-                        opaqueCommand.material->shader->set(prefix + "direction", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
-                        break;
-                    case 1:
-                        opaqueCommand.material->shader->set(prefix + "position", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 0.0f)));
-                        opaqueCommand.material->shader->set(prefix + "attenuation", light->attenuation);
-                        break;
-                    case 2:
-                        opaqueCommand.material->shader->set(prefix + "position", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 0.0f)));
-                        opaqueCommand.material->shader->set(prefix + "direction", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
-                        opaqueCommand.material->shader->set(prefix + "attenuation", light->attenuation);
-                        opaqueCommand.material->shader->set(prefix + "cone_angles", light->cone_angles);
-                        break;
+                    // Print text here saying that the light is directional
+                    // std::cout <<"Directional Light"<< std::endl;
+                    command.material->shader->set("lights[" + std::to_string(i) + "].direction", glm::vec3(lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
                 }
-                index++;
-                if(index >= MAX_LIGHT_COUNT){
-                    break;
+                else if (lights[i]->LightType == LightType::POINT_LIGHT)
+                {
+                    // std::cout <<"point Light"<< std::endl;
+                    command.material->shader->set("lights[" + std::to_string(i) + "].position", glm::vec3(lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(lights[i]->getOwner()->localTransform.position, 0.0f)));
+                    command.material->shader->set("lights[" + std::to_string(i) + "].attenuation", lights[i]->attenuation);
+                }
+                else if (lights[i]->LightType == LightType::SPOT_LIGHT)
+                {
+                    // std::cout <<"spot Light"<< std::endl;
+                    command.material->shader->set("lights[" + std::to_string(i) + "].position", glm::vec3(lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(lights[i]->getOwner()->localTransform.position, 0.0f)));
+                    command.material->shader->set("lights[" + std::to_string(i) + "].direction", glm::vec3(lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
+                    command.material->shader->set("lights[" + std::to_string(i) + "].attenuation", lights[i]->attenuation);
+                    command.material->shader->set("lights[" + std::to_string(i) + "].inner_angle", glm::radians(lights[i]->coneAngles.x));
+                    command.material->shader->set("lights[" + std::to_string(i) + "].outer_angle", glm::radians(lights[i]->coneAngles.y));
                 }
             }
-            opaqueCommand.mesh->draw();
+            command.mesh->draw();
         }
         // If there is a sky material, draw the sky
         if (this->skyMaterial)
@@ -377,48 +376,44 @@ namespace our
         }
         // TODO: (Req 9) Draw all the transparent commands
         //  Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
-        for (auto transparentCommand : transparentCommands)
+        for (auto command : transparentCommands)
         {
-            // TODO: (Phase 2) Add lights logic
-            transparentCommand.material->setup();
-            glm::mat4 modelMatrix = transparentCommand.localToWorld;
-            glm::mat4 ModelViewProjection = ViewProjection * modelMatrix;
-            transparentCommand.material->shader->set("transform", ModelViewProjection);
-            transparentCommand.material->shader->set("VP", ViewProjection);
-            transparentCommand.material->shader->set("M", transparentCommand.localToWorld);
-            transparentCommand.material->shader->set("M_IT", glm::transpose(glm::inverse(transparentCommand.localToWorld)));
-            transparentCommand.material->shader->set("camera_position", positionOfCamera);
-            transparentCommand.material->shader->set("light_count", (int32_t)lights.size());
-            int index = 0;
-            const int MAX_LIGHT_COUNT = 16;
-            for (const auto &light : lights)
+            command.material->setup();
+            // Transform the model from world space to clip space
+            glm::mat4 MVP = ViewProjection * command.localToWorld;
+            command.material->shader->set("transform", MVP);
+            command.material->shader->set("M", command.localToWorld);
+            command.material->shader->set("M_IT", glm::transpose(glm::inverse(command.localToWorld)));
+            command.material->shader->set("VP", ViewProjection);
+            command.material->shader->set("camera_position", glm::vec3(camera->getOwner()->getLocalToWorldMatrix() * glm::vec4(0, 0, 0, 1)));
+            command.material->shader->set("light_count", (int)lights.size());
+            for (int i = 0; i < lights.size(); i++)
             {
-                std::string prefix = "lights[" + std::to_string(index) + "].";
-                transparentCommand.material->shader->set(prefix + "type", static_cast<int>(light->light_type));
-                transparentCommand.material->shader->set(prefix + "color", light->color);
-                switch (light->light_type)
+                command.material->shader->set("lights[" + std::to_string(i) + "].type", (int)lights[i]->LightType);
+                command.material->shader->set("lights[" + std::to_string(i) + "].color", lights[i]->color);
+                if (lights[i]->LightType == LightType::DIRECTIONAL_LIGHT)
                 {
-                case 0:
-                    transparentCommand.material->shader->set(prefix + "direction", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
-                    break;
-                case 1:
-                    transparentCommand.material->shader->set(prefix + "position", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 0.0f)));
-                    transparentCommand.material->shader->set(prefix + "attenuation", light->attenuation);
-                    break;
-                case 2:
-                    transparentCommand.material->shader->set(prefix + "position", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 0.0f)));
-                    transparentCommand.material->shader->set(prefix + "direction", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
-                    transparentCommand.material->shader->set(prefix + "attenuation", light->attenuation);
-                    transparentCommand.material->shader->set(prefix + "cone_angles", light->cone_angles);
-                    break;
+                    // Print text here saying that the light is directional
+                    // std::cout <<"Directional Light"<< std::endl;
+                    command.material->shader->set("lights[" + std::to_string(i) + "].direction", glm::vec3(lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
                 }
-                index++;
-                if (index >= MAX_LIGHT_COUNT)
+                else if (lights[i]->LightType == LightType::POINT_LIGHT)
                 {
-                    break;
+                    // std::cout <<"point Light"<< std::endl;
+                    command.material->shader->set("lights[" + std::to_string(i) + "].position", glm::vec3(lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(lights[i]->getOwner()->localTransform.position, 0.0f)));
+                    command.material->shader->set("lights[" + std::to_string(i) + "].attenuation", lights[i]->attenuation);
+                }
+                else if (lights[i]->LightType == LightType::SPOT_LIGHT)
+                {
+                    // std::cout <<"spot Light"<< std::endl;
+                    command.material->shader->set("lights[" + std::to_string(i) + "].position", glm::vec3(lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(lights[i]->getOwner()->localTransform.position, 0.0f)));
+                    command.material->shader->set("lights[" + std::to_string(i) + "].direction", glm::vec3(lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
+                    command.material->shader->set("lights[" + std::to_string(i) + "].attenuation", lights[i]->attenuation);
+                    command.material->shader->set("lights[" + std::to_string(i) + "].inner_angle", glm::radians(lights[i]->coneAngles.x));
+                    command.material->shader->set("lights[" + std::to_string(i) + "].outer_angle", glm::radians(lights[i]->coneAngles.y));
                 }
             }
-            transparentCommand.mesh->draw();
+            command.mesh->draw();
         }
 
         // If there is a postprocess material, apply postprocessing

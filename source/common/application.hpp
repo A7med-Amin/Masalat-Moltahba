@@ -69,7 +69,8 @@ namespace our {
         std::unordered_map<std::string, State*> states;   // This will store all the states that the application can run
         State * currentState = nullptr;         // This will store the current scene that is being run
         State * nextState = nullptr;            // If it is requested to go to another scene, this will contain a pointer to that scene
-
+        glm::vec3 difficulty = glm::vec3(1, 5, 10) ;
+        int currentDifficulty = 0;
         
         // Virtual functions to be overrode and change the default behaviour of the application
         // according to the example needs.
@@ -118,7 +119,11 @@ namespace our {
         void close(){
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         }
-
+        // Class Setters
+        void setDifficulty(int diff)
+        {
+            this->currentDifficulty = diff;
+        }
         // Class Getters.
         GLFWwindow* getWindow(){ return window; }
         [[nodiscard]] const GLFWwindow* getWindow() const { return window; }
@@ -126,6 +131,7 @@ namespace our {
         [[nodiscard]] const Keyboard& getKeyboard() const { return keyboard; }
         Mouse& getMouse() { return mouse; }
         [[nodiscard]] const Mouse& getMouse() const { return mouse; }
+        int getDifficulty() { return difficulty[currentDifficulty]; }
 
         [[nodiscard]] const nlohmann::json& getConfig() const { return app_config; }
 

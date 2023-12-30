@@ -237,7 +237,7 @@ int our::Application::run(int run_for_frames) {
     }
     // Call onInitialize if the scene needs to do some custom initialization (such as file loading, object creation, etc).
     if(currentState) currentState->onInitialize();
-
+    
     // The time at which the last frame started. But there was no frames yet, so we'll just pick the current time.
     double last_frame_time = glfwGetTime();
     int current_frame = 0;

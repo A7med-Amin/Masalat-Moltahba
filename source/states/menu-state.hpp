@@ -40,6 +40,7 @@ class Menustate: public our::State {
 
     // A meterial holding the menu shader and the menu texture to draw
     our::TexturedMaterial* menuMaterial;
+
     // A material to be used to highlight hovered buttons (we will use blending to create a negative effect).
     our::TintedMaterial * highlightMaterial;
     // A rectangle mesh on which the menu material will be drawn
@@ -61,6 +62,7 @@ class Menustate: public our::State {
         menuMaterial->texture = our::texture_utils::loadImage("assets/textures/menu.png");
         // Initially, the menu material will be black, then it will fade in
         menuMaterial->tint = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+        menuMaterial->sampler = new our::Sampler();
 
         // Second, we create a material to highlight the hovered buttons
         highlightMaterial = new our::TintedMaterial();
@@ -117,6 +119,7 @@ class Menustate: public our::State {
         if(keyboard.justPressed(GLFW_KEY_SPACE)){
             // If the space key is pressed in this frame, go to the play state
             getApp()->changeState("play");
+            // getApp()->setDifficulty()
         } else if(keyboard.justPressed(GLFW_KEY_ESCAPE)) {
             // If the escape key is pressed in this frame, exit the game
             getApp()->close();
