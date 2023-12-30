@@ -13,7 +13,7 @@ namespace our
             return;
 
         // load 'light_type' from json object and put it into light_type property
-        light_type = data.value("light_type", light_type);
+        light_type = (int)data.value("light_type", light_type);
 
         // load 'position' from json object and put it into position property
         position = data.value("position", position);
