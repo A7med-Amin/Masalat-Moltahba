@@ -7,10 +7,16 @@
 // DONE TODO: (Phase 2) Create the `LightComponent`
 namespace our
 {
+    enum class LightType
+    {
+        DIRECTIONAL_LIGHT,
+        POINT_LIGHT,
+        SPOT_LIGHT
+    };
     class LightComponent : public Component
     {
     public:
-        int light_type; // this member variable will be used to specify type of light(Spot_light , Point_light , Direction_light)
+        LightType light_type; // this member variable will be used to specify type of light(Spot_light , Point_light , Direction_light)
         glm::vec3 direction; // Direction of light
         glm::vec3 position; // Position of light source
         glm::vec3 color; // Color of light
