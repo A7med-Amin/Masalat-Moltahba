@@ -137,12 +137,14 @@ namespace our
         }
     }
 
-    void ForwardRenderer::render(World *world)
+    void ForwardRenderer::render(World *world, const std::string &postProcessFilter)
     {
         // First of all, we search for a camera and for all the mesh renderers
         CameraComponent *camera = nullptr;
         opaqueCommands.clear();
         transparentCommands.clear();
+        point_directional_lights.clear();
+        spot_light.clear();
         for (auto entity : world->getEntities())
         {
             // If we hadn't found a camera yet, we look for a camera in this entity
@@ -205,7 +207,7 @@ namespace our
             return glm::dot(cameraForward , first.center) > glm::dot(cameraForward , second.center); });
         // This function used to sort spot lights ascendingly according to the distance from the camera
         // Calculate the world position for two lights (first , second) and then use dot product to sort ascendingly
-        std::sort(spot_light.begin(), spot_light.end(), [cameraForward](const LightComponent* first, const LightComponent* second)
+        std::sort(spot_light.begin(), spot_light.end(), [cameraForward](const LightComponent *first, const LightComponent *second)
                   {
             // get world position of first light
             auto firstPosition = glm::vec3(first->getOwner()->getLocalToWorldMatrix() * glm::vec4(first->getOwner()->localTransform.position, 1.0));
@@ -418,6 +420,32 @@ namespace our
         // If there is a postprocess material, apply postprocessing
         if (postprocessMaterial)
         {
+            // Create the post processing shader
+            if (lastPostProcess != postProcessFilter)
+            {
+                // Create a sampler to use for sampling the scene texture in the post processing shader
+                Sampler *postprocessSampler = new Sampler();
+                postprocessSampler->set(GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                postprocessSampler->set(GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                postprocessSampler->set(GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+                postprocessSampler->set(GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
+                // Create the post processing shader
+                ShaderProgram *postprocessShader = new ShaderProgram();
+                postprocessShader->attach("assets/shaders/fullscreen.vert", GL_VERTEX_SHADER);
+                postprocessShader->attach(postProcessFilter, GL_FRAGMENT_SHADER);
+                postprocessShader->link();
+
+                // Create a post processing material
+                postprocessMaterial = new TexturedMaterial();
+                postprocessMaterial->shader = postprocessShader;
+                postprocessMaterial->texture = colorTarget;
+                postprocessMaterial->sampler = postprocessSampler;
+                // The default options are fine but we don't need to interact with the depth buffer
+                postprocessMaterial->pipelineState.depthMask = false;
+                lastPostProcess = postProcessFilter;
+            }
+            
             // TODO: (Req 11) Return to the default framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
             glBindVertexArray(postProcessVertexArray);

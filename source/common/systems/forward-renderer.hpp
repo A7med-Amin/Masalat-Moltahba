@@ -56,7 +56,7 @@ namespace our
         // Clean up the renderer
         void destroy();
         // This function should be called every frame to draw the given world
-        void render(World* world);
+        void render(World* world, const std::string &postProcessFilter);
 
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)
