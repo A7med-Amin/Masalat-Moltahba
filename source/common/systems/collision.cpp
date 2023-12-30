@@ -31,10 +31,14 @@ struct BoundingBox {
     float minY, maxY;
     float minZ, maxZ;
 };
+
+float absolute(float value) {
+    return value >= 0 ? value : -value;
+}
     bool checkCollision(const BoundingBox& box1, const BoundingBox& box2) {
     return (box1.minX < box2.maxX && box1.maxX > box2.minX) &&
            (box1.minY < box2.maxY && box1.maxY > box2.minY) &&
-           (box1.minZ < box2.maxZ && box1.maxZ > box2.minZ);
+           (box1.minZ - 3  < box2.maxZ && box1.maxZ - 3 > box2.minZ);
 }
 
 // Example usage
@@ -106,11 +110,17 @@ struct BoundingBox {
                     //     // break;
                     // }
 
-
                     BoundingBox playerBox = {playerStart[0], playerEnd[0], playerStart[1], playerEnd[1], playerStart[2], playerEnd[2]};
                     BoundingBox obstacleBox = {objectStart[0], objectEnd[0], objectStart[1] - 1, objectEnd[1] - 1, objectStart[2], objectEnd[2]};
                 // }
                     collided = checkCollision(playerBox, obstacleBox);
+
+                    // if( absolute(playerPosition.x - objectPosition.x) < 1.0f && absolute(playerPosition.y - objectPosition.y) < 1.0f && absolute(playerPosition.z - objectPosition.z) < 1.0f)
+                    // {
+                    //     collided = true;
+
+                    // }
+
                 if (collided) {
                     // Player hits an obstacle
                     if (entity->getComponent<MasalaComponent>()) { // if the object is an obstacle
