@@ -9,7 +9,7 @@
 #include <iostream>
 
 namespace our {
-    void FinalLineSystem::update(World *world, float deltaTime) {
+    void FinalLineSystem::update(World *world, float deltaTime, int &heartCount) {
 
         // Find the player
         glm::vec3 playerPosition;
@@ -40,6 +40,7 @@ namespace our {
             // If the player component exists
             if (finalLineComponent) {
                 if (playerPosition[2] <= finalLinePosition[2]) {
+                    heartCount = 3;
                     // Change the state to winning
                     this->app->changeState("winning");
                     std::cout<<"WIN" << std::endl;
