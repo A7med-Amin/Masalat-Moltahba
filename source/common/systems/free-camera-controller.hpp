@@ -26,9 +26,9 @@ namespace our
     // For more information, see "common/components/free-camera-controller.hpp"
     class FreeCameraControllerSystem
     {
-        Application *app;         // The application in which the state runs
-        bool mouse_locked = true; // Is the mouse locked
-                                  // The state of jumping and falling
+        Application *app;                                    // The application in which the state runs
+        bool mouse_locked = true;                            // Is the mouse locked
+                                                             // The state of jumping and falling
         our::JumpState jumpState = our::JumpState::GROUNDED; // The state of jumping
     public:
         // When a state enters, it should call this function and give it the pointer to the application
@@ -82,21 +82,6 @@ namespace our
             glm::vec3 &position = entity->localTransform.position;
             glm::vec3 &rotation = entity->localTransform.rotation;
 
-            // If the left mouse button is pressed, we get the change in the mouse location
-            // and use it to update the camera rotation
-            // if(app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1)){
-            //     glm::vec2 delta = app->getMouse().getMouseDelta();
-            //     rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch
-            //     rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
-            // }
-
-            // // We prevent the pitch from exceeding a certain angle from the XZ plane to prevent gimbal locks
-            // if(rotation.x < -glm::half_pi<float>() * 0.99f) rotation.x = -glm::half_pi<float>() * 0.99f;
-            // if(rotation.x >  glm::half_pi<float>() * 0.99f) rotation.x  = glm::half_pi<float>() * 0.99f;
-            // // This is not necessary, but whenever the rotation goes outside the 0 to 2*PI range, we wrap it back inside.
-            // // This could prevent floating point error if the player rotates in single direction for an extremely long time.
-            // rotation.y = glm::wrapAngle(rotation.y);
-
             // We update the camera fov based on the mouse wheel scrolling amount
             float fov = camera->fovY + app->getMouse().getScrollOffset().y * controller->fovSensitivity;
             fov = glm::clamp(fov, glm::pi<float>() * 0.01f, glm::pi<float>() * 0.99f); // We keep the fov in the range 0.01*PI to 0.99*PI
@@ -110,74 +95,26 @@ namespace our
                       right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
 
             glm::vec3 current_sensitivity = controller->positionSensitivity;
-            if (didCollide)
-            {
-                // We change the camera position based on the keys WASD/QE
-                // S & W moves the player back and forth
-                if (app->getKeyboard().isPressed(GLFW_KEY_W))
-                {
-                    // // We set the jump state to JUMPING
-                    // jumpState = our::JumpState::JUMPING;
-                    // // Start the jump
-                    // position.z += (deltaTime * jumpSpeed * collisionFactor);
-                    // if (position.z >= jumpMaxHeight)
-                    // {
-                    //     jumpState = our::JumpState::FALLING;
-                    // }
-                    // else if (position.z <= 1)
-                    // {
-                    //     // If the player was falling, we set the jump state to GROUNDED
-                    //     jumpState = our::JumpState::GROUNDED;
-                    // }
-
-                    // // We update the player position based on the jump state
-                    // if (jumpState == our::JumpState::JUMPING)
-                    // {
-                    //     position.z -= (deltaTime * jumpSpeed);
-                    // }
-                    // else if (jumpState == our::JumpState::FALLING)
-                    // {
-                    //     // We update the player position based on the jump state
-                    //     position.z += (deltaTime * jumpSpeed);
-                    // }
-                    // else
-                    // {
-                    //     // We make sure the player is grounded
-                    //     position.z = 1;
-                    // }
-                }
-                // if (app->getKeyboard().isPressed(GLFW_KEY_S))
-                //     position -= front * (deltaTime * current_sensitivity.z * collisionFactor);
-                // // Q & E moves the player up and down
-                // // if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
-                // if (app->getKeyboard().isPressed(GLFW_KEY_E))
-                //     position -= up * (deltaTime * current_sensitivity.y);
-                // // A & D moves the player left or right
-                // if (app->getKeyboard().isPressed(GLFW_KEY_D))
-                //     position += right * (deltaTime * current_sensitivity.x * collisionFactor);
-                // if (app->getKeyboard().isPressed(GLFW_KEY_A))
-                //     position -= right * (deltaTime * current_sensitivity.x * collisionFactor);
-            }
-            // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
+            
             if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
                 current_sensitivity *= controller->speedupFactor;
 
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
-            if (app->getKeyboard().isPressed(GLFW_KEY_W)  || app->getKeyboard().isPressed(GLFW_KEY_UP))
+            if (app->getKeyboard().isPressed(GLFW_KEY_W) || app->getKeyboard().isPressed(GLFW_KEY_UP))
                 position += front * (deltaTime * current_sensitivity.z * collisionFactor);
             if (app->getKeyboard().isPressed(GLFW_KEY_S) || app->getKeyboard().isPressed(GLFW_KEY_DOWN))
-                position -= front * (deltaTime * current_sensitivity.z * collisionFactor);    
+                position -= front * (deltaTime * current_sensitivity.z * collisionFactor);
             // Q & E moves the player up and down
             // if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
             // if (app->getKeyboard().isPressed(GLFW_KEY_E))
             //     position -= up * (deltaTime * current_sensitivity.y);
             // A & D moves the player left or right
-            if (app->getKeyboard().isPressed(GLFW_KEY_D) || app->getKeyboard().isPressed(GLFW_KEY_RIGHT)){
+            if (app->getKeyboard().isPressed(GLFW_KEY_D) || app->getKeyboard().isPressed(GLFW_KEY_RIGHT))
+            {
                 // limit the player movement to the left and right
                 if (position.x <= 7)
                     position += right * (deltaTime * current_sensitivity.x * collisionFactor);
-
             }
             if (app->getKeyboard().isPressed(GLFW_KEY_A) || app->getKeyboard().isPressed(GLFW_KEY_LEFT))
             {
