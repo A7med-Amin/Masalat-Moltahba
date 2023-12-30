@@ -46,8 +46,9 @@ namespace our
         std::string lastPostProcess = "";
 
         // TODO: (Phase 2) Add lights lists to the forward renderer
-        std::vector<LightComponent *> point_directional_lights;
-        std::vector<LightComponent *> spot_light;
+        // std::vector<LightComponent *> point_directional_lights;
+        // std::vector<LightComponent *> spot_light;
+        std::vector<LightComponent *> lights;
 
     public:
         // Initialize the renderer including the sky and the Postprocessing objects.
@@ -56,7 +57,7 @@ namespace our
         // Clean up the renderer
         void destroy();
         // This function should be called every frame to draw the given world
-        void render(World* world);
+        void render(World* world, const std::string &postProcessFilter);
 
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application *app)

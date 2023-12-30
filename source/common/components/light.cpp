@@ -13,7 +13,7 @@ namespace our
             return;
 
         // load 'light_type' from json object and put it into light_type property
-        light_type = data.value("light_type", light_type);
+        light_type = (int)data.value("light_type", light_type);
 
         // load 'position' from json object and put it into position property
         position = data.value("position", position);
@@ -28,6 +28,6 @@ namespace our
         attenuation = data.value("attenuation", attenuation);
 
         // load 'cone_angles' from json object and put it into cone_angles property
-        cone_angles = data.value("attenuation", cone_angles);
+        cone_angles = data.value("cone_angles", cone_angles);
     }
 }

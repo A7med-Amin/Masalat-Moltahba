@@ -7,6 +7,12 @@
 // DONE TODO: (Phase 2) Create the `LightComponent`
 namespace our
 {
+    enum class LightType
+    {
+        DIRECTIONAL_LIGHT,
+        POINT_LIGHT,
+        SPOT_LIGHT
+    };
     class LightComponent : public Component
     {
     public:
