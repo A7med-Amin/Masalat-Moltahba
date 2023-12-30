@@ -26,11 +26,27 @@
 
 
 namespace our {
-    void CollisionSystem::update(World *world, float deltaTime, int &heartCount,
+struct BoundingBox {
+    float minX, maxX;
+    float minY, maxY;
+    float minZ, maxZ;
+};
+    bool checkCollision(const BoundingBox& box1, const BoundingBox& box2) {
+    return (box1.minX < box2.maxX && box1.maxX > box2.minX) &&
+           (box1.minY < box2.maxY && box1.maxY > box2.minY) &&
+           (box1.minZ < box2.maxZ && box1.maxZ > box2.minZ);
+}
+
+// Example usage
+
+
+    bool CollisionSystem::update(World *world, float deltaTime, int &heartCount,
                                 float &collisionStartTime) {
         PlayerComponent *player; // The player component if it exists
         glm::vec3 playerPosition; // The player's position in the world
         Entity *playerEntity;   // The player entity if it exists
+        bool collided = false;
+
 
         for (auto entity: world->getEntities()) {   // search for the player entity
             // Get the player component if it exists
@@ -45,7 +61,7 @@ namespace our {
             }
         }
         if (!player) {
-            return; // If the player doesn't exist, we can't do collision detection
+            return false; // If the player doesn't exist, we can't do collision detection
         }
 
         // Get player collision bounding box
@@ -53,23 +69,48 @@ namespace our {
         glm::vec3 playerEnd = playerEntity->getComponent<CollisionComponent>()->end + playerPosition;   // get the player's end position
 
         // For each entity in the world
+        int iterator = 0;
         for (auto entity: world->getEntities()) {
             // Get the collision component if it exists
+            // std::string type = data.value("type", "");
+            if (entity->name == "moon")
+            {
+                std::cout<<"Hello";
+            }
+            std::cout<< entity->name;
             CollisionComponent *collision = entity->getComponent<CollisionComponent>();
             // If the collision component exists
             if (collision) {
+                iterator += 1;
                 auto objectPosition = entity->localTransform.position; // get the object's position in the world
+                auto objectScale = entity->localTransform.scale; // get the object's position in the world
+                // auto objectRot = entity->localTransform.position; // get the object's position in the world
                 // Get object collision bounding box
-                glm::vec3 objectStart = collision->start + objectPosition;  // get the object's start position
-                glm::vec3 objectEnd = collision->end + objectPosition; // get the object's end position
-                bool collided = true;
+                glm::vec3 objectStart = (objectPosition);  // get the object's start position
+                glm::vec3 objectEnd = (objectPosition); // get the object's end position
                 // loop for each axis (x,y,z)
-                for (int i = 0; i < 3; ++i) {
-                    if (playerStart[i] > objectEnd[i] || playerEnd[i] < objectStart[i]) { // if the player and object don't overlap on this axis
-                        collided = false; // then they don't collide
-                        break;
-                    }
-                }
+                // for (int i = 0; i < 3; ++i) {
+                    // std::cout<< objectPosition[0]<< " ++++++++++ " << objectPosition[1]<<std::endl;
+                    // std::cout<<"player x1:"<< playerStart[0]<< " ------- " << "player x2:"<<playerEnd[0]<<std::endl;
+                    // std::cout<<"object x1:"<< objectStart[0]<< " ------- " << "object x2:"<< objectEnd[0]<<std::endl;
+                    // std::cout<<"player y1:"<< playerStart[1]<< " ------- " << "player y2:"<<playerEnd[1]<<std::endl;
+                    // std::cout<<"object y1:"<< objectStart[1]<< " ------- " << "object y2:"<< objectEnd[1]<<std::endl;
+                    // std::cout<<"player z1:"<< playerStart[2]<< " ------- " << "player z1:"<<playerEnd[2]<<std::endl;
+                    // std::cout<<"object z2:"<< objectStart[2]<< " ------- " << "object z2:"<< objectEnd[2]<<std::endl;
+                    // std::cout<<"========================================="<<std::endl;
+                    // if ((playerStart[0] < objectEnd[0] && playerEnd[0] > objectStart[0])
+                    // && (playerStart[1] < objectEnd[1] && playerEnd[1] > objectStart[1])
+                    // && (playerStart[2] < objectEnd[2] && playerEnd[2] > objectStart[2])
+                    //     ) { // if the player and object don't overlap on this axis
+                    //     collided = true; // then they don't collide
+                    //     // break;
+                    // }
+
+
+                    BoundingBox playerBox = {playerStart[0], playerEnd[0], playerStart[1], playerEnd[1], playerStart[2], playerEnd[2]};
+                    BoundingBox obstacleBox = {objectStart[0], objectEnd[0], objectStart[1] - 1, objectEnd[1] - 1, objectStart[2], objectEnd[2]};
+                // }
+                    collided = checkCollision(playerBox, obstacleBox);
                 if (collided) {
                     // Player hits an obstacle
                     if (entity->getComponent<MasalaComponent>()) { // if the object is an obstacle
@@ -105,6 +146,12 @@ namespace our {
                             }
                         }
                     }
+                    else
+                    {
+                        // std::cout<<"collideddddddddd";
+                    }
+                    std::cout<<"collideddddddddd";
+                    
 
                     RepeatComponent *repeatComponent = entity->getComponent<RepeatComponent>();
                     glm::vec3 &repeatPosition = entity->localTransform.position;
@@ -113,8 +160,14 @@ namespace our {
                     }
                     break;
                 }
+                // else{
+                //         std::cout<<"notttttttttttttttt";
+
+                // }
             }
         }
+        // std::cout<< iterator <<std::endl;
+        return (collided);
     }
 
     // decrease the hearts

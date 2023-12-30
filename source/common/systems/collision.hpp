@@ -23,7 +23,7 @@ namespace our {
         }
 
         // This should be called every frame to update all entities containing a MovementComponent.
-        void update(World *world, float deltaTime, int &heartCount,
+        bool update(World *world, float deltaTime, int &heartCount,
                     float &collisionStartTime);
 
         // This function is called when the player collides with an obstacle
