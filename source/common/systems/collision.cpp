@@ -82,11 +82,6 @@ namespace our
         {
             // Get the collision component if it exists
             // std::string type = data.value("type", "");
-            if (entity->name == "moon")
-            {
-                std::cout << "Hello";
-            }
-            // std::cout << entity->name;
             CollisionComponent *collision = entity->getComponent<CollisionComponent>();
             // If the collision component exists
             if (collision)
@@ -96,8 +91,8 @@ namespace our
                 auto objectScale = entity->localTransform.scale;       // get the object's scale
 
                 // Get object collision bounding box
-                glm::vec3 objectStart = (objectPosition); // get the object's start position
-                glm::vec3 objectEnd = (objectPosition);   // get the object's end position
+                glm::vec3 objectStart = (collision->start + objectPosition); // get the object's start position
+                glm::vec3 objectEnd = (objectPosition + collision->end);   // get the object's end position
 
                 // loop for each axis (x,y,z)
                 // for (int i = 0; i < 3; ++i) {
@@ -131,9 +126,17 @@ namespace our
 
                 if (collided)
                 {
+                    if(entity->getComponent<PlayerComponent>())
+                    {
+                        std::cout << "Collide with Player"<< std::endl;
+                        continue;
+                    }
+
                     // Player hits an obstacle
                     if (entity->getComponent<MasalaComponent>())
                     { // if the object is an obstacle
+                        std::cout << "collided with obstacle : " << heartCount << std::endl;
+
                         if (collisionStartTime == 0)
                             collisionStartTime = deltaTime; // start counting the time of collision for postprocessing effect
 
@@ -145,9 +148,11 @@ namespace our
                             app->changeState("game-over"); // go to the game over state
                         }
                     }
+
                     // Player takes a heart
                     else if (entity->getComponent<GemHeartComponent>()) // if the object is a gem heart
                     {
+                        std::cout << "collided with heart" << std::endl;
                         if (heartCount < 3) // if the player has less than 3 hearts which is max
                         {
                             heartCount++; // increase the count of hearts
@@ -169,7 +174,6 @@ namespace our
                             }
                         }
                     }
-
 
                     RepeatComponent *repeatComponent = entity->getComponent<RepeatComponent>();
                     glm::vec3 &repeatPosition = entity->localTransform.position;
