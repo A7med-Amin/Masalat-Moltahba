@@ -1,6 +1,7 @@
 #pragma once
 
 #include <application.hpp>
+#include <iostream>
 
 #include <ecs/world.hpp>
 #include <systems/forward-renderer.hpp>
@@ -60,15 +61,25 @@ class Playstate: public our::State {
         bool didCollide = false;
         movementSystem.update(&world, (float)deltaTime);
         myPlayer.update(&world, (float)deltaTime);
-        float collisionStartTime = 0; // temporaryyyyyyyyyyyyyyyy
+        // float collisionStartTime = 0; // temporaryyyyyyyyyyyyyyyy
         didCollide = collisionSystem.update(&world,(float) deltaTime, getApp()->heartCount, collisionStartTime);
         cameraController.update(&world, (float)deltaTime, didCollide);
         
         repeatSystem.update(&world, (float) deltaTime);
         finalLineSystem.update(&world, (float) deltaTime);
-                
+
+        std::string postProcessFrag = "assets/shaders/postprocess/vignette.frag";
+        
+        
+        // postProcessFrag = "assets/shaders/postprocess/sandWethereEffect.frag";
+        if (collisionStartTime != 0) {
+            collisionStartTime += (float) deltaTime;
+            postProcessFrag = "assets/shaders/postprocess/Grain.frag";
+        }
+        // Collision effect for 100 time
+        if (collisionStartTime >= 20 * deltaTime)collisionStartTime = 0;
         // And finally we use the renderer system to draw the scene
-        renderer.render(&world);
+        renderer.render(&world, postProcessFrag);
 
         // Get a reference to the keyboard object
         auto& keyboard = getApp()->getKeyboard();
