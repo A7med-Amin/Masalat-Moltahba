@@ -1,5 +1,6 @@
 //TODO: (Phase 2)
 
+#include <iostream>
 #include "repeat.hpp"
 
 #pragma once
@@ -9,6 +10,7 @@
 #include "../components/repeat.hpp"
 
 #include <glm/glm.hpp>
+using namespace std;
 
 /*
     This component is responsible for repeating objects to continue with us
@@ -48,11 +50,14 @@ namespace our {
             glm::vec3 &repeatPosition = repeatEntity->localTransform.position;
             // If the repeat component exists
             if (repeatComponent) {
-                if (playerPosition[0] <= repeatPosition[0] - 5) {
+                // print the position of the player and the repeat component
+                cout << "repeat component for entity: " << " " << entity->name << " " << repeatPosition.x << " " << repeatPosition.y << " " << repeatPosition.z << endl;
+                if (playerPosition[2] <= repeatPosition[2] - 5) {
                     // Repear masala component only
                     MasalaComponent *masalaComponent = repeatEntity->getComponent<MasalaComponent>();
                     // Prevent the repeating after the end of the level
                     if (masalaComponent) {
+                        cout << "repeat masala component for entity: " << " " << entity->name << " " << repeatPosition.x << " " << repeatPosition.y << " " << repeatPosition.z << endl;
                         if ((repeatPosition + repeatComponent->translation).x < -1995) {
                             world->markForRemoval(repeatEntity);
                             continue;

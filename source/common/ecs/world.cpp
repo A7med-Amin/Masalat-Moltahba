@@ -54,9 +54,8 @@ namespace our {
                             // std::cout << "here\n";
                         }
                         entityMap[vertical][horizontal] = true;
-                        newDuplicateEntity->localTransform.position.x += (-float(horizontal)) * SLICE_SIZE;
+                        newDuplicateEntity->localTransform.position.x += float(i) * duplicates[1];
                         newDuplicateEntity->localTransform.position.z = (-4.0f + float(vertical) * 4.0f);
-
                         
                     } else {
                         newDuplicateEntity->localTransform.position.x += float(i) * duplicates[1];

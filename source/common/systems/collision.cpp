@@ -43,16 +43,52 @@ namespace our
                (box1.minZ - 3 < box2.maxZ && box1.maxZ - 3 > box2.minZ);
     }
 
-    // Example usage
+    void CollisionSystem::checkMasalaHeight(World *world, float deltaTime)
+    {
+        // Entity *tempEntity = nullptr;
+        MasalaComponent *masala = nullptr;
+        for (auto entity : world->getEntities())
+        { // search for the player entity
+            // Get the MASALA component if it exists
+            // playerEntity = entity;
+            masala = entity->getComponent<MasalaComponent>();
+            // If the player component exists
+            if (masala)
+            {
+                if (masala->increasingHeight)
+                {
+                    // glm::vec3 masalaCoordinates = glm::vec3(entity->getLocalToWorldMatrix() *
+                    //             glm::vec4(entity->localTransform.position, 1.0)); // get the player's position in the world
+
+                    glm::vec3 &position = entity->localTransform.position;
+                    position.y += 0.2 * deltaTime;
+                    if (position.y > -3)
+                    {
+                        masala->increasingHeight = false;
+                    }
+                }
+                else
+                {
+                    glm::vec3 &position = entity->localTransform.position;
+                    position.y -= 0.2 * deltaTime;
+                    if (position.y < -10)
+                    {
+                        masala->increasingHeight = true;
+                    }
+                }
+            }
+        }
+    }
+
 
     bool CollisionSystem::update(World *world, float deltaTime, int &heartCount,
                                  float &collisionStartTime)
     {
+        checkMasalaHeight(world, 0.05);
         PlayerComponent *player;  // The player component if it exists
         glm::vec3 playerPosition; // The player's position in the world
         Entity *playerEntity;     // The player entity if it exists
         bool collided = false;
-        static double last_collision_time = 0.0;
 
         for (auto entity : world->getEntities())
         { // search for the player entity
@@ -66,6 +102,8 @@ namespace our
                     glm::vec3(playerEntity->getLocalToWorldMatrix() *
                               glm::vec4(playerEntity->localTransform.position, 1.0)); // get the player's position in the world
                 break;
+                glm::vec3 &position = entity->localTransform.position;
+
             }
         }
         if (!player)
@@ -122,8 +160,8 @@ namespace our
                         CollisionSystem::decreaseHearts(world, heartCount);
 
                         if (heartCount < 1)
-                        { // if the player has no more hearts
-                            heartCount = 3; // reset the heart count
+                        {                                  // if the player has no more hearts
+                            heartCount = 3;                // reset the heart count
                             app->changeState("game-over"); // go to the game over state
                         }
                     }

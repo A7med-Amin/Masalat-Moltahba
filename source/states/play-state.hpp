@@ -15,6 +15,8 @@
 #include <systems/collision.hpp>
 
 
+
+
 // This state shows how to use the ECS framework and deserialization.
 class Playstate: public our::State {
 
@@ -31,6 +33,7 @@ class Playstate: public our::State {
 
     our::PlayerComponent myPlayer;
 
+
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
@@ -43,6 +46,7 @@ class Playstate: public our::State {
             world.deserialize(config["world"]);
         }
         // We initialize the camera controller system since it needs a pointer to the app
+        // checkMasalaHeight(getApp());
         cameraController.enter(getApp());
         collisionSystem.enter(getApp());
         finalLineSystem.enter(getApp());
@@ -60,10 +64,11 @@ class Playstate: public our::State {
         // Here, we just run a bunch of systems to control the world logic
         bool didCollide = false;
         movementSystem.update(&world, (float)deltaTime);
-        myPlayer.update(&world, (float)deltaTime);
+        myPlayer.update(&world, (float)deltaTime * getApp()->getDifficulty());
+        // std::cout<<(myPlayer.speed);
         // float collisionStartTime = 0; // temporaryyyyyyyyyyyyyyyy
-        didCollide = collisionSystem.update(&world,(float) deltaTime, getApp()->heartCount, collisionStartTime);
-        cameraController.update(&world, (float)deltaTime, didCollide);
+        didCollide = collisionSystem.update(&world,(float) deltaTime * getApp()->getDifficulty() , getApp()->heartCount, collisionStartTime);
+        cameraController.update(&world, (float)deltaTime * getApp()->getDifficulty() , didCollide);
         
         repeatSystem.update(&world, (float) deltaTime);
         finalLineSystem.update(&world, (float) deltaTime, getApp()->heartCount);
@@ -76,7 +81,7 @@ class Playstate: public our::State {
             postProcessFrag = "assets/shaders/postprocess/Grain.frag";
         }
         // Collision effect for 100 time
-        if (collisionStartTime >= 20 * deltaTime)collisionStartTime = 0;
+        if (collisionStartTime >= 15 * deltaTime)collisionStartTime = 0;
         // And finally we use the renderer system to draw the scene
         renderer.render(&world, postProcessFrag);
 
