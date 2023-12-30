@@ -33,24 +33,7 @@ class Playstate: public our::State {
 
     our::PlayerComponent myPlayer;
 
-    // void checkMasalaHeight(our::Application *app)
-    // {
-    //     our::Entity *tempEnt = nullptr;
-    //     for (auto entity : world.getEntities())
-    //     { // search for the player entity
-    //         // Get the player component if it exists
-    //         tempEnt = entity;
-    //         masala = tempEnt->getComponent<MasalaComponent>();
-    //         // If the player component exists
-    //         if (player)
-    //         {
-    //             playerPosition =
-    //                 glm::vec3(playerEntity->getLocalToWorldMatrix() *
-    //                         glm::vec4(playerEntity->localTransform.position, 1.0)); // get the player's position in the world
-    //             break;
-    //         }
-    //     }
-    // }
+
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
@@ -81,11 +64,11 @@ class Playstate: public our::State {
         // Here, we just run a bunch of systems to control the world logic
         bool didCollide = false;
         movementSystem.update(&world, (float)deltaTime);
-        myPlayer.update(&world, (float)deltaTime);
+        myPlayer.update(&world, (float)deltaTime * getApp()->getDifficulty());
         // std::cout<<(myPlayer.speed);
         // float collisionStartTime = 0; // temporaryyyyyyyyyyyyyyyy
-        didCollide = collisionSystem.update(&world,(float) deltaTime, getApp()->heartCount, collisionStartTime);
-        cameraController.update(&world, (float)deltaTime, didCollide);
+        didCollide = collisionSystem.update(&world,(float) deltaTime * getApp()->getDifficulty() , getApp()->heartCount, collisionStartTime);
+        cameraController.update(&world, (float)deltaTime * getApp()->getDifficulty() , didCollide);
         
         repeatSystem.update(&world, (float) deltaTime);
         finalLineSystem.update(&world, (float) deltaTime, getApp()->heartCount);
