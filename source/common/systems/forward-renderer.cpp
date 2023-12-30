@@ -398,14 +398,14 @@ namespace our
                 transparentCommand.material->shader->set(prefix + "color", light->color);
                 switch (light->light_type)
                 {
-                case LightType::DIRECTIONAL_LIGHT:
+                case 0:
                     transparentCommand.material->shader->set(prefix + "direction", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
                     break;
-                case LightType::POINT_LIGHT:
+                case 1:
                     transparentCommand.material->shader->set(prefix + "position", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 0.0f)));
                     transparentCommand.material->shader->set(prefix + "attenuation", light->attenuation);
                     break;
-                case LightType::SPOT_LIGHT:
+                case 2:
                     transparentCommand.material->shader->set(prefix + "position", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 0.0f)));
                     transparentCommand.material->shader->set(prefix + "direction", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
                     transparentCommand.material->shader->set(prefix + "attenuation", light->attenuation);
