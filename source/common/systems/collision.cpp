@@ -86,7 +86,7 @@ namespace our
             {
                 std::cout << "Hello";
             }
-            std::cout << entity->name;
+            // std::cout << entity->name;
             CollisionComponent *collision = entity->getComponent<CollisionComponent>();
             // If the collision component exists
             if (collision)

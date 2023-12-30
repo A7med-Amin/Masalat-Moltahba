@@ -225,16 +225,16 @@ namespace our
         // Check if the data does not object
         if(!data.is_object()) return;
         // load "albedo" value from Json object and assign the value to class member value -> albedo //
-        albedo = AssetLoader<Texture2D>::get(data.value("albedo" , ""));
+        albedo = AssetLoader<Texture2D>::get(data.value("albedo" , "red"));
         // load "emissive" value from Json object and assign the value to class member value -> emmissive //
-        emissive = AssetLoader<Texture2D>::get(data.value("emissive" , ""));
+        emissive = AssetLoader<Texture2D>::get(data.value("emissive" , "red"));
         // load "specular" value from Json object and assign the value to class member value -> specular //
-        specular = AssetLoader<Texture2D>::get(data.value("specular" , ""));
+        specular = AssetLoader<Texture2D>::get(data.value("specular" , "red"));
         // load "ambient_occlusion" value from Json object and assign the value to class member value -> ambient_occlusion //
-        ambient_occlusion = AssetLoader<Texture2D>::get(data.value("ambient_occlusion" , ""));
+        ambient_occlusion = AssetLoader<Texture2D>::get(data.value("ambient_occlusion" , "red"));
         // load "roughness" value from Json object and assign the value to class member value -> roughness //
-        roughness = AssetLoader<Texture2D>::get(data.value("roughness" , ""));
+        roughness = AssetLoader<Texture2D>::get(data.value("roughness" , "red"));
         // load "sampler" value from Json object and assign the value to class member value -> sampler //
-        sampler = AssetLoader<Sampler>::get(data.value("sampler" , ""));
+        sampler = AssetLoader<Sampler>::get(data.value("sampler" , "red"));
     }
 }

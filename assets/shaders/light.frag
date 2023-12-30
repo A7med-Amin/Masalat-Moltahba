@@ -1,5 +1,5 @@
 // DONE TODO: (Phase 2)
-
+#version 330 core
 #define DIRECTIONAL 0
 #define POINT       1
 #define SPOT        2
@@ -113,7 +113,7 @@ void main() {
             world_to_light_dir = light.position - fsin.world;
             float d = length(world_to_light_dir);
             world_to_light_dir /= d;
-            attenuation = 1.0f / dot(light.attenuation, vec3(d*d, d, 1.0f));
+            attenuation = 1.0f / dot(light.attenuation, vec3(1.0f , d , d*d));
             if(light.type == SPOT){
                 float angle = acos(dot(light.direction, -world_to_light_dir));
                 attenuation *= smoothstep(light.cone_angles.y, light.cone_angles.x, angle);
@@ -129,6 +129,6 @@ void main() {
     }
 
     // TODO: (Phase 2) Make sure
-    frag_color = fsin.color * vec4(color, 1.0f);
+    frag_color = vec4(color, 1.0f);
 }
 

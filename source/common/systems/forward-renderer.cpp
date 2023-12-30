@@ -143,8 +143,9 @@ namespace our
         CameraComponent *camera = nullptr;
         opaqueCommands.clear();
         transparentCommands.clear();
-        point_directional_lights.clear();
-        spot_light.clear();
+        // point_directional_lights.clear();
+        // spot_light.clear();
+        lights.clear();
         for (auto entity : world->getEntities())
         {
             // If we hadn't found a camera yet, we look for a camera in this entity
@@ -317,7 +318,7 @@ namespace our
             opaqueCommand.material->shader->set("M", opaqueCommand.localToWorld);
             opaqueCommand.material->shader->set("M_IT", glm::transpose(glm::inverse(opaqueCommand.localToWorld)));
             opaqueCommand.material->shader->set("camera_position", positionOfCamera);
-            opaqueCommand.material->shader->set("light_count", (int32_t)lights.size());
+            opaqueCommand.material->shader->set("light_count",(int)lights.size());
             int index = 0;
             const int MAX_LIGHT_COUNT = 16;
             for(const auto& light : lights)
@@ -327,14 +328,14 @@ namespace our
                 opaqueCommand.material->shader->set(prefix + "color", light->color);
                 switch(light->light_type)
                 {
-                    case LightType::DIRECTIONAL_LIGHT:
+                    case 0:
                         opaqueCommand.material->shader->set(prefix + "direction", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
                         break;
-                    case LightType::POINT_LIGHT:
+                    case 1:
                         opaqueCommand.material->shader->set(prefix + "position", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 0.0f)));
                         opaqueCommand.material->shader->set(prefix + "attenuation", light->attenuation);
                         break;
-                    case LightType::SPOT_LIGHT:
+                    case 2:
                         opaqueCommand.material->shader->set(prefix + "position", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(light->getOwner()->localTransform.position, 0.0f)));
                         opaqueCommand.material->shader->set(prefix + "direction", glm::vec3(light->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0, -1.0, 0.0, 0.0)));
                         opaqueCommand.material->shader->set(prefix + "attenuation", light->attenuation);

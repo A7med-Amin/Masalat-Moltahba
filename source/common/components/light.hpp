@@ -16,7 +16,7 @@ namespace our
     class LightComponent : public Component
     {
     public:
-        LightType light_type; // this member variable will be used to specify type of light(Spot_light , Point_light , Direction_light)
+        int light_type; // this member variable will be used to specify type of light(Spot_light , Point_light , Direction_light)
         glm::vec3 direction; // Direction of light
         glm::vec3 position; // Position of light source
         glm::vec3 color; // Color of light
