@@ -15,14 +15,19 @@ namespace our
 {
 
     //TODO: (Phase 2) free camera controller
-
+    enum JumpState {
+            JUMPING,
+            FALLING,
+            GROUNDED
+    };
     // The free camera controller system is responsible for moving every entity which contains a FreeCameraControllerComponent.
     // This system is added as a slightly complex example for how use the ECS framework to implement logic. 
     // For more information, see "common/components/free-camera-controller.hpp"
     class FreeCameraControllerSystem {
         Application* app; // The application in which the state runs
         bool mouse_locked = true; // Is the mouse locked
-
+            // The state of jumping and falling
+        our::JumpState jumpState = our::JumpState::GROUNDED; // The state of jumping
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void enter(Application* app){
@@ -30,11 +35,12 @@ namespace our
         }
 
         // This should be called every frame to update all entities containing a FreeCameraControllerComponent 
-        void update(World* world, float deltaTime) {
+        void update(World* world, float deltaTime, bool didCollide) {
             // First of all, we search for an entity containing both a CameraComponent and a FreeCameraControllerComponent
             // As soon as we find one, we break
             CameraComponent* camera = nullptr;
             FreeCameraControllerComponent *controller = nullptr;
+            int collisionFactor = (didCollide)?  (-1 * 3): 1;
             for(auto entity : world->getEntities()){
                 camera = entity->getComponent<CameraComponent>();
                 controller = entity->getComponent<FreeCameraControllerComponent>();
@@ -61,18 +67,18 @@ namespace our
 
             // If the left mouse button is pressed, we get the change in the mouse location
             // and use it to update the camera rotation
-            if(app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1)){
-                glm::vec2 delta = app->getMouse().getMouseDelta();
-                rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch
-                rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
-            }
+            // if(app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1)){
+            //     glm::vec2 delta = app->getMouse().getMouseDelta();
+            //     rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch
+            //     rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
+            // }
 
-            // We prevent the pitch from exceeding a certain angle from the XZ plane to prevent gimbal locks
-            if(rotation.x < -glm::half_pi<float>() * 0.99f) rotation.x = -glm::half_pi<float>() * 0.99f;
-            if(rotation.x >  glm::half_pi<float>() * 0.99f) rotation.x  = glm::half_pi<float>() * 0.99f;
-            // This is not necessary, but whenever the rotation goes outside the 0 to 2*PI range, we wrap it back inside.
-            // This could prevent floating point error if the player rotates in single direction for an extremely long time. 
-            rotation.y = glm::wrapAngle(rotation.y);
+            // // We prevent the pitch from exceeding a certain angle from the XZ plane to prevent gimbal locks
+            // if(rotation.x < -glm::half_pi<float>() * 0.99f) rotation.x = -glm::half_pi<float>() * 0.99f;
+            // if(rotation.x >  glm::half_pi<float>() * 0.99f) rotation.x  = glm::half_pi<float>() * 0.99f;
+            // // This is not necessary, but whenever the rotation goes outside the 0 to 2*PI range, we wrap it back inside.
+            // // This could prevent floating point error if the player rotates in single direction for an extremely long time. 
+            // rotation.y = glm::wrapAngle(rotation.y);
 
             // We update the camera fov based on the mouse wheel scrolling amount
             float fov = camera->fovY + app->getMouse().getScrollOffset().y * controller->fovSensitivity;
@@ -92,14 +98,44 @@ namespace our
 
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
-            if(app->getKeyboard().isPressed(GLFW_KEY_W)) position += front * (deltaTime * current_sensitivity.z);
-            if(app->getKeyboard().isPressed(GLFW_KEY_S)) position -= front * (deltaTime * current_sensitivity.z);
+            if(app->getKeyboard().isPressed(GLFW_KEY_W)) position += front * (deltaTime * current_sensitivity.z * collisionFactor);
+            if(app->getKeyboard().isPressed(GLFW_KEY_S)) position -= front * (deltaTime * current_sensitivity.z * collisionFactor);
             // Q & E moves the player up and down
-            if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
+            // if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
             if(app->getKeyboard().isPressed(GLFW_KEY_E)) position -= up * (deltaTime * current_sensitivity.y);
             // A & D moves the player left or right 
-            if(app->getKeyboard().isPressed(GLFW_KEY_D)) position += right * (deltaTime * current_sensitivity.x);
-            if(app->getKeyboard().isPressed(GLFW_KEY_A)) position -= right * (deltaTime * current_sensitivity.x);
+            if(app->getKeyboard().isPressed(GLFW_KEY_D)) position += right * (deltaTime * current_sensitivity.x * collisionFactor);
+            if(app->getKeyboard().isPressed(GLFW_KEY_A)) position -= right * (deltaTime * current_sensitivity.x * collisionFactor);
+
+            // Jump logic
+            float jumpSpeed = 6;
+            float jumpMaxHeight = 4;
+            if ((app->getKeyboard().isPressed(GLFW_KEY_SPACE) || app->getKeyboard().isPressed(GLFW_KEY_UP))) {
+                if (jumpState == our::JumpState::GROUNDED) {
+                    // We set the jump state to JUMPING
+                    jumpState = our::JumpState::JUMPING;
+                    // Start the jump
+                    position.y += (deltaTime * jumpSpeed * collisionFactor);
+                }
+            }
+            // If the player jumps higher than the max height, we set the jump state to FALLING
+            if (position.y >= jumpMaxHeight) {
+                jumpState = our::JumpState::FALLING;
+            } else if (position.y <= 1) {
+                // If the player was falling, we set the jump state to GROUNDED
+                jumpState = our::JumpState::GROUNDED;
+            }
+
+            // We update the player position based on the jump state
+            if (jumpState == our::JumpState::JUMPING) {
+                position.y += (deltaTime * jumpSpeed);
+            } else if (jumpState == our::JumpState::FALLING) {
+                // We update the player position based on the jump state
+                position.y -= (deltaTime * jumpSpeed);
+            } else {
+                // We make sure the player is grounded
+                position.y = 1;
+            }
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked

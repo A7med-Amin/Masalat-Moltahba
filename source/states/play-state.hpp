@@ -8,6 +8,11 @@
 #include <systems/movement.hpp>
 #include <../common/components/player.hpp>
 #include <asset-loader.hpp>
+#include <systems/final-line.hpp>
+#include <systems/collision.hpp>
+#include <systems/repeat.hpp>
+
+
 
 // This state shows how to use the ECS framework and deserialization.
 class Playstate: public our::State {
@@ -17,6 +22,11 @@ class Playstate: public our::State {
     our::FreeCameraControllerSystem cameraController;
     our::MovementSystem movementSystem;
     our::PlayerComponent myPlayer;
+    our::CollisionSystem collisionSystem;
+
+
+    // player data
+    int heartCount;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -31,7 +41,10 @@ class Playstate: public our::State {
         }
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
+        // We initialize the player component since it needs a pointer to the app
         myPlayer.enter(getApp());
+        // We initialize the collision system since it needs a pointer to the app
+        collisionSystem.enter(getApp());
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
         renderer.initialize(size, config["renderer"]);
@@ -39,9 +52,13 @@ class Playstate: public our::State {
 
     void onDraw(double deltaTime) override {
         // Here, we just run a bunch of systems to control the world logic
-        movementSystem.update(&world, (float)deltaTime, our::MotionState::RUNNING);
-        cameraController.update(&world, (float)deltaTime);
+        bool didCollide = false;
+        movementSystem.update(&world, (float)deltaTime);
         myPlayer.update(&world, (float)deltaTime);
+        float collisionStartTime = 0; // temporaryyyyyyyyyyyyyyyy
+        didCollide = collisionSystem.update(&world, deltaTime, heartCount, collisionStartTime);
+        
+        cameraController.update(&world, (float)deltaTime, didCollide);
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 

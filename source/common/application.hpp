@@ -78,7 +78,8 @@ namespace our {
         virtual void setupCallbacks();                              // Sets-up the window callback functions from GLFW to our (Mouse/Keyboard) classes.
 
     public:
-
+        // initialization of the application
+        our::MotionState motionState = our::MotionState::RESTING;
         int heartCount = 3;
 
         // Create an application with following configuration

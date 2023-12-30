@@ -23,6 +23,10 @@ namespace our {
                           // If parent is null, the entity is a root entity (has no parent).
         Transform localTransform; // The transform of this entity relative to its parent.
 
+        // added by AMIN
+        // glm::vec3 start;
+        // glm::vec3 end;
+
         World* getWorld() const { return world; } // Returns the world to which this entity belongs
 
         glm::mat4 getLocalToWorldMatrix() const; // Computes and returns the transformation from the entities local space to the world space

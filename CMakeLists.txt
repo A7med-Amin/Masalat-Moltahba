@@ -92,7 +92,9 @@ set(COMMON_SOURCES
         source/common/components/player.cpp
         source/common/components/repeat.hpp
         source/common/components/repeat.cpp
-
+        source/common/components/final-line.hpp
+        source/common/components/final-line.cpp
+        
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp
         source/common/systems/free-camera-controller.hpp
@@ -101,7 +103,9 @@ set(COMMON_SOURCES
         source/common/systems/collision.cpp
         source/common/systems/repeat.hpp
         source/common/systems/repeat.cpp
-        
+        source/common/systems/final-line.hpp
+        source/common/systems/final-line.cpp
+
 )
 
 # Define the directories in which to search for the included headers
