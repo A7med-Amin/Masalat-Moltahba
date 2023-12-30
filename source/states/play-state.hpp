@@ -82,6 +82,7 @@ class Playstate: public our::State {
         bool didCollide = false;
         movementSystem.update(&world, (float)deltaTime);
         myPlayer.update(&world, (float)deltaTime);
+        // std::cout<<(myPlayer.speed);
         // float collisionStartTime = 0; // temporaryyyyyyyyyyyyyyyy
         didCollide = collisionSystem.update(&world,(float) deltaTime, getApp()->heartCount, collisionStartTime);
         cameraController.update(&world, (float)deltaTime, didCollide);

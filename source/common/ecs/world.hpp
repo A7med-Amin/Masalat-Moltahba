@@ -53,7 +53,7 @@ namespace our {
         void deleteMarkedEntities(){
             //TODO: (Req 8) Remove and delete all the entities that have been marked for removal
             for (const auto& element : markedForRemoval) {
-                markedForRemoval.erase(element);
+                entities.erase(element);
                 delete element;
             }
             markedForRemoval.clear();

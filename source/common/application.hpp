@@ -69,7 +69,7 @@ namespace our {
         std::unordered_map<std::string, State*> states;   // This will store all the states that the application can run
         State * currentState = nullptr;         // This will store the current scene that is being run
         State * nextState = nullptr;            // If it is requested to go to another scene, this will contain a pointer to that scene
-
+        glm::vec3 difficulty;
         
         // Virtual functions to be overrode and change the default behaviour of the application
         // according to the example needs.

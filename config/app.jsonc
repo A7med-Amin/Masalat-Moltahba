@@ -1,5 +1,6 @@
 {
     "start-scene": "menu",
+    "difficulty" : [1 , 2 , 4],
     "window": {
         "title": "Masalat Molthba",
         "size": {
@@ -461,6 +462,58 @@
                 "components": [
                     {
                         "name": "2",
+                        "type": "Mesh Renderer",
+                        "mesh": "masala",
+                        "material": "masala"
+                    },
+                    {
+                        "type": "Masala"
+                    },
+                    // {
+                    //     "type": "Movement",
+                    //     "linearVelocity": [0, 0.3, 0]
+                    //     // "angularVelocity": [0, 45, 0]
+                    // }
+                    // , 
+                    {
+                        "type": "Collision",
+                        "start": [
+                            -0.5,
+                            -5,
+                            -0.2
+                        ],
+                        "end": [
+                            0.5,
+                            6,
+                            0.1
+                        ]
+                    }
+                    // ,
+                    // {
+                    //     "type": "Repeat",
+                    //     "translation": [
+                    //         0,
+                    //         0,
+                    //         -5
+                    //     ]
+                    // }
+                ]
+            },
+            {
+                "position": [
+                    7,
+                    -7,
+                    -10
+                ],
+                
+                // "duplicates": [
+                //     2,
+                //     10,
+                //     false
+                // ],
+                "components": [
+                    {
+                        "name": "omar masala",
                         "type": "Mesh Renderer",
                         "mesh": "masala",
                         "material": "masala"

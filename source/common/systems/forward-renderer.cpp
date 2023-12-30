@@ -188,8 +188,8 @@ namespace our
         //  from the local space to the world space
         auto cameraOwner = camera->getOwner();
         auto Matrix = cameraOwner->getLocalToWorldMatrix();
-        glm::vec3 positionOfCamera = Matrix * glm::vec4(0, 0, 0, 1);
-        glm::vec3 positionOfCameraPoints = Matrix * glm::vec4(0, 0, -1, 1);
+        glm::vec3 positionOfCamera = Matrix * glm::vec4(0, 2, 0, 1);
+        glm::vec3 positionOfCameraPoints = Matrix * glm::vec4(0, 0, -2, 1);
         glm::vec3 cameraForward = glm::normalize(positionOfCameraPoints - positionOfCamera);
 
         std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand &first, const RenderCommand &second)
