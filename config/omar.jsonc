@@ -180,11 +180,12 @@
                 ]
             },
             {
+                // "position": [0, 0, -15],
                 "rotation": [-45, 0, 0],
                 "components": [
                     {
                         "name": "2",
-                        "type": "Mesh Renderer",
+                        "type": "Masala",
                         "mesh": "monkey",
                         "material": "monkey"
                     },

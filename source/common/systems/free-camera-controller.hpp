@@ -164,22 +164,22 @@ namespace our
 
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
-            if (app->getKeyboard().isPressed(GLFW_KEY_W))
+            if (app->getKeyboard().isPressed(GLFW_KEY_W)  || app->getKeyboard().isPressed(GLFW_KEY_UP))
                 position += front * (deltaTime * current_sensitivity.z * collisionFactor);
-            if (app->getKeyboard().isPressed(GLFW_KEY_S))
-                position -= front * (deltaTime * current_sensitivity.z * collisionFactor);
+            if (app->getKeyboard().isPressed(GLFW_KEY_S) || app->getKeyboard().isPressed(GLFW_KEY_DOWN))
+                position -= front * (deltaTime * current_sensitivity.z * collisionFactor);    
             // Q & E moves the player up and down
             // if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
-            if (app->getKeyboard().isPressed(GLFW_KEY_E))
-                position -= up * (deltaTime * current_sensitivity.y);
+            // if (app->getKeyboard().isPressed(GLFW_KEY_E))
+            //     position -= up * (deltaTime * current_sensitivity.y);
             // A & D moves the player left or right
-            if (app->getKeyboard().isPressed(GLFW_KEY_D)){
+            if (app->getKeyboard().isPressed(GLFW_KEY_D) || app->getKeyboard().isPressed(GLFW_KEY_RIGHT)){
                 // limit the player movement to the left and right
                 if (position.x <= 7)
                     position += right * (deltaTime * current_sensitivity.x * collisionFactor);
 
             }
-            if (app->getKeyboard().isPressed(GLFW_KEY_A))
+            if (app->getKeyboard().isPressed(GLFW_KEY_A) || app->getKeyboard().isPressed(GLFW_KEY_LEFT))
             {
                 // limit the player movement to the left and right
                 if (position.x >= -7)
@@ -187,7 +187,7 @@ namespace our
             }
 
             // Jump logic
-            if ((app->getKeyboard().isPressed(GLFW_KEY_SPACE) || app->getKeyboard().isPressed(GLFW_KEY_UP)))
+            if (app->getKeyboard().isPressed(GLFW_KEY_SPACE))
             {
                 if (jumpState == our::JumpState::GROUNDED)
                 {

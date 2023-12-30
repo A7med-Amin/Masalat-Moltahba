@@ -1,7 +1,7 @@
 {
     "start-scene": "menu",
     "window": {
-        "title": "Default Game Window",
+        "title": "Masalat Molthba",
         "size": {
             "width": 1280,
             "height": 720
@@ -57,7 +57,8 @@
                 "masala": "assets/models/masala.obj",
                 "house": "assets/models/house.obj",
                 "house2": "assets/models/house2.obj",
-                "man": "assets/models//man.obj"
+                // "guy": "assets/models/guy.obj"
+                "man": "assets/models/man.obj"
             },
             "samplers": {
                 "default": {},
@@ -303,6 +304,25 @@
                     "texture": "road2",
                     "sampler": "default"
                 }
+                // "guy": {
+                //     "type": "textured",
+                //     "shader": "textured",
+                //     "pipelineState": {
+                //         "faceCulling": {
+                //             "enabled": false
+                //         },
+                //         "depthTesting": {
+                //             "enabled": true
+                //         }
+                //     },
+                //     "tint": [
+                //         1,
+                //         1,
+                //         1,
+                //         1
+                //     ],
+                //     "sampler": "default"
+                // }
             }
         },
         "world": [
@@ -310,7 +330,7 @@
                 "position": [
                     0,
                     0,
-                    0
+                    5
                 ],
                 "components": [
                     {

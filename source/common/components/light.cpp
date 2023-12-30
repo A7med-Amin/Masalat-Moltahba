@@ -28,6 +28,6 @@ namespace our
         attenuation = data.value("attenuation", attenuation);
 
         // load 'cone_angles' from json object and put it into cone_angles property
-        cone_angles = data.value("attenuation", cone_angles);
+        cone_angles = data.value("cone_angles", cone_angles);
     }
 }

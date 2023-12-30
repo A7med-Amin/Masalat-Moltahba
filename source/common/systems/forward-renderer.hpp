@@ -46,8 +46,9 @@ namespace our
         std::string lastPostProcess = "";
 
         // TODO: (Phase 2) Add lights lists to the forward renderer
-        std::vector<LightComponent *> point_directional_lights;
-        std::vector<LightComponent *> spot_light;
+        // std::vector<LightComponent *> point_directional_lights;
+        // std::vector<LightComponent *> spot_light;
+        std::vector<LightComponent *> lights;
 
     public:
         // Initialize the renderer including the sky and the Postprocessing objects.

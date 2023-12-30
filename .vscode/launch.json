@@ -9,7 +9,7 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/GAME_APPLICATION.exe",
-            "args": ["-c", "./config/omar.jsonc"],
+            "args": ["-c", "./config/app.jsonc"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
