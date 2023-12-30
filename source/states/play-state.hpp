@@ -81,7 +81,7 @@ class Playstate: public our::State {
             postProcessFrag = "assets/shaders/postprocess/Grain.frag";
         }
         // Collision effect for 100 time
-        if (collisionStartTime >= 50 * deltaTime)collisionStartTime = 0;
+        if (collisionStartTime >= 15 * deltaTime)collisionStartTime = 0;
         // And finally we use the renderer system to draw the scene
         renderer.render(&world, postProcessFrag);
 
