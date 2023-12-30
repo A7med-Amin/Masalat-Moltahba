@@ -15,6 +15,8 @@
 #include <systems/collision.hpp>
 
 
+
+
 // This state shows how to use the ECS framework and deserialization.
 class Playstate: public our::State {
 
@@ -31,6 +33,24 @@ class Playstate: public our::State {
 
     our::PlayerComponent myPlayer;
 
+    // void checkMasalaHeight(our::Application *app)
+    // {
+    //     our::Entity *tempEnt = nullptr;
+    //     for (auto entity : world.getEntities())
+    //     { // search for the player entity
+    //         // Get the player component if it exists
+    //         tempEnt = entity;
+    //         masala = tempEnt->getComponent<MasalaComponent>();
+    //         // If the player component exists
+    //         if (player)
+    //         {
+    //             playerPosition =
+    //                 glm::vec3(playerEntity->getLocalToWorldMatrix() *
+    //                         glm::vec4(playerEntity->localTransform.position, 1.0)); // get the player's position in the world
+    //             break;
+    //         }
+    //     }
+    // }
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
@@ -43,6 +63,7 @@ class Playstate: public our::State {
             world.deserialize(config["world"]);
         }
         // We initialize the camera controller system since it needs a pointer to the app
+        // checkMasalaHeight(getApp());
         cameraController.enter(getApp());
         collisionSystem.enter(getApp());
         finalLineSystem.enter(getApp());
