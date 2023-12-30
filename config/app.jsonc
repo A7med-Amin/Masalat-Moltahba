@@ -254,7 +254,7 @@
         },
         "world":[
             {
-                "position": [0, 5, 20],
+                "position": [0, 0, 0],
                 "components": [
                     {
                         "type": "Camera"
@@ -265,16 +265,26 @@
                 ],
                 "children": [
                     {
-                        "position": [1, -1, -1],
-                        "rotation": [45, 45, 0],
-                        "scale": [0.1, 0.1, 1.0],
-                        "components": [
+                        "position": [0, -1, -6],
+                        "rotation": [0, 180, 0],
+                        "components":[
                             {
+                                "type": "Player",
+                                "speed": 4
+                            },
+                            {
+                                "type": "Collision",
+                                "start": [-0.5, -0.5, -0.5],
+                                "end": [0.5, 0.5, 0.5]
+                            },
+                            {
+                                "name": "1",
                                 "type": "Mesh Renderer",
-                                "mesh": "cube",
-                                "material": "metal"
+                                "mesh": "monkey",
+                                "material": "monkey"
                             }
                         ]
+        
                     }
 
                 ]
@@ -300,14 +310,6 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "road"
-                    },
-                    {
-                        "type": "Repeat",
-                        "translation": [
-                            -100,
-                            0,
-                            0
-                        ]
                     }
                 ]
             },
@@ -332,14 +334,6 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "road2"
-                    },
-                    {
-                        "type": "Repeat",
-                        "translation": [
-                            -100,
-                            0,
-                            0
-                        ]
                     }
                 ]
             },
@@ -364,15 +358,8 @@
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "road2"
-                    },
-                    {
-                        "type": "Repeat",
-                        "translation": [
-                            -100,
-                            0,
-                            0
-                        ]
                     }
+                   
                 ]
             },
             {
@@ -388,14 +375,6 @@
                         "type": "Mesh Renderer",
                         "mesh": "masala",
                         "material": "masala"
-                    },
-                    {
-                        "type": "Repeat",
-                        "translation": [
-                            -100,
-                            0,
-                            0
-                        ]
                     }
                 ]
             },
