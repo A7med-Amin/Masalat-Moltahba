@@ -35,7 +35,7 @@ class GameOverstate : public our::State
         MenuMaterial->shader->attach("assets/shaders/textured.vert", GL_VERTEX_SHADER);
         MenuMaterial->shader->attach("assets/shaders/textured.frag", GL_FRAGMENT_SHADER);
         MenuMaterial->shader->link();
-        MenuMaterial->texture = our::texture_utils::loadImage("assets/textures/game-over.jpg");
+        MenuMaterial->texture = our::texture_utils::loadImage("assets/textures/gameover.png");
         MenuMaterial->tint = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 
         HighlightedMaterial = new our::TintedMaterial();
@@ -56,7 +56,7 @@ class GameOverstate : public our::State
             {{0.0f, 1.0f, 0.0f}, {255, 255, 255, 255}, {0.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},},
             {0,1,2,2,3,0,});
         time = 0;
-        buttons[0].position = {380.0f, 450.0f};
+        buttons[0].position = {380.0f, 460.0f};
         buttons[0].size = {515.0f, 65.0f};
         buttons[0].action = [this](){ this->getApp()->changeState("play"); };
     }

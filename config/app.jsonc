@@ -57,7 +57,8 @@
                 "masala": "assets/models/masala.obj",
                 "house": "assets/models/house.obj",
                 "house2": "assets/models/house2.obj",
-                "man": "assets/models/man.obj"
+                "man": "assets/models/man.obj",
+                "heart": "assets/models/heart.obj"
             },
             "samplers": {
                 "default": {},
@@ -302,6 +303,24 @@
                     ],
                     "texture": "road2",
                     "sampler": "default"
+                },
+                "heart": {
+                    "type": "tinted",
+                    "shader": "tinted",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        0,
+                        0,
+                        1
+                    ]
                 }
             }
         },
@@ -362,6 +381,90 @@
                                 "type": "Mesh Renderer",
                                 "mesh": "man",
                                 "material": "man"
+                            }
+                        ]
+                    },
+                    {
+                        "position": [
+                            -0.163,
+                            0.07,
+                            0.40000001
+                        ],
+                        "rotation": [
+                            0,
+                            -90,
+                            0
+                        ],
+                        "scale": [
+                            0.0009,
+                            0.0009,
+                            0.0009
+                        ],
+                        "components": [
+                            {
+                                "type": "Mesh Renderer",
+                                "mesh": "heart",
+                                "material": "heart"
+                            },
+                            {
+                                "type": "Heart",
+                                "number": 1
+                            }
+                        ]
+                    },
+                    {
+                        "position": [
+                            -0.154,
+                            0.07,
+                            0.40000001
+                        ],
+                        "rotation": [
+                            0,
+                            -90,
+                            0
+                        ],
+                        "scale": [
+                            0.0009,
+                            0.0009,
+                            0.0009
+                        ],
+                        "components": [
+                            {
+                                "type": "Mesh Renderer",
+                                "mesh": "heart",
+                                "material": "heart"
+                            },
+                            {
+                                "type": "Heart",
+                                "number": 2
+                            }
+                        ]
+                    },
+                    {
+                        "position": [
+                            -0.145,
+                            0.07,
+                            0.40000001
+                        ],
+                        "rotation": [
+                            0,
+                            -90,
+                            0
+                        ],
+                        "scale": [
+                            0.0009,
+                            0.0009,
+                            0.0009
+                        ],
+                        "components": [
+                            {
+                                "type": "Mesh Renderer",
+                                "mesh": "heart",
+                                "material": "heart"
+                            },
+                            {
+                                "type": "Heart",
+                                "number": 3
                             }
                         ]
                     }
