@@ -57,7 +57,6 @@
                 "masala": "assets/models/masala.obj",
                 "house": "assets/models/house.obj",
                 "house2": "assets/models/house2.obj",
-                // "guy": "assets/models/guy.obj"
                 "man": "assets/models/man.obj"
             },
             "samplers": {
@@ -185,8 +184,8 @@
                     },
                     "tint": [
                         1,
-                        0.6,
-                        0.6,
+                        1,
+                        1,
                         1
                     ], // what are the channels for? (RGBA)
                     "texture": "masala",
@@ -304,39 +303,22 @@
                     "texture": "road2",
                     "sampler": "default"
                 }
-                // "guy": {
-                //     "type": "textured",
-                //     "shader": "textured",
-                //     "pipelineState": {
-                //         "faceCulling": {
-                //             "enabled": false
-                //         },
-                //         "depthTesting": {
-                //             "enabled": true
-                //         }
-                //     },
-                //     "tint": [
-                //         1,
-                //         1,
-                //         1,
-                //         1
-                //     ],
-                //     "sampler": "default"
-                // }
             }
         },
         "world": [
             {
                 "position": [
                     0,
-                    0,
+                    50,
                     5
                 ],
                 "components": [
                     {
+                        "name": "camera",
                         "type": "Camera"
                     },
                     {
+                        "name": "cameraController",
                         "type": "Free Camera Controller"
                     }
                 ],
@@ -345,12 +327,17 @@
                         "position": [
                             0,
                             -2,
-                            -6
+                            -3
                         ],
                         "rotation": [
                             0,
                             180,
                             0
+                        ],
+                        "scale": [
+                            0.8,
+                            0.8,
+                            0.8
                         ],
                         "components": [
                             {
@@ -360,13 +347,13 @@
                             {
                                 "type": "Collision",
                                 "start": [
-                                    -0.5,
-                                    -0.5,
-                                    -0.5
+                                    -0.3,
+                                    -0.6,
+                                    -0.2
                                 ],
                                 "end": [
-                                    0.5,
-                                    0.5,
+                                    0.3,
+                                    1,
                                     0.5
                                 ]
                             },
@@ -398,6 +385,7 @@
                 ],
                 "components": [
                     {
+                        "name": "road1",
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "road"
@@ -422,6 +410,7 @@
                 ],
                 "components": [
                     {
+                        "name": "road2",
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "road2"
@@ -446,6 +435,7 @@
                 ],
                 "components": [
                     {
+                        "name": "road2",
                         "type": "Mesh Renderer",
                         "mesh": "plane",
                         "material": "road2"
@@ -455,13 +445,13 @@
             {
                 "position": [
                     0,
-                    -10,
+                    -7,
                     -30
                 ],
                 "scale": [
-                    2,
-                    2,
-                    2
+                    1,
+                    0.9,
+                    1
                 ],
                 // "duplicates": [
                 //     2,
@@ -470,21 +460,31 @@
                 // ],
                 "components": [
                     {
+                        "name": "2",
                         "type": "Mesh Renderer",
                         "mesh": "masala",
                         "material": "masala"
                     },
                     {
+                        "type": "Masala"
+                    },
+                    // {
+                    //     "type": "Movement",
+                    //     "linearVelocity": [0, 0.3, 0]
+                    //     // "angularVelocity": [0, 45, 0]
+                    // }
+                    // , 
+                    {
                         "type": "Collision",
                         "start": [
                             -0.5,
-                            -0.5,
-                            -0.5
+                            -5,
+                            -0.2
                         ],
                         "end": [
                             0.5,
-                            0.5,
-                            0.5
+                            6,
+                            0.1
                         ]
                     }
                     // ,
@@ -516,14 +516,13 @@
                 ],
                 "components": [
                     {
+                        "name": "house",
                         "type": "Mesh Renderer",
                         "mesh": "house",
                         "material": "house"
                     }
                 ]
             },
-
-          
 
             {
                 "position": [
@@ -543,6 +542,7 @@
                 ],
                 "components": [
                     {
+                        "name": "house2",
                         "type": "Mesh Renderer",
                         "mesh": "house2",
                         "material": "house2"

@@ -70,7 +70,6 @@ class Playstate: public our::State {
 
         std::string postProcessFrag = "assets/shaders/postprocess/vignette.frag";
         
-        
         // postProcessFrag = "assets/shaders/postprocess/sandWethereEffect.frag";
         if (collisionStartTime != 0) {
             collisionStartTime += (float) deltaTime;
