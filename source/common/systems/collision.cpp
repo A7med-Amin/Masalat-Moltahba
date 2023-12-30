@@ -89,7 +89,6 @@ namespace our
         glm::vec3 playerPosition; // The player's position in the world
         Entity *playerEntity;     // The player entity if it exists
         bool collided = false;
-        static double last_collision_time = 0.0;
 
         for (auto entity : world->getEntities())
         { // search for the player entity
@@ -161,8 +160,8 @@ namespace our
                         CollisionSystem::decreaseHearts(world, heartCount);
 
                         if (heartCount < 1)
-                        { // if the player has no more hearts
-                            heartCount = 3; // reset the heart count
+                        {                                  // if the player has no more hearts
+                            heartCount = 3;                // reset the heart count
                             app->changeState("game-over"); // go to the game over state
                         }
                     }
