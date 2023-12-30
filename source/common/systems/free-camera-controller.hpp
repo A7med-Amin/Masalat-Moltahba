@@ -66,26 +66,26 @@ namespace our
             Entity *entity = camera->getOwner();
 
             // If the left mouse button is pressed, we lock and hide the mouse. This common in First Person Games.
-            if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && !mouse_locked)
-            {
-                app->getMouse().lockMouse(app->getWindow());
-                mouse_locked = true;
-                // If the left mouse button is released, we unlock and unhide the mouse.
-            }
-            else if (!app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && mouse_locked)
-            {
-                app->getMouse().unlockMouse(app->getWindow());
-                mouse_locked = false;
-            }
+            // if (app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && !mouse_locked)
+            // {
+            //     app->getMouse().lockMouse(app->getWindow());
+            //     mouse_locked = true;
+            //     // If the left mouse button is released, we unlock and unhide the mouse.
+            // }
+            // else if (!app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && mouse_locked)
+            // {
+            //     app->getMouse().unlockMouse(app->getWindow());
+            //     mouse_locked = false;
+            // }
 
             // We get a reference to the entity's position and rotation
             glm::vec3 &position = entity->localTransform.position;
             glm::vec3 &rotation = entity->localTransform.rotation;
 
             // We update the camera fov based on the mouse wheel scrolling amount
-            float fov = camera->fovY + app->getMouse().getScrollOffset().y * controller->fovSensitivity;
-            fov = glm::clamp(fov, glm::pi<float>() * 0.01f, glm::pi<float>() * 0.99f); // We keep the fov in the range 0.01*PI to 0.99*PI
-            camera->fovY = fov;
+            // float fov = camera->fovY + app->getMouse().getScrollOffset().y * controller->fovSensitivity;
+            // fov = glm::clamp(fov, glm::pi<float>() * 0.01f, glm::pi<float>() * 0.99f); // We keep the fov in the range 0.01*PI to 0.99*PI
+            // camera->fovY = fov;
 
             // We get the camera model matrix (relative to its parent) to compute the front, up and right directions
             glm::mat4 matrix = entity->localTransform.toMat4();
@@ -95,7 +95,7 @@ namespace our
                       right = glm::vec3(matrix * glm::vec4(1, 0, 0, 0));
 
             glm::vec3 current_sensitivity = controller->positionSensitivity;
-            
+
             if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
                 current_sensitivity *= controller->speedupFactor;
 

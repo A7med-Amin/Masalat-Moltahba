@@ -1,6 +1,10 @@
 {
     "start-scene": "menu",
-    "difficulty" : [1 , 2 , 4],
+    "difficulty": [
+        1,
+        2,
+        4
+    ],
     "window": {
         "title": "Masalat Molthba",
         "size": {
@@ -53,7 +57,8 @@
                 "road2": "assets/textures/road2.jpg",
                 "man_norm": "assets/textures/rp_dennis_posed_004_norm.jpg",
                 "man_diff": "assets/textures/rp_dennis_posed_004_dif.jpg",
-                "finalLine": "assets/textures/finalLine.jpg"
+                "finalLine": "assets/textures/finalLine.jpg",
+                "street_light": "assets/textures/street_light.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -64,7 +69,8 @@
                 "house": "assets/models/house.obj",
                 "house2": "assets/models/house2.obj",
                 "man": "assets/models/man.obj",
-                "heart": "assets/models/heart.obj"
+                "heart": "assets/models/heart.obj",
+                "street_light": "assets/models/streetlamp.obj"
             },
             "samplers": {
                 "default": {},
@@ -347,6 +353,26 @@
                         0,
                         1
                     ]
+                },
+                "street_light": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "street_light",
+                    "sampler": "default"
                 }
             }
         },
@@ -412,9 +438,9 @@
                     },
                     {
                         "position": [
-                            -14,
+                            -1,
                             2,
-                            -10
+                            -4
                         ],
                         "rotation": [
                             0,
@@ -422,9 +448,9 @@
                             0
                         ],
                         "scale": [
-                            0.1,
-                            0.1,
-                            0.1
+                            0.05,
+                            0.05,
+                            0.05
                         ],
                         "components": [
                             {
@@ -436,13 +462,23 @@
                                 "type": "Heart",
                                 "number": 1
                             }
+                            // ,
+                            // {
+                            //     "type": "Movement",
+                            //     // "linearVelocity": [0, 0.1, 0],
+                            //     "angularVelocity": [
+                            //         0,
+                            //         45,
+                            //         0
+                            //     ]
+                            // }
                         ]
                     },
                     {
                         "position": [
-                            -12,
+                            0,
                             2,
-                            -10
+                            -4
                         ],
                         "rotation": [
                             0,
@@ -450,9 +486,9 @@
                             0
                         ],
                         "scale": [
-                            0.1,
-                            0.1,
-                            0.1
+                            0.05,
+                            0.05,
+                            0.05
                         ],
                         "components": [
                             {
@@ -464,13 +500,23 @@
                                 "type": "Heart",
                                 "number": 2
                             }
+                            // ,
+                            // {
+                            //     "type": "Movement",
+                            //     // "linearVelocity": [0, 0.1, 0],
+                            //     "angularVelocity": [
+                            //         0,
+                            //         45,
+                            //         0
+                            //     ]
+                            // }
                         ]
                     },
                     {
                         "position": [
-                            -10,
+                            1,
                             2,
-                            -10
+                            -4
                         ],
                         "rotation": [
                             0,
@@ -478,9 +524,9 @@
                             0
                         ],
                         "scale": [
-                            0.1,
-                            0.1,
-                            0.1
+                            0.05,
+                            0.05,
+                            0.05
                         ],
                         "components": [
                             {
@@ -492,6 +538,16 @@
                                 "type": "Heart",
                                 "number": 3
                             }
+                            // ,
+                            // {
+                            //     "type": "Movement",
+                            //     // "linearVelocity": [0, 0.1, 0],
+                            //     "angularVelocity": [
+                            //         0,
+                            //         45,
+                            //         0
+                            //     ]
+                            // }
                         ]
                     }
                 ]
@@ -633,7 +689,6 @@
                     -7,
                     -10
                 ],
-                
                 // "duplicates": [
                 //     2,
                 //     10,
@@ -784,6 +839,40 @@
                     }
                 ]
             }
+            // ,
+            // {
+            //     "position": [
+            //         0,
+            //         -3,
+            //         -10
+            //     ],
+            //     "scale": [
+            //         0.5,
+            //         0.5,
+            //         0.5
+            //     ],
+            //     // "duplicates": [
+            //     //     2,
+            //     //     10,
+            //     //     false
+            //     // ],
+            //     "components": [
+            //         {
+            //             "type": "Mesh Renderer",
+            //             "mesh": "street_light",
+            //             "material": "street_light"
+            //         }
+            //         // ,
+            //         // {
+            //         //     "type": "Repeat",
+            //         //     "translation": [
+            //         //         0,
+            //         //         0,
+            //         //         -5
+            //         //     ]
+            //         // }
+            //     ]
+            // }
         ]
     }
 }
