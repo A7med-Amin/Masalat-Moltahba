@@ -6,6 +6,7 @@
 #include <systems/forward-renderer.hpp>
 #include <systems/free-camera-controller.hpp>
 #include <systems/movement.hpp>
+#include <../common/components/player.hpp>
 #include <asset-loader.hpp>
 #include <systems/final-line.hpp>
 #include <systems/collision.hpp>
@@ -27,6 +28,7 @@ class Playstate: public our::State {
     int heartCount = 3;
     float collisionStartTime = 0;
 
+    our::PlayerComponent myPlayer;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -45,6 +47,8 @@ class Playstate: public our::State {
         finalLineSystem.enter(getApp());
         renderer.enter(getApp());
 
+        // We initialize the player component since it needs a pointer to the app
+        myPlayer.enter(getApp());
 
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
@@ -53,11 +57,13 @@ class Playstate: public our::State {
 
     void onDraw(double deltaTime) override {
         // Here, we just run a bunch of systems to control the world logic
+        bool didCollide = false;
         movementSystem.update(&world, (float)deltaTime);
-        cameraController.update(&world, (float)deltaTime);
-        collisionSystem.update(&world, (float) deltaTime, getApp()->heartCount,
-                        collisionStartTime);
-
+        myPlayer.update(&world, (float)deltaTime);
+        float collisionStartTime = 0; // temporaryyyyyyyyyyyyyyyy
+        didCollide = collisionSystem.update(&world,(float) deltaTime, getApp()->heartCount, collisionStartTime);
+        cameraController.update(&world, (float)deltaTime, didCollide);
+        
         repeatSystem.update(&world, (float) deltaTime);
         finalLineSystem.update(&world, (float) deltaTime);
                 
