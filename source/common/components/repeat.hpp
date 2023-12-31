@@ -13,6 +13,7 @@ namespace our {
     class RepeatComponent : public Component {
     public:
         glm::vec3 translation = {0, 0, 0};
+        bool random = false;
 
         static std::string getID() { return "Repeat"; }
 

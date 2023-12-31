@@ -46,36 +46,50 @@ namespace our {
             return;
         }
 
-        // Repeat the entities
         RepeatComponent *repeatComponent;
         Entity *repeatEntity;
         for (auto entity: world->getEntities()) {
-            // Get Reepeat component 
             repeatEntity = entity;
             repeatComponent = repeatEntity->getComponent<RepeatComponent>();
-            // Get repeat componenet position in the world
             glm::vec3 &repeatPosition = repeatEntity->localTransform.position;
-            // If the repeat component exists
+            int randomX;
             if (repeatComponent) {
-                if (playerPosition[2] <= repeatPosition[2] - 10) {
+                randomX = repeatComponent->random;
+                if (playerPosition[2] <= repeatPosition[2] ) {
                     MasalaComponent *masalaComponent = repeatEntity->getComponent<MasalaComponent>();
                     GemHeartComponent *gemHeartComponent = repeatEntity->getComponent<GemHeartComponent>();
 
                     if (masalaComponent) {
-                        if ((repeatPosition + repeatComponent->translation).x < -1995) {
+                        if ((repeatPosition + repeatComponent->translation).z < -495) {
                             world->markForRemoval(repeatEntity);
                             continue;
                         }
                     }
 
-                    if(repeatComponent->translation.y){
-                        repeatPosition.x += generateRandomNumber(-1, 6);
+                     if (gemHeartComponent) {
+                        if ((repeatPosition + repeatComponent->translation).z < -450) {
+                            world->markForRemoval(repeatEntity);
+                            continue;
+                        }
                     }
 
-                    repeatPosition += repeatComponent->translation;
-                    if(repeatPosition.z < -490){
-                        repeatPosition.z = -490;
+                    if(randomX){
+                        cout << "random" << endl;
+                        repeatPosition.x += generateRandomNumber(-5, 5);
+                            if(repeatPosition.x < -8){
+                        repeatPosition.x = -8;
                     }
+                    if(repeatPosition.x > 8){
+                        repeatPosition.x = 8;
+                    }
+                    }
+
+                
+
+                    repeatPosition += repeatComponent->translation;
+                    // if(repeatPosition.z < -490){
+                    //     repeatPosition.z = -490;
+                    // }
                 }
             }
         }

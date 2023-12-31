@@ -7,5 +7,6 @@ namespace our {
     void RepeatComponent::deserialize(const nlohmann::json &data) {
         if (!data.is_object()) return;
         translation = data.value("translation", translation);
+        random = data.value("random", random);
     }
 }
