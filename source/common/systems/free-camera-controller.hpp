@@ -113,13 +113,13 @@ namespace our
             if (app->getKeyboard().isPressed(GLFW_KEY_D) || app->getKeyboard().isPressed(GLFW_KEY_RIGHT))
             {
                 // limit the player movement to the left and right
-                if (position.x <= 7)
+                if (position.x <= 9)
                     position += right * (deltaTime * current_sensitivity.x * collisionFactor);
             }
             if (app->getKeyboard().isPressed(GLFW_KEY_A) || app->getKeyboard().isPressed(GLFW_KEY_LEFT))
             {
                 // limit the player movement to the left and right
-                if (position.x >= -7)
+                if (position.x >= -9)
                     position -= right * (deltaTime * current_sensitivity.x * collisionFactor);
             }
 
