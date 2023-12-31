@@ -126,6 +126,10 @@ namespace our {
         {
             this->currentDifficulty = diff;
         }
+        void setHeartCount(int count)
+        {
+            this->heartCount = count;
+        }
         // Class Getters.
         GLFWwindow* getWindow(){ return window; }
         [[nodiscard]] const GLFWwindow* getWindow() const { return window; }
