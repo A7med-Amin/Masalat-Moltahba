@@ -31,7 +31,6 @@
             },
             "textures": {
                 "moon": "assets/textures/moon.jpg",
-                "grass": "assets/textures/grass_ground_d.jpg",
                 "wood": "assets/textures/wood.jpg",
                 "glass": "assets/textures/glass-panels.png",
                 "monkey": "assets/textures/monkey.png",
@@ -54,6 +53,7 @@
                 "man_norm": "assets/textures/rp_dennis_posed_004_norm.jpg",
                 "man_diff": "assets/textures/rp_dennis_posed_004_dif.jpg",
                 "finalLine": "assets/textures/finalLine.jpg"
+
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -64,7 +64,8 @@
                 "house": "assets/models/house.obj",
                 "house2": "assets/models/house2.obj",
                 "man": "assets/models/man.obj",
-                "heart": "assets/models/heart.obj"
+                "heart": "assets/models/heart.obj",
+                "zar3": "assets/models/zar3.obj"
             },
             "samplers": {
                 "default": {},
@@ -85,7 +86,7 @@
                         }
                     },
                     "tint": [
-                        0.45,
+                        0.36,
                         0.4,
                         0.5,
                         1
@@ -117,26 +118,6 @@
                     ],
                     "texture": "glass",
                     "sampler": "pixelated"
-                },
-                "grass": {
-                    "type": "textured",
-                    "shader": "textured",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [
-                        1,
-                        1,
-                        1,
-                        1
-                    ],
-                    "texture": "grass",
-                    "sampler": "default"
                 },
                 "monkey": {
                     "type": "textured",
@@ -468,7 +449,7 @@
                     },
                     {
                         "position": [
-                            -0.145,
+                            -0.136,
                             0.07,
                             0.40000001
                         ],
@@ -572,21 +553,14 @@
                 ]
             },
             {
-                "position": [
-                    0,
-                    -7,
-                    -30
+                "position": [-5, -7, -100 ],
+                "scale": [1,0.9,1 ],
+                "duplicates": [
+                    2,
+                    10,
+                    false,
+                    true
                 ],
-                "scale": [
-                    1,
-                    0.9,
-                    1
-                ],
-                // "duplicates": [
-                //     2,
-                //     10,
-                //     false
-                // ],
                 "components": [
                     {
                         "name": "2",
@@ -597,48 +571,86 @@
                     {
                         "type": "Masala"
                     },
-                    // {
-                    //     "type": "Movement",
-                    //     "linearVelocity": [0, 0.3, 0]
-                    //     // "angularVelocity": [0, 45, 0]
-                    // }
-                    // ,
                     {
                         "type": "Collision",
-                        "start": [
-                            -0.5,
-                            -5,
-                            -0.2
-                        ],
-                        "end": [
-                            0.5,
-                            6,
-                            0.1
-                        ]
+                        "start": [-0.5,-5,-0.2],
+                        "end": [0.5, 6,0.1 ]
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [0,1,-50]
                     }
-                    // ,
-                    // {
-                    //     "type": "Repeat",
-                    //     "translation": [
-                    //         0,
-                    //         0,
-                    //         -5
-                    //     ]
-                    // }
                 ]
             },
             {
-                "position": [
-                    7,
-                    -7,
-                    -10
+                "position": [-5, -7, -50 ],
+                "scale": [1,0.9,1 ],
+                "duplicates": [
+                    2,
+                    10,
+                    false,
+                    true
                 ],
+                "components": [
+                    {
+                        "name": "2",
+                        "type": "Mesh Renderer",
+                        "mesh": "masala",
+                        "material": "masala"
+                    },
+                    {
+                        "type": "Masala"
+                    },
+                    {
+                        "type": "Collision",
+                        "start": [-0.5,-5,-0.2],
+                        "end": [0.5, 6,0.1 ]
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [0,1,-50]
+                    }
+                ]
+            },
+            {
+                "position": [-5, -7, -30 ],
+                "scale": [1,0.9,1 ],
+                "duplicates": [
+                    2,
+                    10,
+                    false,
+                    true
+                ],
+                "components": [
+                    {
+                        "name": "2",
+                        "type": "Mesh Renderer",
+                        "mesh": "masala",
+                        "material": "masala"
+                    },
+                    {
+                        "type": "Masala"
+                    },
+                    {
+                        "type": "Collision",
+                        "start": [-0.5,-5,-0.2],
+                        "end": [0.5, 6,0.1 ]
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [0,1,-50]
+                    }
+                ]
+            },
+            {
+                "position": [-6,-7,-10],
                 
-                // "duplicates": [
-                //     2,
-                //     10,
-                //     false
-                // ],
+                "duplicates": [
+                    2,
+                    10,
+                    false,
+                    true
+                ],
                 "components": [
                     {
                         "name": "omar masala",
@@ -649,12 +661,6 @@
                     {
                         "type": "Masala"
                     },
-                    // {
-                    //     "type": "Movement",
-                    //     "linearVelocity": [0, 0.3, 0]
-                    //     // "angularVelocity": [0, 45, 0]
-                    // }
-                    // , 
                     {
                         "type": "Collision",
                         "start": [
@@ -667,65 +673,216 @@
                             6,
                             0.1
                         ]
-                    }
-                    // ,
-                    // {
-                    //     "type": "Repeat",
-                    //     "translation": [
-                    //         0,
-                    //         0,
-                    //         -5
-                    //     ]
-                    // }
-                ]
-            },
-            {
-                "position": [
-                    -10,
-                    0,
-                    -40
-                ],
-                "scale": [
-                    0.2,
-                    0.2,
-                    0.2
-                ],
-                "duplicates": [
-                    2,
-                    20,
-                    false
-                ],
-                "components": [
+                    },
                     {
-                        "name": "house",
-                        "type": "Mesh Renderer",
-                        "mesh": "house",
-                        "material": "house"
+                        "type": "Repeat",
+                        "translation": [0,1,-100]
                     }
                 ]
             },
             {
-                "position": [
-                    -15,
-                    0,
-                    -20
-                ],
-                "scale": [
-                    1,
-                    1,
-                    1
-                ],
-                "duplicates": [
-                    2,
-                    30,
-                    false
-                ],
+                "position": [ -18,   0, -20],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,
+                false],
                 "components": [
                     {
                         "name": "house2",
                         "type": "Mesh Renderer",
                         "mesh": "house2",
                         "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 0],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,
+                false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]                    
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 20],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 40],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 60],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 80],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 100],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 120],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 140],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 160],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 180],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
+                    }
+                ]
+            },
+            {
+                "position": [ -18,   0, 200],
+                "scale": [1,1,1],
+                "duplicates": [2, 36,false,false],
+                "components": [
+                    {
+                        "name": "house2",
+                        "type": "Mesh Renderer",
+                        "mesh": "house2",
+                        "material": "house2"
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [ 0,0,-200]
                     }
                 ]
             },
@@ -761,7 +918,7 @@
                 "position": [
                     0,
                     -0.9,
-                    -100
+                    -500
                 ],
                 "rotation": [
                     90,
@@ -785,5 +942,5 @@
                 ]
             }
         ]
-    }
+        }
 }

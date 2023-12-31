@@ -17,6 +17,12 @@ using namespace std;
     within the screen by moving it forward in the screen by applying translation
 */
 
+ int generateRandomNumber(int min, int max)
+    {
+        // Generate a random number between min and max (inclusive)
+        int randomNumber = rand() % (max - min + 1) + min;
+        return randomNumber;
+    }
 namespace our {
     void RepeatSystem::update(World *world, float deltaTime) {
         glm::vec3 playerPosition;
@@ -50,21 +56,17 @@ namespace our {
             glm::vec3 &repeatPosition = repeatEntity->localTransform.position;
             // If the repeat component exists
             if (repeatComponent) {
-                // print the position of the player and the repeat component
-                cout << "repeat component for entity: " << " " << entity->name << " " << repeatPosition.x << " " << repeatPosition.y << " " << repeatPosition.z << endl;
                 if (playerPosition[2] <= repeatPosition[2] - 5) {
-                    // Repear masala component only
                     MasalaComponent *masalaComponent = repeatEntity->getComponent<MasalaComponent>();
-                    // Prevent the repeating after the end of the level
                     if (masalaComponent) {
-                        cout << "repeat masala component for entity: " << " " << entity->name << " " << repeatPosition.x << " " << repeatPosition.y << " " << repeatPosition.z << endl;
                         if ((repeatPosition + repeatComponent->translation).x < -1995) {
                             world->markForRemoval(repeatEntity);
                             continue;
                         }
                     }
-                    // Repeat the entity (translate it by the translation vector)
-                    // Move it forward to make it still appearing within the screen
+                    if(repeatComponent->translation.y){
+                        repeatPosition.x += generateRandomNumber(-1, 6);
+                    }
                     repeatPosition += repeatComponent->translation;
                 }
             }
