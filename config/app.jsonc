@@ -462,16 +462,15 @@
                                 "type": "Heart",
                                 "number": 1
                             }
-                            // ,
-                            // {
-                            //     "type": "Movement",
-                            //     // "linearVelocity": [0, 0.1, 0],
-                            //     "angularVelocity": [
-                            //         0,
-                            //         45,
-                            //         0
-                            //     ]
-                            // }
+                            ,
+                            {
+                                "type": "Movement",
+                                "angularVelocity": [
+                                    0,
+                                    360,
+                                    0
+                                ]
+                            }
                         ]
                     },
                     {
@@ -500,16 +499,15 @@
                                 "type": "Heart",
                                 "number": 2
                             }
-                            // ,
-                            // {
-                            //     "type": "Movement",
-                            //     // "linearVelocity": [0, 0.1, 0],
-                            //     "angularVelocity": [
-                            //         0,
-                            //         45,
-                            //         0
-                            //     ]
-                            // }
+                            ,
+                            {
+                                "type": "Movement",
+                                "angularVelocity": [
+                                    0,
+                                    360,
+                                    0
+                                ]
+                            }
                         ]
                     },
                     {
@@ -538,16 +536,15 @@
                                 "type": "Heart",
                                 "number": 3
                             }
-                            // ,
-                            // {
-                            //     "type": "Movement",
-                            //     // "linearVelocity": [0, 0.1, 0],
-                            //     "angularVelocity": [
-                            //         0,
-                            //         45,
-                            //         0
-                            //     ]
-                            // }
+                            ,
+                            {
+                                "type": "Movement",
+                                "angularVelocity": [
+                                    0,
+                                    360,
+                                    0
+                                ]
+                            }
                         ]
                     }
                 ]
