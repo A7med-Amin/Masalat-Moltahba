@@ -8,14 +8,24 @@
 #include <glm/gtx/fast_trigonometry.hpp>
 #include "../application.hpp"
 
+#ifdef USE_SOUND
 
+#include "../../vendor/irrKlang/include/irrKlang.h"
+
+#endif
 namespace our {
 
     // The final line system is responsible for detection of final line reach.
     class FinalLineSystem {
+        #ifdef USE_SOUND
+        irrklang::ISoundEngine *soundEngine;
+#endif
     public:
         FinalLineSystem() {
             app = nullptr;
+            #ifdef USE_SOUND
+            soundEngine = irrklang::createIrrKlangDevice();
+#endif
         }
 
         Application *app; // The application in which the state runs

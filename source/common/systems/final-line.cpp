@@ -42,6 +42,9 @@ namespace our {
                 if (playerPosition[2] <= finalLinePosition[2]) {
                     heartCount = 3;
                     // Change the state to winning
+                                         #ifdef USE_SOUND
+                    soundEngine->play2D("audio/mabrok.mp3");
+                #endif   
                     this->app->changeState("winning");
                     std::cout<<"WIN" << std::endl;
                     break;
