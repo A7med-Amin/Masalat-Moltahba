@@ -39,7 +39,6 @@
                 "glass": "assets/textures/glass-panels.png",
                 "monkey": "assets/textures/monkey.png",
                 "masala": "assets/textures/masala/FancObel_t.jpeg",
-                "house": "assets/textures/house/house.jpg",
                 "house_albedo": "assets/textures/house/house_albedo.jpg",
                 "house_specular": "assets/textures/house/house_specular.jpg",
                 "house_roughness": "assets/textures/house/house_roughness.jpg",
@@ -66,7 +65,6 @@
                 "plane": "assets/models/plane.obj",
                 "sphere": "assets/models/sphere.obj",
                 "masala": "assets/models/masala.obj",
-                "house": "assets/models/house.obj",
                 "house2": "assets/models/house2.obj",
                 "man": "assets/models/man.obj",
                 "heart": "assets/models/heart.obj",
@@ -183,31 +181,6 @@
                         1
                     ],
                     "texture": "masala",
-                    "sampler": "default"
-                },
-                "house": {
-                    "type": "textured",
-                    "shader": "textured",
-                    "pipelineState": {
-                        "faceCulling": {
-                            "enabled": false
-                        },
-                        "depthTesting": {
-                            "enabled": true
-                        }
-                    },
-                    "tint": [
-                        1,
-                        1,
-                        1,
-                        1
-                    ],
-                    "texture": "house",
-                    "albedo": "house_albedo",
-                    "specular": "house_specular",
-                    "roughness": "house_roughness",
-                    "emissive": "house_emissive",
-                    "ambient_occlusion": "house_ambient_occlusion",
                     "sampler": "default"
                 },
                 "house2": {

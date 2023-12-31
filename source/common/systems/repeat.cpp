@@ -86,9 +86,9 @@ namespace our {
                 
 
                     repeatPosition += repeatComponent->translation;
-                    // if(repeatPosition.z < -490){
-                    //     repeatPosition.z = -490;
-                    // }
+                    if(repeatPosition.z < -490){
+                        repeatPosition.z = -490;
+                    }
                 }
             }
         }
