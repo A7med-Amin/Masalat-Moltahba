@@ -180,6 +180,9 @@ namespace our
                     {
                         if (heartCount < 3) // if the player has less than 3 hearts which is max
                         {
+                            #ifdef USE_SOUND
+                                soundEngine->play2D("audio/elyba3do.mp3");
+                            #endif
                             heartCount++; // increase the count of hearts
                         }
 

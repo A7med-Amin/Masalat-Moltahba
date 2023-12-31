@@ -10,6 +10,13 @@
 #include <functional>
 #include <array>
 
+#ifdef USE_SOUND
+
+#include <irrKlang.h>
+
+#endif
+
+
 // TODO: (Phase 2) change a menu state
 
 // This struct is used to store the location and size of a button and the code it should execute when clicked
@@ -49,6 +56,11 @@ class Menustate: public our::State {
     float time;
     // An array of the button that we can interact with
     std::array<Button, 2> buttons;
+
+    #ifdef USE_SOUND
+    // For sound effects
+    irrklang::ISoundEngine *soundEngine;
+    #endif
 
     void onInitialize() override {
         // First, we create a material for the menu's background
@@ -110,9 +122,15 @@ class Menustate: public our::State {
         buttons[1].position = {830.0f, 644.0f};
         buttons[1].size = {400.0f, 33.0f};
         buttons[1].action = [this](){this->getApp()->close();};
+
+        #ifdef USE_SOUND
+        soundEngine = irrklang::createIrrKlangDevice();
+        soundEngine->play2D("audio/start.mp3", true);
+        #endif
     }
 
     void onDraw(double deltaTime) override {
+
         // Get a reference to the keyboard object
         auto& keyboard = getApp()->getKeyboard();
 
@@ -175,6 +193,12 @@ class Menustate: public our::State {
     }
 
     void onDestroy() override {
+
+        #ifdef USE_SOUND
+        // Stop play state sound
+        soundEngine->drop();
+
+#endif
         // Delete all the allocated resources
         delete rectangle;
         delete menuMaterial->texture;
