@@ -56,7 +56,7 @@ namespace our {
             glm::vec3 &repeatPosition = repeatEntity->localTransform.position;
             // If the repeat component exists
             if (repeatComponent) {
-                if (playerPosition[2] <= repeatPosition[2] - 5) {
+                if (playerPosition[2] <= repeatPosition[2] - 10) {
                     MasalaComponent *masalaComponent = repeatEntity->getComponent<MasalaComponent>();
                     if (masalaComponent) {
                         if ((repeatPosition + repeatComponent->translation).x < -1995) {

@@ -28,7 +28,6 @@ namespace our
             return;
         for (const auto &entityData : data)
         {
-            cout << "New Entity" << endl;
             // TODO: (Req 8) Create an entity, make its parent "parent" and call its deserialize with "entityData".
             Entity *myEntity = add();
             // if (parent != nullptr)
@@ -38,13 +37,10 @@ namespace our
             if (entityData.contains("children"))
             {
                 // TODO: (Req 8) Recursively call this world's "deserialize" using the children data
-                //  and the current entity as the parent
                 this->deserialize(entityData["children"], myEntity);
             }
             if (entityData.contains("duplicates"))
             {
-                // cout << "here\n";
-                cout << "duplicates" << endl;
                 glm::vec4 duplicates = glm::vec4(entityData["duplicates"][0], entityData["duplicates"][1],
                                                  entityData["duplicates"][2], entityData["duplicates"][3]);
                 for (int i = 1; i < (int)duplicates[0]; ++i)
