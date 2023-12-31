@@ -58,7 +58,7 @@
                 "man_diff": "assets/textures/rp_dennis_posed_004_dif.jpg",
                 "finalLine": "assets/textures/finalLine.jpg",
                 "street_light": "assets/textures/streat_light.png",
-                "gem_heart":"assets/textures/gem_heart.png"
+                "gem_heart": "assets/textures/gem_heart.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -71,7 +71,7 @@
                 "man": "assets/models/man.obj",
                 "heart": "assets/models/heart.obj",
                 "StreetLight": "assets/models/streetlamp.obj",
-                "gem_heart":"assets/models/gem_heart.obj"
+                "gem_heart": "assets/models/gem_heart.obj"
             },
             "samplers": {
                 "default": {},
@@ -181,7 +181,7 @@
                         1,
                         1,
                         1
-                    ], // what are the channels for? (RGBA)
+                    ],
                     "texture": "masala",
                     "sampler": "default"
                 },
@@ -359,7 +359,7 @@
                     "texture": "street_light",
                     "sampler": "default"
                 },
-                "gem_heart":{
+                "gem_heart": {
                     "type": "textured",
                     "shader": "textured",
                     "pipelineState": {
@@ -628,7 +628,7 @@
             },
             {
                 "position": [
-                    -5,
+                    -7,
                     -7,
                     -100
                 ],
@@ -669,15 +669,16 @@
                         "type": "Repeat",
                         "translation": [
                             0,
-                            1,
+                            0,
                             -50
-                        ]
+                        ],
+                        "random": true
                     }
                 ]
             },
             {
                 "position": [
-                    -5,
+                    -7,
                     -7,
                     -50
                 ],
@@ -719,15 +720,16 @@
                         "type": "Repeat",
                         "translation": [
                             0,
-                            1,
+                            0,
                             -50
-                        ]
+                        ],
+                        "random": true
                     }
                 ]
             },
             {
                 "position": [
-                    -5,
+                    -7,
                     -7,
                     -30
                 ],
@@ -769,15 +771,16 @@
                         "type": "Repeat",
                         "translation": [
                             0,
-                            1,
+                            0,
                             -50
-                        ]
+                        ],
+                        "random": true
                     }
                 ]
             },
             {
                 "position": [
-                    -6,
+                    -7,
                     -7,
                     -10
                 ],
@@ -814,9 +817,10 @@
                         "type": "Repeat",
                         "translation": [
                             0,
-                            1,
+                            0,
                             -100
-                        ]
+                        ],
+                        "random": true
                     }
                 ]
             },
@@ -1400,10 +1404,10 @@
                         ]
                     }
                 ]
-            }
-            ,{
+            },
+            {
                 "position": [
-                    -3,
+                    0,
                     1,
                     -70
                 ],
@@ -1417,13 +1421,7 @@
                     0.03,
                     0.03
                 ],
-                // "duplicates": [
-                //     2,
-                //     10,
-                //     false,
-                //     true
-                // ],
-                "components":[
+                "components": [
                     {
                         "type": "Mesh Renderer",
                         "mesh": "gem_heart",
@@ -1446,7 +1444,7 @@
                         "type": "GemHeart"
                     },
                     {
-                        "type":"Movement",
+                        "type": "Movement",
                         "linearVelocity": [
                             0,
                             0,
@@ -1462,9 +1460,10 @@
                         "type": "Repeat",
                         "translation": [
                             0,
-                            1,
+                            0,
                             -50
-                        ]
+                        ],
+                        "random": true
                     }
                 ]
             }
