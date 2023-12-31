@@ -74,7 +74,6 @@ namespace our {
                     }
 
                     if(randomX){
-                        cout << "random" << endl;
                         repeatPosition.x += generateRandomNumber(-5, 5);
                             if(repeatPosition.x < -8){
                         repeatPosition.x = -8;
