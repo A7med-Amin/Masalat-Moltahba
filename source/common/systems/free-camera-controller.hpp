@@ -96,15 +96,15 @@ namespace our
 
             glm::vec3 current_sensitivity = controller->positionSensitivity;
 
-            if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
-                current_sensitivity *= controller->speedupFactor;
+            // if (app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT))
+            //     current_sensitivity *= controller->speedupFactor;
 
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
             if (app->getKeyboard().isPressed(GLFW_KEY_W) || app->getKeyboard().isPressed(GLFW_KEY_UP))
                 position += front * (deltaTime * current_sensitivity.z * collisionFactor);
-            if (app->getKeyboard().isPressed(GLFW_KEY_S) || app->getKeyboard().isPressed(GLFW_KEY_DOWN))
-                position -= front * (deltaTime * current_sensitivity.z * collisionFactor);
+            // if (app->getKeyboard().isPressed(GLFW_KEY_S) || app->getKeyboard().isPressed(GLFW_KEY_DOWN))
+            //     position -= front * (deltaTime * current_sensitivity.z * collisionFactor);
             // Q & E moves the player up and down
             if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
             if (app->getKeyboard().isPressed(GLFW_KEY_E))

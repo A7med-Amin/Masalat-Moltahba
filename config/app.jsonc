@@ -467,7 +467,7 @@
                                 "type": "Movement",
                                 "angularVelocity": [
                                     0,
-                                    360,
+                                    270,
                                     0
                                 ]
                             }
@@ -504,7 +504,7 @@
                                 "type": "Movement",
                                 "angularVelocity": [
                                     0,
-                                    360,
+                                    270,
                                     0
                                 ]
                             }
@@ -541,7 +541,7 @@
                                 "type": "Movement",
                                 "angularVelocity": [
                                     0,
-                                    360,
+                                    270,
                                     0
                                 ]
                             }
