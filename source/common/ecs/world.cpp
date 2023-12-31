@@ -43,15 +43,20 @@ namespace our
             {
                 glm::vec4 duplicates = glm::vec4(entityData["duplicates"][0], entityData["duplicates"][1],
                                                  entityData["duplicates"][2], entityData["duplicates"][3]);
-                for (int i = 1; i < (int)duplicates[0]; ++i)
+
+                int duplicatesCount = (int)duplicates[0];
+                int duplicatesDistance = duplicates[1];
+                bool duplicatesZ = (bool)duplicates[2];
+                bool duplicatesRandom = (bool)duplicates[3];
+                for (int i = 1; i < duplicatesCount; ++i)
                 {
                     Entity *newDuplicateEntity = add();  // create a new entity using the add function in world.hpp
                     newDuplicateEntity->parent = parent; // set the parent of the new entity to the given parent
                     newDuplicateEntity->deserialize(
                         entityData); // deserialize the new entity using the given entityData
-                    if ((bool)duplicates[2])
+                    if (duplicatesZ)
                     {
-                        newDuplicateEntity->localTransform.position.x += float(i) * duplicates[1];
+                        newDuplicateEntity->localTransform.position.x += float(i) * duplicatesDistance;
                         for (int j = 0; j < 3; ++j)
                         {
                             Entity *newDuplicateEntity = add();  // create a new entity using the add function in world.hpp
@@ -60,13 +65,17 @@ namespace our
                                 entityData); // deserialize the new entity using the given entityData
                             newDuplicateEntity->localTransform.position.z -= float(j) * 20;
                         }
-                    }else
+                    }
+                    else
                     {
-                        if ((bool)duplicates[3]){
-                            int random = generateRandomNumber(0, 10);
-                            newDuplicateEntity->localTransform.position.x +=  random;
-                        }else{
-                            newDuplicateEntity->localTransform.position.x += float(i) * duplicates[1];
+                        if (duplicatesRandom)
+                        {
+                            int random = generateRandomNumber(4, 10);
+                            newDuplicateEntity->localTransform.position.x += random;
+                        }
+                        else
+                        {
+                            newDuplicateEntity->localTransform.position.x += duplicatesDistance;
                         }
                     }
                 }
