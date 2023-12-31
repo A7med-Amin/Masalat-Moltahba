@@ -13,6 +13,8 @@
 #include "input/keyboard.hpp"
 #include "input/mouse.hpp"
 
+#define USE_SOUND
+
 namespace our {
 
     // The motion state of the player

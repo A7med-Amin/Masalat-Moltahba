@@ -116,6 +116,9 @@ include_directories(
         vendor/glm
         vendor/imgui
         vendor/utils
+        vendor/irrKlang/include
+        vendor/irrKlang
+
 )
 
 
@@ -140,8 +143,24 @@ set(STATES_SOURCES
 
 )
 
+set(IRRKLANG_INCLUDE_DIRS
+        vendor/irrKlang/include/
+        vendor/irrKlang/
+        vendor/irrKlang/lib/Win32-visualStudio)
 # For each example, we add an executable target
 # Each target compiles one example source file and the common & vendor source files
 # Then we link GLFW with each target
 add_executable(GAME_APPLICATION source/main.cpp ${STATES_SOURCES} ${COMMON_SOURCES} ${VENDOR_SOURCES})
-target_link_libraries(GAME_APPLICATION glfw)
+
+link_directories(${IRRKLANG_INCLUDE_DIRS})
+target_link_libraries(GAME_APPLICATION PRIVATE ../vendor/irrKlang/lib/Win32-visualStudio/irrKlang glfw )
+# Copy DLL files to the binary directory
+add_custom_command(TARGET GAME_APPLICATION POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/dlls
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_SOURCE_DIR}/vendor/irrKlang/dlls/win32-visualStudio/irrKlang.dll
+        ${CMAKE_SOURCE_DIR}/vendor/irrKlang/dlls/win32-visualStudio/ikpMP3.dll
+        ${CMAKE_SOURCE_DIR}/vendor/irrKlang/dlls/win32-visualStudio/ikpFlac.dll
+        ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/
+        COMMENT "Copying DLL files to the binary directory"
+        )
