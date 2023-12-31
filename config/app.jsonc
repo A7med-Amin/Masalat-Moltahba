@@ -58,19 +58,19 @@
                 "man_norm": "assets/textures/rp_dennis_posed_004_norm.jpg",
                 "man_diff": "assets/textures/rp_dennis_posed_004_dif.jpg",
                 "finalLine": "assets/textures/finalLine.jpg",
-                "street_light": "assets/textures/street_light.png"
+                "street_light": "assets/textures/streat_light.png"
             },
             "meshes": {
-              "cube": "assets/models/cube.obj",
-              "monkey": "assets/models/monkey.obj",
-              "plane": "assets/models/plane.obj",
-              "sphere": "assets/models/sphere.obj",
-              "masala": "assets/models/masala.obj",
-              "house": "assets/models/house.obj",
-              "house2": "assets/models/house2.obj",
-              "man": "assets/models/man.obj",
-              "heart": "assets/models/heart.obj",
-              "StreetLight": "assets/models/streetlamp.obj"
+                "cube": "assets/models/cube.obj",
+                "monkey": "assets/models/monkey.obj",
+                "plane": "assets/models/plane.obj",
+                "sphere": "assets/models/sphere.obj",
+                "masala": "assets/models/masala.obj",
+                "house": "assets/models/house.obj",
+                "house2": "assets/models/house2.obj",
+                "man": "assets/models/man.obj",
+                "heart": "assets/models/heart.obj",
+                "StreetLight": "assets/models/streetlamp.obj"
             },
             "samplers": {
                 "default": {},
@@ -79,230 +79,301 @@
                 }
             },
             "materials": {
-              "metal": {
-                "type": "tinted",
-                "shader": "tinted",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "metal": {
+                    "type": "tinted",
+                    "shader": "tinted",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        0.45,
+                        0.4,
+                        0.5,
+                        1
+                    ]
                 },
-                "tint": [0.45, 0.4, 0.5, 1]
-              },
-              "glass": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  },
-                  "blending": {
-                    "enabled": true,
-                    "sourceFactor": "GL_SRC_ALPHA",
-                    "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
-                  },
-                  "depthMask": false
+                "glass": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        },
+                        "blending": {
+                            "enabled": true,
+                            "sourceFactor": "GL_SRC_ALPHA",
+                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                        },
+                        "depthMask": false
+                    },
+                    "transparent": true,
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "glass",
+                    "sampler": "pixelated"
                 },
-                "transparent": true,
-                "tint": [1, 1, 1, 1],
-                "texture": "glass",
-                "sampler": "pixelated"
-              },
-              "grass": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "grass": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "grass",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "grass",
-                "sampler": "default"
-              },
-              "monkey": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "monkey": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "monkey",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "monkey",
-                "sampler": "default"
-              },
-              "moon": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "moon": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "moon",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "moon",
-                "sampler": "default"
-              },
-              "masala": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "masala": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ], // what are the channels for? (RGBA)
+                    "texture": "masala",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1], // what are the channels for? (RGBA)
-                "texture": "masala",
-                "sampler": "default"
-              },
-              "house": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "house": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "house",
+                    "albedo": "house_albedo",
+                    "specular": "house_specular",
+                    "roughness": "house_roughness",
+                    "emissive": "house_emissive",
+                    "ambient_occlusion": "house_ambient_occlusion",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "house",
-                "albedo": "house_albedo",
-                "specular": "house_specular",
-                "roughness": "house_roughness",
-                "emissive": "house_emissive",
-                "ambient_occlusion": "house_ambient_occlusion",
-                "sampler": "default"
-              },
-              "house2": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "house2": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "house2_diffuse",
+                    "albedo": "house2_diffuse",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "house2_diffuse",
-                "albedo": "house2_diffuse",
-                "sampler": "default"
-              },
-              "man": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "man": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "man_diff",
+                    "albedo": "man_norm",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "man_diff",
-                "albedo": "man_norm",
-                "sampler": "default"
-              },
-              "road": {
-                "type": "lighted",
-                "shader": "light",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "road": {
+                    "type": "lighted",
+                    "shader": "light",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "road",
+                    "albedo": "road_albedo",
+                    "specular": "road_specular",
+                    "roughness": "road_roughness",
+                    "emissive": "road_emissive",
+                    "ambient_occlusion": "road_ambient_occlusion",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "road",
-                "albedo": "road_albedo",
-                "specular": "road_specular",
-                "roughness": "road_roughness",
-                "emissive": "road_emissive",
-                "ambient_occlusion": "road_ambient_occlusion",
-                "sampler": "default"
-              },
-              "road2": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "road2": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "road2",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "road2",
-                "sampler": "default"
-              },
-              "finalLine": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "finalLine": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "finalLine",
+                    "sampler": "default"
                 },
-                "tint": [1, 1, 1, 1],
-                "texture": "finalLine",
-                "sampler": "default"
-              },
-              "heart": {
-                "type": "tinted",
-                "shader": "tinted",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
+                "heart": {
+                    "type": "tinted",
+                    "shader": "tinted",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        0,
+                        0,
+                        1
+                    ]
                 },
-                "tint": [1, 0, 0, 1]
-              },
-              "StreetLight": {
-                "type": "textured",
-                "shader": "textured",
-                "pipelineState": {
-                  "faceCulling": {
-                    "enabled": false
-                  },
-                  "depthTesting": {
-                    "enabled": true
-                  }
-                },
-                "tint": [1, 1, 1, 1],
-                "sampler": "default"
-              }
+                "StreetLight": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "street_light",
+                    "sampler": "default"
+                }
             }
         },
         "world": [
@@ -767,41 +838,62 @@
                         "type": "FinalLine"
                     }
                 ]
-            },      
+            },
             {
-              "position": [-7.5, -0.9, -30],
-              "components": [
-                {
-                  "name": "2",
-                  "type": "Mesh Renderer",
-                  "mesh": "StreetLight",
-                  "material": "monkey"
-                },
-                {
-                  "type": "Light",
-                  "lightType": "spot",
-                  "direction": [10, -30, 0.0],
-                  "color": [120, 43, 33],
-                  "attenuation": [0.08, 0.08, 0.08],
-                  "coneAngles": [80, 120]
-                }
-                // {
-                //   "type": "Masala"
-                // }
-                // {
-                //   "type": "Collision",
-                //   "start": [-0.5, -5, -0.2],
-                //   "end": [0.5, 6, 0.1]
-                // }
-                // {
-                //   "type": "Light",
-                //   "lightType": "spot",
-                //   "direction": [10, -10, 0.0],
-                //   "color": [1, 0, 0],
-                //   "attenuation": [0, 0, 0.001],
-                //   "coneAngles": [40, 50]
-                // }
-              ]
+                "position": [
+                    -7.5,
+                    -0.9,
+                    -30
+                ],
+                "scale": [
+                    1,0.8,1
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "StreetLight",
+                        "material": "StreetLight"
+                    },
+                    {
+                        "type": "Light",
+                        "lightType": "spot",
+                        "direction": [
+                            10,
+                            -30,
+                            0.0
+                        ],
+                        "color": [
+                            120,
+                            43,
+                            33
+                        ],
+                        "attenuation": [
+                            0.08,
+                            0.08,
+                            0.08
+                        ],
+                        "coneAngles": [
+                            80,
+                            120
+                        ]
+                    }
+                    // {
+                    //   "type": "Masala"
+                    // }
+                    // {
+                    //   "type": "Collision",
+                    //   "start": [-0.5, -5, -0.2],
+                    //   "end": [0.5, 6, 0.1]
+                    // }
+                    // {
+                    //   "type": "Light",
+                    //   "lightType": "spot",
+                    //   "direction": [10, -10, 0.0],
+                    //   "color": [1, 0, 0],
+                    //   "attenuation": [0, 0, 0.001],
+                    //   "coneAngles": [40, 50]
+                    // }
+                ]
             }
         ]
     }
