@@ -645,7 +645,6 @@
                 ],
                 "components": [
                     {
-                        "name": "2",
                         "type": "Mesh Renderer",
                         "mesh": "masala",
                         "material": "masala"
@@ -1418,6 +1417,12 @@
                     0.03,
                     0.03
                 ],
+                // "duplicates": [
+                //     2,
+                //     10,
+                //     false,
+                //     true
+                // ],
                 "components":[
                     {
                         "type": "Mesh Renderer",
@@ -1451,6 +1456,14 @@
                             0,
                             90,
                             0
+                        ]
+                    },
+                    {
+                        "type": "Repeat",
+                        "translation": [
+                            0,
+                            0,
+                            -50
                         ]
                     }
                 ]
