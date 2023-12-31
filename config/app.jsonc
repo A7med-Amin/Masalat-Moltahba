@@ -57,7 +57,8 @@
                 "man_norm": "assets/textures/rp_dennis_posed_004_norm.jpg",
                 "man_diff": "assets/textures/rp_dennis_posed_004_dif.jpg",
                 "finalLine": "assets/textures/finalLine.jpg",
-                "street_light": "assets/textures/streat_light.png"
+                "street_light": "assets/textures/streat_light.png",
+                "gem_heart":"assets/textures/gem_heart.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -69,7 +70,8 @@
                 "house2": "assets/models/house2.obj",
                 "man": "assets/models/man.obj",
                 "heart": "assets/models/heart.obj",
-                "StreetLight": "assets/models/streetlamp.obj"
+                "StreetLight": "assets/models/streetlamp.obj",
+                "gem_heart":"assets/models/gem_heart.obj"
             },
             "samplers": {
                 "default": {},
@@ -209,8 +211,8 @@
                     "sampler": "default"
                 },
                 "house2": {
-                    "type": "textured",
-                    "shader": "textured",
+                    "type": "lighted",
+                    "shader": "light",
                     "pipelineState": {
                         "faceCulling": {
                             "enabled": false
@@ -226,7 +228,11 @@
                         1
                     ],
                     "texture": "house2_diffuse",
-                    "albedo": "house2_diffuse",
+                    "albedo": "house_albedo",
+                    "specular": "house_specular",
+                    "roughness": "house_roughness",
+                    "ambient_occlusion": "house_ambient_occlusion",
+                    "emissive": "house_emissive",
                     "sampler": "default"
                 },
                 "man": {
@@ -352,6 +358,26 @@
                     ],
                     "texture": "street_light",
                     "sampler": "default"
+                },
+                "gem_heart":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "gem_heart",
+                    "sampler": "default"
                 }
             }
         },
@@ -440,8 +466,7 @@
                             {
                                 "type": "Heart",
                                 "number": 1
-                            }
-                            ,
+                            },
                             {
                                 "type": "Movement",
                                 "angularVelocity": [
@@ -477,8 +502,7 @@
                             {
                                 "type": "Heart",
                                 "number": 2
-                            }
-                            ,
+                            },
                             {
                                 "type": "Movement",
                                 "angularVelocity": [
@@ -514,8 +538,7 @@
                             {
                                 "type": "Heart",
                                 "number": 3
-                            }
-                            ,
+                            },
                             {
                                 "type": "Movement",
                                 "angularVelocity": [
@@ -604,8 +627,16 @@
                 ]
             },
             {
-                "position": [-5, -7, -100 ],
-                "scale": [1,0.9,1 ],
+                "position": [
+                    -5,
+                    -7,
+                    -100
+                ],
+                "scale": [
+                    1,
+                    0.9,
+                    1
+                ],
                 "duplicates": [
                     2,
                     10,
@@ -624,18 +655,38 @@
                     },
                     {
                         "type": "Collision",
-                        "start": [-0.5,-5,-0.2],
-                        "end": [0.5, 6,0.1 ]
+                        "start": [
+                            -0.5,
+                            -5,
+                            -0.2
+                        ],
+                        "end": [
+                            0.5,
+                            6,
+                            0.1
+                        ]
                     },
                     {
                         "type": "Repeat",
-                        "translation": [0,1,-50]
+                        "translation": [
+                            0,
+                            1,
+                            -50
+                        ]
                     }
                 ]
             },
             {
-                "position": [-5, -7, -50 ],
-                "scale": [1,0.9,1 ],
+                "position": [
+                    -5,
+                    -7,
+                    -50
+                ],
+                "scale": [
+                    1,
+                    0.9,
+                    1
+                ],
                 "duplicates": [
                     2,
                     10,
@@ -654,18 +705,38 @@
                     },
                     {
                         "type": "Collision",
-                        "start": [-0.5,-5,-0.2],
-                        "end": [0.5, 6,0.1 ]
+                        "start": [
+                            -0.5,
+                            -5,
+                            -0.2
+                        ],
+                        "end": [
+                            0.5,
+                            6,
+                            0.1
+                        ]
                     },
                     {
                         "type": "Repeat",
-                        "translation": [0,1,-50]
+                        "translation": [
+                            0,
+                            1,
+                            -50
+                        ]
                     }
                 ]
             },
             {
-                "position": [-5, -7, -30 ],
-                "scale": [1,0.9,1 ],
+                "position": [
+                    -5,
+                    -7,
+                    -30
+                ],
+                "scale": [
+                    1,
+                    0.9,
+                    1
+                ],
                 "duplicates": [
                     2,
                     10,
@@ -684,18 +755,33 @@
                     },
                     {
                         "type": "Collision",
-                        "start": [-0.5,-5,-0.2],
-                        "end": [0.5, 6,0.1 ]
+                        "start": [
+                            -0.5,
+                            -5,
+                            -0.2
+                        ],
+                        "end": [
+                            0.5,
+                            6,
+                            0.1
+                        ]
                     },
                     {
                         "type": "Repeat",
-                        "translation": [0,1,-50]
+                        "translation": [
+                            0,
+                            1,
+                            -50
+                        ]
                     }
                 ]
             },
             {
-                "position": [-6,-7,-10],
-                
+                "position": [
+                    -6,
+                    -7,
+                    -10
+                ],
                 "duplicates": [
                     2,
                     10,
@@ -727,15 +813,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [0,1,-100]
+                        "translation": [
+                            0,
+                            1,
+                            -100
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, -20],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,
-                false],
+                "position": [
+                    -18,
+                    0,
+                    -20
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -745,15 +847,49 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
+                    },
+                    {
+                        "type": "Light",
+                        "lightType": "spot",
+                        "color": [
+                            1,
+                            0.2,
+                            0.2
+                        ],
+                        "attenuation": [
+                            0,
+                            0,
+                            0.001
+                        ],
+                        "coneAngles": [
+                            40,
+                            50
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 0],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,
-                false],
+                "position": [
+                    -18,
+                    0,
+                    0
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -763,14 +899,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]                    
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 20],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    20
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -780,14 +933,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 40],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    40
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -797,14 +967,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 60],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    60
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -814,14 +1001,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 80],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    80
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -831,14 +1035,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 100],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    100
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -848,14 +1069,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 120],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    120
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -865,14 +1103,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 140],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    140
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -882,14 +1137,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 160],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    160
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -899,14 +1171,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 180],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    180
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -916,14 +1205,31 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
             {
-                "position": [ -18,   0, 200],
-                "scale": [1,1,1],
-                "duplicates": [2, 36,false,false],
+                "position": [
+                    -18,
+                    0,
+                    200
+                ],
+                "scale": [
+                    1,
+                    1,
+                    1
+                ],
+                "duplicates": [
+                    2,
+                    36,
+                    false,
+                    false
+                ],
                 "components": [
                     {
                         "name": "house2",
@@ -933,7 +1239,11 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [ 0,0,-200]
+                        "translation": [
+                            0,
+                            0,
+                            -200
+                        ]
                     }
                 ]
             },
@@ -999,7 +1309,9 @@
                     -30
                 ],
                 "scale": [
-                    1,0.8,1
+                    1,
+                    0.8,
+                    1
                 ],
                 "components": [
                     {
@@ -1032,24 +1344,12 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [0,0,-30]
+                        "translation": [
+                            0,
+                            0,
+                            -30
+                        ]
                     }
-                    // {
-                    //   "type": "Masala"
-                    // }
-                    // {
-                    //   "type": "Collision",
-                    //   "start": [-0.5, -5, -0.2],
-                    //   "end": [0.5, 6, 0.1]
-                    // }
-                    // {
-                    //   "type": "Light",
-                    //   "lightType": "spot",
-                    //   "direction": [10, -10, 0.0],
-                    //   "color": [1, 0, 0],
-                    //   "attenuation": [0, 0, 0.001],
-                    //   "coneAngles": [40, 50]
-                    // }
                 ]
             },
             {
@@ -1059,7 +1359,9 @@
                     -30
                 ],
                 "scale": [
-                    1,0.8,1
+                    1,
+                    0.8,
+                    1
                 ],
                 "components": [
                     {
@@ -1092,24 +1394,65 @@
                     },
                     {
                         "type": "Repeat",
-                        "translation": [0,0,-30]
+                        "translation": [
+                            0,
+                            0,
+                            -30
+                        ]
                     }
-                    // {
-                    //   "type": "Masala"
-                    // }
-                    // {
-                    //   "type": "Collision",
-                    //   "start": [-0.5, -5, -0.2],
-                    //   "end": [0.5, 6, 0.1]
-                    // }
-                    // {
-                    //   "type": "Light",
-                    //   "lightType": "spot",
-                    //   "direction": [10, -10, 0.0],
-                    //   "color": [1, 0, 0],
-                    //   "attenuation": [0, 0, 0.001],
-                    //   "coneAngles": [40, 50]
-                    // }
+                ]
+            }
+            ,{
+                "position": [
+                    -3,
+                    1,
+                    -70
+                ],
+                "rotation": [
+                    0,
+                    90,
+                    0
+                ],
+                "scale": [
+                    0.03,
+                    0.03,
+                    0.03
+                ],
+                "components":[
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "gem_heart",
+                        "material": "gem_heart"
+                    },
+                    {
+                        "type": "Collision",
+                        "start": [
+                            -0.5,
+                            -5,
+                            -0.2
+                        ],
+                        "end": [
+                            0.5,
+                            6,
+                            0.1
+                        ]
+                    },
+                    {
+                        "type": "GemHeart"
+                    },
+                    {
+                        "type":"Movement",
+                        "linearVelocity": [
+                            0,
+                            0,
+                            0
+                        ],
+                        "angularVelocity": [
+                            0,
+                            90,
+                            0
+                        ]
+                    }
                 ]
             }
         ]

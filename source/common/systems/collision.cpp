@@ -178,7 +178,6 @@ namespace our
                     // Player takes a heart
                     else if (entity->getComponent<GemHeartComponent>()) // if the object is a gem heart
                     {
-                        std::cout << "collided with heart" << std::endl;
                         if (heartCount < 3) // if the player has less than 3 hearts which is max
                         {
                             heartCount++; // increase the count of hearts
@@ -192,10 +191,10 @@ namespace our
                         {                                                                        // search for the heart entity
                             HeartComponent *heart = heartEntity->getComponent<HeartComponent>(); // get the heart component if it exists
                             if (heart && heart->heartNumber == heartCount)
-                            {                                                  // if the heart component exists and it's the heart that we want to increase
-                                heartEntity->localTransform.scale.x = 0.0009f; // make the heart appear
-                                heartEntity->localTransform.scale.y = 0.0009f; // make the heart appear
-                                heartEntity->localTransform.scale.z = 0.0009f; // make the heart appear
+                            {                                                 // if the heart component exists and it's the heart that we want to increase
+                                heartEntity->localTransform.scale.x = 0.05f; // make the heart appear
+                                heartEntity->localTransform.scale.y = 0.05f; // make the heart appear
+                                heartEntity->localTransform.scale.z = 0.05f; // make the heart appear
                                 break;
                             }
                         }
