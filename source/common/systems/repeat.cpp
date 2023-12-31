@@ -72,8 +72,6 @@ namespace our {
                     if(repeatPosition.z < -490){
                         repeatPosition.z = -490;
                     }
-
-                    cout << "Repeat position: " << repeatPosition.z << endl;
                 }
             }
         }

@@ -125,6 +125,7 @@ namespace our
             // If the collision component exists
             if (collision)
             {
+           
                 iterator += 1;
                 auto objectPosition = entity->localTransform.position; // get the object's position in the world
                 auto objectScale = entity->localTransform.scale;       // get the object's scale
@@ -145,9 +146,14 @@ namespace our
                         continue;
                     }
 
+
+
                     // Player hits an obstacle
                     if (entity->getComponent<MasalaComponent>())
                     { // if the object is an obstacle
+                #ifdef USE_SOUND
+                    soundEngine->play2D("audio/way.mp3");
+                #endif
                         std::cout << "collided with obstacle : " << heartCount << std::endl;
 
                         if (collisionStartTime == 0)
@@ -160,7 +166,10 @@ namespace our
                         CollisionSystem::decreaseHearts(world, heartCount);
 
                         if (heartCount < 1)
-                        {                                  // if the player has no more hearts
+                        {
+                                 #ifdef USE_SOUND
+                    soundEngine->play2D("audio/haha.mp3");
+                #endif                                  // if the player has no more hearts
                             heartCount = 3;                // reset the heart count
                             app->changeState("game-over"); // go to the game over state
                         }

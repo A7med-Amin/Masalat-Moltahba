@@ -9,16 +9,31 @@
 #include <glm/gtx/fast_trigonometry.hpp>
 #include "../application.hpp"
 
-namespace our {
-    // The collision system is responsible for detecting collisions between entities.
-    class CollisionSystem {
-    public:
-        // CollisionSystem() {
-        // }
+#ifdef USE_SOUND
 
+#include "../../vendor/irrKlang/include/irrKlang.h"
+
+#endif
+
+namespace our
+{
+    // The collision system is responsible for detecting collisions between entities.
+    class CollisionSystem
+    {
+#ifdef USE_SOUND
+        irrklang::ISoundEngine *soundEngine;
+#endif
+    public:
+        CollisionSystem()
+        {
+#ifdef USE_SOUND
+            soundEngine = irrklang::createIrrKlangDevice();
+#endif
+        }
         Application *app; // The application in which the state runs
         // When a state enters, it should call this function and give it the pointer to the application
-        void enter(Application *app) {
+        void enter(Application *app)
+        {
             this->app = app;
         }
 

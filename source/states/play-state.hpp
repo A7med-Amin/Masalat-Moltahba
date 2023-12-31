@@ -15,8 +15,6 @@
 #include <systems/collision.hpp>
 
 
-
-
 // This state shows how to use the ECS framework and deserialization.
 class Playstate: public our::State {
 
@@ -77,11 +75,14 @@ class Playstate: public our::State {
         
         // postProcessFrag = "assets/shaders/postprocess/sandWethereEffect.frag";
         if (collisionStartTime != 0) {
+
             collisionStartTime += (float) deltaTime;
             postProcessFrag = "assets/shaders/postprocess/Grain.frag";
         }
         // Collision effect for 100 time
-        if (collisionStartTime >= 15 * deltaTime)collisionStartTime = 0;
+        if (collisionStartTime >= 15 * deltaTime){
+            collisionStartTime = 0;
+        }
         // And finally we use the renderer system to draw the scene
         renderer.render(&world, postProcessFrag);
 
