@@ -8,6 +8,7 @@
 #include "../components/player.hpp"
 #include "../components/masala.hpp"
 #include "../components/repeat.hpp"
+#include "../components/gem-heart.hpp"
 
 #include <glm/glm.hpp>
 using namespace std;
@@ -58,12 +59,15 @@ namespace our {
             if (repeatComponent) {
                 if (playerPosition[2] <= repeatPosition[2] - 10) {
                     MasalaComponent *masalaComponent = repeatEntity->getComponent<MasalaComponent>();
+                    GemHeartComponent *gemHeartComponent = repeatEntity->getComponent<GemHeartComponent>();
+
                     if (masalaComponent) {
                         if ((repeatPosition + repeatComponent->translation).x < -1995) {
                             world->markForRemoval(repeatEntity);
                             continue;
                         }
                     }
+
                     if(repeatComponent->translation.y){
                         repeatPosition.x += generateRandomNumber(-1, 6);
                     }
