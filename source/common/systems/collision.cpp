@@ -184,8 +184,8 @@ namespace our
                         }
 
                         // Make heart to disappear
-                        entity->localTransform.scale = glm::vec3(0.0f, 0.0f, 0.0f);
-                        entity->localTransform.position = glm::vec3(0.0f, 0.0f, 0.0f);
+                        // entity->localTransform.scale = glm::vec3(0.0f, 0.0f, 0.0f);
+                        // entity->localTransform.position = glm::vec3(0.0f, 0.0f, 0.0f);
 
                         for (auto heartEntity : world->getEntities())
                         {                                                                        // search for the heart entity
