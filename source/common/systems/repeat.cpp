@@ -67,7 +67,13 @@ namespace our {
                     if(repeatComponent->translation.y){
                         repeatPosition.x += generateRandomNumber(-1, 6);
                     }
+
                     repeatPosition += repeatComponent->translation;
+                    if(repeatPosition.z < -490){
+                        repeatPosition.z = -490;
+                    }
+
+                    cout << "Repeat position: " << repeatPosition.z << endl;
                 }
             }
         }
