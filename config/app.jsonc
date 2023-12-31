@@ -1,6 +1,10 @@
 {
     "start-scene": "menu",
-    "difficulty" : [1 , 2 , 4],
+    "difficulty": [
+        1,
+        2,
+        4
+    ],
     "window": {
         "title": "Masalat Molthba",
         "size": {
@@ -52,8 +56,8 @@
                 "road2": "assets/textures/road2.jpg",
                 "man_norm": "assets/textures/rp_dennis_posed_004_norm.jpg",
                 "man_diff": "assets/textures/rp_dennis_posed_004_dif.jpg",
-                "finalLine": "assets/textures/finalLine.jpg"
-
+                "finalLine": "assets/textures/finalLine.jpg",
+                "street_light": "assets/textures/streat_light.png"
             },
             "meshes": {
                 "cube": "assets/models/cube.obj",
@@ -65,7 +69,7 @@
                 "house2": "assets/models/house2.obj",
                 "man": "assets/models/man.obj",
                 "heart": "assets/models/heart.obj",
-                "zar3": "assets/models/zar3.obj"
+                "StreetLight": "assets/models/streetlamp.obj"
             },
             "samplers": {
                 "default": {},
@@ -328,6 +332,26 @@
                         0,
                         1
                     ]
+                },
+                "StreetLight": {
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling": {
+                            "enabled": false
+                        },
+                        "depthTesting": {
+                            "enabled": true
+                        }
+                    },
+                    "tint": [
+                        1,
+                        1,
+                        1,
+                        1
+                    ],
+                    "texture": "street_light",
+                    "sampler": "default"
                 }
             }
         },
@@ -393,19 +417,19 @@
                     },
                     {
                         "position": [
-                            -0.163,
-                            0.07,
-                            0.40000001
+                            -1,
+                            2,
+                            -4
                         ],
                         "rotation": [
                             0,
-                            -90,
+                            -40,
                             0
                         ],
                         "scale": [
-                            0.0009,
-                            0.0009,
-                            0.0009
+                            0.05,
+                            0.05,
+                            0.05
                         ],
                         "components": [
                             {
@@ -417,23 +441,32 @@
                                 "type": "Heart",
                                 "number": 1
                             }
+                            ,
+                            {
+                                "type": "Movement",
+                                "angularVelocity": [
+                                    0,
+                                    270,
+                                    0
+                                ]
+                            }
                         ]
                     },
                     {
                         "position": [
-                            -0.154,
-                            0.07,
-                            0.40000001
+                            0,
+                            2,
+                            -4
                         ],
                         "rotation": [
                             0,
-                            -90,
+                            -40,
                             0
                         ],
                         "scale": [
-                            0.0009,
-                            0.0009,
-                            0.0009
+                            0.05,
+                            0.05,
+                            0.05
                         ],
                         "components": [
                             {
@@ -445,23 +478,32 @@
                                 "type": "Heart",
                                 "number": 2
                             }
+                            ,
+                            {
+                                "type": "Movement",
+                                "angularVelocity": [
+                                    0,
+                                    270,
+                                    0
+                                ]
+                            }
                         ]
                     },
                     {
                         "position": [
-                            -0.136,
-                            0.07,
-                            0.40000001
+                            1,
+                            2,
+                            -4
                         ],
                         "rotation": [
                             0,
-                            -90,
+                            -40,
                             0
                         ],
                         "scale": [
-                            0.0009,
-                            0.0009,
-                            0.0009
+                            0.05,
+                            0.05,
+                            0.05
                         ],
                         "components": [
                             {
@@ -472,6 +514,15 @@
                             {
                                 "type": "Heart",
                                 "number": 3
+                            }
+                            ,
+                            {
+                                "type": "Movement",
+                                "angularVelocity": [
+                                    0,
+                                    270,
+                                    0
+                                ]
                             }
                         ]
                     }
@@ -899,8 +950,8 @@
                         "lightType": "spot",
                         "color": [
                             1,
-                            1,
-                            0
+                            0.2,
+                            0.2
                         ],
                         "attenuation": [
                             0,
@@ -940,7 +991,63 @@
                         "type": "FinalLine"
                     }
                 ]
+            },
+            {
+                "position": [
+                    -7.5,
+                    -0.9,
+                    -30
+                ],
+                "scale": [
+                    1,0.8,1
+                ],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "StreetLight",
+                        "material": "StreetLight"
+                    },
+                    {
+                        "type": "Light",
+                        "lightType": "spot",
+                        "direction": [
+                            10,
+                            -30,
+                            0.0
+                        ],
+                        "color": [
+                            120,
+                            43,
+                            33
+                        ],
+                        "attenuation": [
+                            0.08,
+                            0.08,
+                            0.08
+                        ],
+                        "coneAngles": [
+                            80,
+                            120
+                        ]
+                    }
+                    // {
+                    //   "type": "Masala"
+                    // }
+                    // {
+                    //   "type": "Collision",
+                    //   "start": [-0.5, -5, -0.2],
+                    //   "end": [0.5, 6, 0.1]
+                    // }
+                    // {
+                    //   "type": "Light",
+                    //   "lightType": "spot",
+                    //   "direction": [10, -10, 0.0],
+                    //   "color": [1, 0, 0],
+                    //   "attenuation": [0, 0, 0.001],
+                    //   "coneAngles": [40, 50]
+                    // }
+                ]
             }
         ]
-        }
+    }
 }
