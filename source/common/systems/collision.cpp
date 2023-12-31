@@ -61,7 +61,7 @@ namespace our
                     //             glm::vec4(entity->localTransform.position, 1.0)); // get the player's position in the world
 
                     glm::vec3 &position = entity->localTransform.position;
-                    position.y += 0.2 * deltaTime;
+                    position.y += 1.2 * deltaTime;
                     if (position.y > -3)
                     {
                         masala->increasingHeight = false;
@@ -70,7 +70,7 @@ namespace our
                 else
                 {
                     glm::vec3 &position = entity->localTransform.position;
-                    position.y -= 0.2 * deltaTime;
+                    position.y -= 0.6 * deltaTime;
                     if (position.y < -10)
                     {
                         masala->increasingHeight = true;
