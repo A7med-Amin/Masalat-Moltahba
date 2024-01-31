@@ -38,7 +38,7 @@ cmake -B build -S .
 cmake --build build
 ``````
 
-You can install CMake extention for VSCode and build using it then run the game by typing in cmd
+Instead of the previous commands, you can install CMake extention for VSCode and build using it then run the game by typing in cmd
 ```bash
 ./bin/GAME_APPLICATION.exe
 ``````
