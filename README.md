@@ -8,18 +8,19 @@ move left and right, and the spacebar to jump. Be cautious – if a Masala Molta
 you lose a credit. Lose all your credits, and it's game over. Can you navigate through the twists and turns
 of the university without running out of credits? Let the challenge begin!</p>
 
-#Gameplay
+# Gameplay
 
 https://github.com/A7med-Amin/Masalat-Moltahba/assets/80707696/4bcd46f7-cf50-4c5d-9b8a-e6cad8e029e0
 
-#Controls
+# Controls
+
 ● Froward 🔼 or W
 ● Left ◀️ or A
 ● Right ▶️ or D
 ● Jump space
 ● Exit Game Esc
 
-#installation
+# Installation
 
 <p>Clone the repo to your local device</p>
 
@@ -27,7 +28,7 @@ https://github.com/A7med-Amin/Masalat-Moltahba/assets/80707696/4bcd46f7-cf50-4c5
 git clone https://github.com/A7med-Amin/Masalat-Moltahba.git
 ``````
 
-#Start the game
+# Start the game
 
 <p>To run the game first you need to build the code using CMake with the provided 
 ```bash 
