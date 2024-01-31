@@ -14,11 +14,11 @@ https://github.com/A7med-Amin/Masalat-Moltahba/assets/80707696/4bcd46f7-cf50-4c5
 
 # Controls
 
-● Froward 🔼 or W
-● Left ◀️ or A
-● Right ▶️ or D
-● Jump space
-● Exit Game Esc
+### ● Froward 🔼 or W
+### ● Left ◀️ or A
+### ● Right ▶️ or D
+### ● Jump space
+### ● Exit Game Esc
 
 # Installation
 
@@ -30,10 +30,7 @@ git clone https://github.com/A7med-Amin/Masalat-Moltahba.git
 
 # Start the game
 
-<p>To run the game first you need to build the code using CMake with the provided 
-```bash 
-  CMakeLists.txt
-`````` file. </p>
+<p>To run the game first you need to build the code using CMake with the provided <bold>CMakeLists.txt</bold> file. </p>
 
 ```bash
 mkdir build
